@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: blog-master
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
+
+server:
+  port: 56000
