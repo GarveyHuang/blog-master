@@ -9,9 +9,11 @@ package com.jax.blog.service;
  **/
 
 public class URLMapper {
-    //登录相关
-    public static final String login = "/login"; //登录页
-    public static final String loginAuth = "/loginAuth.do"; //登录检验
-    //主页
+    /** 登录页 */
+    public static final String login = "/login";
+    /** 登录校验 */
+    public static final String loginAuth = "/loginAuth.do";
+
+    /** 博客主页 */
     public static final String index = "/index";
 }

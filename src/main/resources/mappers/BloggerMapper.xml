@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 博主信息映射 -->
+<mapper namespace="com.jax.blog.mapper.BloggerMapper">
+    <sql id="BASE_TABLE">
+        t_blogger
+    </sql>
+
+    <sql id="BASE_COLUMN">
+        a.id, a.username, a.password, a.profile, a.nickname, a.truename, a.sign, a.imagename,
+    </sql>
+    <!--<resultMap id="BloggerResultMapper" type="com.jax.blog.model.Blogger">
+        <id property="id" column="id" jdbcType="INT" />
+        <result property="username" column="username" jdbcType="VARCHAR" />
+        <result property="password" column="password" jdbcType="VARCHAR" />
+        <result property="profile" column="profile" jdbcType="VARCHAR" />
+        <result property="nickname" column="nickname" jdbcType="VARCHAR" />
+        <result property="truename" column="truename" jdbcType="VARCHAR" />
+        <result property="sign" column="sign" jdbcType="VARCHAR" />
+        <result property="imagename" column="imagename" jdbcType="VARCHAR" />
+    </resultMap>-->
+    <select id="getBloggerById" resultMap="BloggerResultMapper">
+        SELECT
+        <trim suffix="" suffixOverrides="">
+            <include refid="BASE_COLUMN"></include>
+        </trim>
+        FROM
+        <include refid="BASE_TABLE"></include> AS a
+        WHERE a.id = #{id, jdbcType=INTEGER}
+    </select>
+</mapper>
