@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>登录</title>
     <script
             src="${pageContext.request.contextPath}/static/bootstrap3/js/jquery-1.11.2.min.js"></script>
-    <STYLE>
+    <style>
         body {
             background: #ebebeb;
             font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei",
@@ -31,8 +30,8 @@
             border: 1px solid #d3d3d3;
             padding: 10px 10px;
             width: 290px;
-            border-radius: 4px;
             padding-left: 35px;
+            border-radius: 4px;
             -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
             box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
             -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
@@ -51,7 +50,7 @@
 
         .u_logo {
             background:
-                    url("${pageContext.request.contextPath}/static/images/username.png")
+                    url("${pageContext.request.contextPath}/images/username.png")
                     no-repeat;
             padding: 10px 10px;
             position: absolute;
@@ -61,7 +60,7 @@
 
         .p_logo {
             background:
-                    url("${pageContext.request.contextPath}/static/images/password.png")
+                    url("${pageContext.request.contextPath}/images/password.png")
                     no-repeat;
             padding: 10px 10px;
             position: absolute;
@@ -75,7 +74,7 @@
 
         .tou {
             background:
-                    url("${pageContext.request.contextPath}/static/images/tou.png")
+                    url("${pageContext.request.contextPath}/images/tou.png")
                     no-repeat;
             width: 97px;
             height: 92px;
@@ -86,7 +85,7 @@
 
         .left_hand {
             background:
-                    url("${pageContext.request.contextPath}/static/images/left_hand.png")
+                    url("${pageContext.request.contextPath}/images/left_hand.png")
                     no-repeat;
             width: 32px;
             height: 37px;
@@ -97,7 +96,7 @@
 
         .right_hand {
             background:
-                    url("${pageContext.request.contextPath}/static/images/right_hand.png")
+                    url("${pageContext.request.contextPath}/images/right_hand.png")
                     no-repeat;
             width: 32px;
             height: 37px;
@@ -108,7 +107,7 @@
 
         .initial_left_hand {
             background:
-                    url("${pageContext.request.contextPath}/static/images/hand.png")
+                    url("${pageContext.request.contextPath}/images/hand.png")
                     no-repeat;
             width: 30px;
             height: 20px;
@@ -119,7 +118,7 @@
 
         .initial_right_hand {
             background:
-                    url("${pageContext.request.contextPath}/static/images/hand.png")
+                    url("${pageContext.request.contextPath}/images/hand.png")
                     no-repeat;
             width: 30px;
             height: 20px;
@@ -130,7 +129,7 @@
 
         .left_handing {
             background:
-                    url("${pageContext.request.contextPath}/static/images/left-handing.png")
+                    url("${pageContext.request.contextPath}/images/left-handing.png")
                     no-repeat;
             width: 30px;
             height: 20px;
@@ -141,7 +140,7 @@
 
         .right_handinging {
             background:
-                    url("${pageContext.request.contextPath}/static/images/right_handing.png")
+                    url("${pageContext.request.contextPath}/images/right_handing.png")
                     no-repeat;
             width: 30px;
             height: 20px;
@@ -149,9 +148,9 @@
             top: -21px;
             left: 210px;
         }
-    </STYLE>
+    </style>
 
-    <SCRIPT type="text/javascript">
+    <script type="text/javascript">
         $(function() {
             //得到焦点
             $("#password").focus(function() {
@@ -198,45 +197,37 @@
             }
             return true;
         }
-    </SCRIPT>
+    </script>
 </head>
 <body>
-<DIV class="top_div"></DIV>
-<form action="${pageContext.request.contextPath}/blogger/login.do"
-      method="post" onsubmit="return checkForm()">
-    <DIV
-            style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
-        <DIV style="width: 165px; height: 96px; position: absolute;">
-            <DIV class="tou"></DIV>
-            <DIV class="initial_left_hand" id="left_hand"></DIV>
-            <DIV class="initial_right_hand" id="right_hand"></DIV>
-        </DIV>
-        <P style="padding: 30px 0px 10px; position: relative;">
-            <SPAN class="u_logo"></SPAN>
-            <INPUT id="username" name="username" class="ipt" type="text"
-                   placeholder="请输入用户名" value="${blogger.username}">
-        </P>
-        <P style="position: relative;">
-            <SPAN class="p_logo"></SPAN>
-            <INPUT id="password" name="password" class="ipt" type="password"
-                   placeholder="请输入密码" value="${blogger.password}">
-        </P>
-        <DIV
-                style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
-            <P style="margin: 0px 35px 20px 45px;">
-                <SPAN style="float: left;">xxx的博客系统</SPAN>
+<div class="top_div"></div>
+<form action="${pageContext.request.contextPath}/blogger/loginAuth.do" method="post" onsubmit="return checkForm()">
+    <div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
+        <div style="width: 165px; height: 96px; position: absolute;">
+            <div class="tou"></div>
+            <div class="initial_left_hand" id="left_hand"></div>
+            <div class="initial_right_hand" id="right_hand"></div>
+        </div>
+        <p style="padding: 30px 0px 10px; position: relative;">
+            <span class="u_logo"></span>
+            <input id="username" name="username" class="ipt" type="text" placeholder="请输入用户名" value="${blogger.username}">
+        </p>
+        <p style="position: relative;">
+            <span class="p_logo"></span>
+            <input id="password" name="password" class="ipt" type="password" placeholder="请输入密码" value="${blogger.password}">
+        </p>
+        <div style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
+            <p style="margin: 0px 35px 20px 45px;">
+                <span style="float: left;">欢迎使用</span>
                 <span><font color="red" id="error">${errorInfo}</font></span>
-                <SPAN
-                        style="float: right;">
-						<input type="submit"
-                               style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;"
-                               value="登录" />
-					</SPAN>
-            </P>
-        </DIV>
-    </DIV>
+                <span style="float: right;">
+                    <input type="submit" style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;"
+                           value="登录" />
+                </span>
+            </p>
+        </div>
+    </div>
 </form>
-<div style="text-align:center;padding-top: 30px">Copyright ©
-    2018- 个人博客系统  版权所有 ></div>
+<div style="text-align:center;padding-top: 30px">Copyright ©2018 &nbsp;&nbsp; JaveyHuang,&nbsp;All Rights Reserved </div>
 </body>
 </html>

@@ -20,7 +20,6 @@ public class IndexController {
 
     @RequestMapping(value = URLMapper.index, method = RequestMethod.GET)
     public String index() {
-        //ModelAndView view = new ModelAndView();
         return "index";
     }
 }

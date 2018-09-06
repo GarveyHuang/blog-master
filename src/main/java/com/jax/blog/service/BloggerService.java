@@ -1,5 +1,7 @@
 package com.jax.blog.service;
 
+import com.jax.blog.model.Blogger;
+
 /**
  * @ClassName BloggerService
  * @Description TODO
@@ -9,4 +11,5 @@ package com.jax.blog.service;
  **/
 
 public interface BloggerService {
+    Blogger getBloggerById(Integer bloggerId);
 }

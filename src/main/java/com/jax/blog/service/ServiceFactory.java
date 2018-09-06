@@ -9,4 +9,5 @@ package com.jax.blog.service;
  **/
 
 public class ServiceFactory {
+    //public static BloggerService getBloggerService() { return }
 }
