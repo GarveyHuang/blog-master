@@ -18,8 +18,8 @@ import org.springframework.web.servlet.View;
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = URLMapper.index, method = RequestMethod.GET)
+    @RequestMapping(value = URLMapper.HOME, method = RequestMethod.GET)
     public String index() {
-        return URLMapper.index;
+        return URLMapper.HOME;
     }
 }

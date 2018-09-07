@@ -10,10 +10,10 @@ package com.jax.blog.service;
 
 public class URLMapper {
     /** 登录页 */
-    public static final String login = "/login";
-    /** 登录校验 */
-    public static final String loginAuth = "/loginAuth.do";
+    public static final String ADMIN_LOGIN = "/admin/login";
+    /** 注销 */
+    public static final String LOGOUT = "/logout";
 
     /** 博客主页 */
-    public static final String index = "/index";
+    public static final String HOME = "/home";
 }
