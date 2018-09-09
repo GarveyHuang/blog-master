@@ -1,12 +1,12 @@
 package com.jax.blog.dao;
 
-import com.jax.blog.model.Blogger;
+import com.jax.blog.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
- * @ClassName BloggerMapper
+ * @ClassName UserMapper
  * @Description TODO
  * @Author huangjw
  * @Date 2018/9/6 11:52
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
  **/
 @Mapper
 @Component
-public interface BloggerDAO {
+public interface UserDAO {
     /**
      * 根据主键编号获取用户信息
      * @param uid
      * @return
      */
-    Blogger getBloggerInfoById(@Param("uid") Integer uid);
+    User getUserInfoById(@Param("uid") Integer uid);
 
     /**
      * 根据用户名和密码获取用户信息
@@ -28,12 +28,12 @@ public interface BloggerDAO {
      * @param password
      * @return
      */
-    Blogger getBloggerInfoByCond(@Param("username") String username, @Param("password") String password);
+    User getUserInfoByCond(@Param("username") String username, @Param("password") String password);
 
     /**
      * 更新用户信息
-     * @param blogger
+     * @param user
      * @return
      */
-    int updateBloggerInfo(Blogger blogger);
+    int updateUserInfo(User user);
 }

@@ -3,19 +3,15 @@ package com.jax.blog.controller.admin;
 import com.jax.blog.constant.WebConst;
 import com.jax.blog.controller.BaseController;
 import com.jax.blog.exception.BusinessException;
-import com.jax.blog.model.Blogger;
-import com.jax.blog.service.blogger.BloggerService;
+import com.jax.blog.model.User;
+import com.jax.blog.service.user.UserService;
 import com.jax.blog.service.URLMapper;
 import com.jax.blog.utils.APIResponse;
 import com.jax.blog.utils.TaleUtils;
-import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -33,12 +29,12 @@ import java.io.IOException;
 @Controller
 public class AuthController extends BaseController {
     @Autowired
-    private BloggerService bloggerService;
+    private UserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "/admin/getBlogger", method = RequestMethod.GET)
-    public Blogger getBloggerById(@RequestParam("id") Integer bloggerId) {
-        return bloggerService.getBloggerInfoById(bloggerId);
+    @RequestMapping(value = "/admin/getUser", method = RequestMethod.GET)
+    public User getUserById(@RequestParam("id") Integer userId) {
+        return userService.getUserInfoById(userId);
     }
 
     /**
@@ -61,17 +57,16 @@ public class AuthController extends BaseController {
      */
     @RequestMapping(value = URLMapper.ADMIN_LOGIN, method = RequestMethod.POST)
     public APIResponse doLogin(HttpServletRequest request,
-                                 HttpServletResponse response,
-                                 @RequestParam(name = "username") String username,
-                                 @RequestParam(name = "password") String password,
-                                 @RequestParam(name = "remember_me") String remember_me
-                                 ) {
+                               HttpServletResponse response) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String remember_me = request.getParameter("remember_me");
         Integer error_count = cache.get("login_error_count");
         try {
-            Blogger bloggerInfo = bloggerService.login(username, password);
-            request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, bloggerInfo);
+            User userInfo = userService.login(username, password);
+            request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, userInfo);
             if(StringUtils.isNoneBlank(remember_me)) {
-                TaleUtils.setCookie(response, bloggerInfo.getId());
+                TaleUtils.setCookie(response, userInfo.getUid());
             }
         } catch (Exception e) {
             error_count = null == error_count ? 1 : error_count + 1;

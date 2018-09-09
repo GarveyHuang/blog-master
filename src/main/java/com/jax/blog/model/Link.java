@@ -9,10 +9,17 @@ package com.jax.blog.model;
  **/
 
 public class Link {
+    /** id */
     private Integer id;
-    private String linkName;    //友链名称
-    private String linkUrl;     //友链地址
-    private Integer orderNum;   //优先级
+
+    /** 友链名称 */
+    private String linkName;
+
+    /** 友链url */
+    private String linkUrl;
+
+    /** 排序 */
+    private Integer orderNum;
 
     public Integer getId() {
         return id;

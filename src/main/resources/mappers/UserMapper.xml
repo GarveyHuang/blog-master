@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 博主信息映射 -->
-<mapper namespace="com.jax.blog.dao.BloggerDAO">
-    <resultMap id="BloggerResultMapper" type="com.jax.blog.model.Blogger">
-        <id property="id" column="id" jdbcType="INTEGER" />
+<mapper namespace="com.jax.blog.dao.UserDAO">
+    <resultMap id="UserResultMapper" type="com.jax.blog.model.User">
+        <id property="uid" column="uid" jdbcType="INTEGER" />
         <result property="username" column="username" jdbcType="VARCHAR" />
         <result property="password" column="password" jdbcType="VARCHAR" />
         <result property="profile" column="profile" jdbcType="VARCHAR" />
-        <result property="nickname" column="nickname" jdbcType="VARCHAR" />
-        <result property="truename" column="truename" jdbcType="VARCHAR" />
+        <result property="email" column="email" jdbcType="VARCHAR" />
+        <result property="homeUrl" column="homeUrl" jdbcType="VARCHAR" />
+        <result property="screenName" column="screenName" jdbcType="VARCHAR" />
         <result property="sign" column="sign" jdbcType="VARCHAR" />
-        <result property="imagename" column="imagename" jdbcType="VARCHAR" />
+        <result property="imageName" column="imageName" jdbcType="VARCHAR" />
+        <result property="created" column="created" jdbcType="INTEGER" />
+        <result property="activated" column="activated" jdbcType="INTEGER" />
+        <result property="logged" column="logged" jdbcType="INTEGER" />
+        <result property="groupName" column="groupName" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="BASE_TABLE">
-        t_blogger
+        t_user
     </sql>
 
     <sql id="BASE_COLUMN">
-        a.id, a.username, a.password, a.profile, a.nickname, a.truename, a.sign, a.imagename,
+        a.uid, a.username, a.password, a.profile, a.email ,a.screenName, a.sign, a.imagename, a.created, a.activated, a.logged,
     </sql>
-    <select id="getBloggerInfoById" resultMap="BloggerResultMapper">
+    <select id="getUserInfoById" resultMap="UserResultMapper">
         SELECT
         <trim suffix="" suffixOverrides=",">
             <include refid="BASE_COLUMN"></include>
         </trim>
         FROM <include refid="BASE_TABLE"></include> AS a
-        WHERE a.id = #{id, jdbcType=INTEGER}
+        WHERE a.uid = #{uid, jdbcType=INTEGER}
     </select>
 
-    <select id="getBloggerInfoByCond" resultMap="BloggerResultMapper">
+    <select id="getUserInfoByCond" resultMap="UserResultMapper">
         SELECT
         <trim suffix="" suffixOverrides=",">
             <include refid="BASE_COLUMN"></include>
