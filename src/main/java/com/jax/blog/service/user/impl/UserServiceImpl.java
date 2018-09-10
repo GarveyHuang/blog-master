@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUserInfo(User user) {
         if(null == user.getUid()) {
-            throw BusinessException.withErrorCode("用户编号不能为空");
+            throw BusinessException.withErrorCode("用户id不能为空");
         }
         return dao.updateUserInfo(user);
     }

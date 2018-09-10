@@ -16,10 +16,10 @@ public class URLMapper {
     /** 后台主页 */
     public static final String ADMIN_MAIN = "/admin/main";
 
-    /** 修改个人信息 */
-    public static final String ADMIN_USER_MODIFY = "/admin/user/modify.do";
+    /** 更新用户信息 */
+    public static final String ADMIN_USER_UPDATE = "/admin/user/update.do";
     /** 修改密码 */
-    public static final String ADMIN_PASSWORD_MODIFY = "/admin/password/modify";
+    public static final String ADMIN_PASSWORD_MODIFY = "/admin/password/modify.do";
 
     /** 博客主页 */
     public static final String HOME = "/home";

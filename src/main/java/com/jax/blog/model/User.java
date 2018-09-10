@@ -28,7 +28,7 @@ public class User {
     private String homeUrl;
 
     /**  用户显示的名称 */
-    private String screenName;
+    private String nickName;
 
     /** 签名 */
     private String sign;
@@ -96,12 +96,12 @@ public class User {
         this.homeUrl = homeUrl;
     }
 
-    public String getScreenName() {
-        return screenName;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setScreenName(String screenName) {
-        this.screenName = screenName;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getSign() {
@@ -161,7 +161,7 @@ public class User {
                 ", profile='" + profile + '\'' +
                 ", email='" + email + '\'' +
                 ", homeUrl='" + homeUrl + '\'' +
-                ", screenName='" + screenName + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", sign='" + sign + '\'' +
                 ", imageName='" + imageName + '\'' +
                 ", created=" + created +

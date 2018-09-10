@@ -18,13 +18,11 @@
             if($("#tabs").tabs("exists",text)){
                 $("#tabs").tabs("select",text);
             }else{
-                var content="<iframe frameborder=0 scrolling='auto' src='${pageContext.request.contextPath}/views/admin/"+url+"'></iframe>";
+                var content="<iframe frameborder=0 scrolling='auto' style='width:100%; height:100%'  src='${pageContext.request.contextPath}/views/admin/"+url+"'></iframe>";
                 $("#tabs").tabs("add",{
                     title:text,
                     iconCls:iconCls,
                     closable:true,
-                    width: $("#tabs").parent().width(),
-                    height: $("#tabs").parent().height(),
                     content:content
                 });
                 $('#tabs').tabs('getSelected').css('width', 'auto');
@@ -37,7 +35,7 @@
 
         function modifyPassword() {
             $("#fm").form("submit",{
-                url: "${pageContext.request.contextPath}/admin/blogger/modifyPassword.do",
+                url: "${pageContext.request.contextPath}/admin/password/modify.do",
                 onSubmit: function() {
                     var newPassword = $("#password").val();
                     var newPassword2 = $("#password2").val();
@@ -104,7 +102,7 @@
                 <h2>博客后台管理系统</h2>
             </td>
             <td valign="bottom" align="right" width="50%">
-                <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong><%=currentUser.getScreenName()%></font>
+                <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong><%=currentUser.getNickName()%></font>
             </td>
         </tr>
     </table>
@@ -119,15 +117,15 @@
 <div region="west" style="width: 220px;" title="导航菜单" split="true">
     <div class="easyui-accordion" data-options="border:false">
         <div title="常用操作" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
-            <a href="javascript:openTab('写博客','writeBlog.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
+            <a href="javascript:openTab('写博客','writeArticle.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
             <a href="javascript:openTab('评论审核','commentReview.jsp','icon-review')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-review'" style="width: 150px">评论审核</a>
         </div>
         <div title="博客管理"  data-options="iconCls:'icon-bkgl'" style="padding:10px;">
-            <a href="javascript:openTab('写博客','writeBlog.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px;">写博客</a>
+            <a href="javascript:openTab('写博客','writeArticle.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px;">写博客</a>
             <a href="javascript:openTab('博客信息管理','blogManage.jsp','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
         </div>
         <div title="博客类别管理" data-options="iconCls:'icon-bklb'" style="padding:10px">
-            <a href="javascript:openTab('博客类别信息管理','blogTypeManage.jsp','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
+            <a href="javascript:openTab('博客类别信息管理','articleTypeManage.jsp','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
         </div>
         <div title="评论管理"  data-options="iconCls:'icon-plgl'" style="padding:10px">
             <a href="javascript:openTab('评论审核','commentReview.jsp','icon-review')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-review'" style="width: 150px">评论审核</a>
@@ -138,7 +136,7 @@
             <a href="javascript:openPasswordModifyDialog()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
         </div>
         <div title="系统管理"  data-options="iconCls:'icon-system'" style="padding:10px">
-            <a href="javascript:openTab('标签管理','linkManage.jsp','icon-link')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-link'" style="width: 150px">标签管理</a>
+            <a href="javascript:openTab('友情链接管理','linkManage.jsp','icon-link')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-link'" style="width: 150px">友情链接管理</a>
             <a href="javascript:refreshSystemCache()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-refresh'" style="width: 150px;">刷新系统缓存</a>
             <a href="${pageContext.request.contextPath }/admin/1" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-link'" style="width: 150px">回到主页</a>
             <a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
@@ -146,27 +144,27 @@
     </div>
 </div>
 <div region="south" style="height: 25px;padding: 5px" align="center">
-    <%=currentUser.getScreenName()%>的博客系统
+    <%=currentUser.getNickName()%>的博客系统
 </div>
-<div id="dlg" class="easyui-dialog" style="width:400px; height:200px; padding:10px 20px"
+<div id="dlg" class="easyui-dialog" style="width:400px; height:230px;"
      closed="true" buttons="#dlg-buttons">
-    <form id="fm" method="post">
+    <form id="fm" method="post" style="width: 350px; height: 150px;">
         <table cellspacing="8px">
             <tr>
-                <td>用户名</td>
+                <td>用户名：</td>
                 <td>
-                    <input type="text" id="username" name="username" value="<%=currentUser.getUsername()%>" readonly="readonly">
+                    <input type="text" id="username" name="username" style="border: 0;" value="<%=currentUser.getUsername()%>" readonly="readonly">
                 </td>
             </tr>
             <tr>
-                <td>新密码</td>
+                <td>新密码：</td>
                 <td>
                     <input type="password" id="password" name="password" class="easyui-validatebox"
                            required="true" style="width:200px">
                 </td>
             </tr>
             <tr>
-                <td>确认新密码</td>
+                <td>确认新密码：</td>
                 <td>
                     <input type="password" id="password2" name="password2" class="easyui-validatebox"
                            required="true" style="width:200px">
