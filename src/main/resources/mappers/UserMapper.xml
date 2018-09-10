@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 博主信息映射 -->
+<mapper namespace="com.jax.blog.dao.UserDAO">
+    <resultMap id="UserResultMapper" type="com.jax.blog.model.User">
+        <id property="uid" column="uid" jdbcType="INTEGER" />
+        <result property="username" column="username" jdbcType="VARCHAR" />
+        <result property="password" column="password" jdbcType="VARCHAR" />
+        <result property="profile" column="profile" jdbcType="VARCHAR" />
+        <result property="email" column="email" jdbcType="VARCHAR" />
+        <result property="homeUrl" column="homeUrl" jdbcType="VARCHAR" />
+        <result property="screenName" column="screenName" jdbcType="VARCHAR" />
+        <result property="sign" column="sign" jdbcType="VARCHAR" />
+        <result property="imageName" column="imageName" jdbcType="VARCHAR" />
+        <result property="created" column="created" jdbcType="INTEGER" />
+        <result property="activated" column="activated" jdbcType="INTEGER" />
+        <result property="logged" column="logged" jdbcType="INTEGER" />
+        <result property="groupName" column="groupName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="BASE_TABLE">
+        t_user
+    </sql>
+
+    <sql id="BASE_COLUMN">
+        a.uid, a.username, a.password, a.profile, a.email ,a.screenName, a.sign, a.imagename, a.created, a.activated, a.logged,
+    </sql>
+    <select id="getUserInfoById" resultMap="UserResultMapper">
+        SELECT
+        <trim suffix="" suffixOverrides=",">
+            <include refid="BASE_COLUMN"></include>
+        </trim>
+        FROM <include refid="BASE_TABLE"></include> AS a
+        WHERE a.uid = #{uid, jdbcType=INTEGER}
+    </select>
+
+    <select id="getUserInfoByCond" resultMap="UserResultMapper">
+        SELECT
+        <trim suffix="" suffixOverrides=",">
+            <include refid="BASE_COLUMN"></include>
+        </trim>
+        FROM <include refid="BASE_TABLE"></include> AS a
+        <where>
+            <if test="username != null">
+                AND a.username = #{username, jdbcType=VARCHAR}
+            </if>
+            <if test="password != null">
+                AND a.password = #{password, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateUserInfo">
+        UPDATE <include refid="BASE_TABLE"></include>
+        <set>
+            <if test="profile != null">profile=#{proflie, jdbcType=VARCHAR}</if>
+            <if test="email != null">email=#{emial, jdbcType=VARCHAR}</if>
+            <if test="homeUrl != null">homeUrl=#{homeUrl, jdbcType=VARCHAR}</if>
+            <if test="screenName != null">screenName=#{screenName, jdbcType=VARCHAR}</if>
+            <if test="sign != null">sign=#{sign, jdbcType=VARCHAR}</if>
+            <if test="imageName != null">imageName=#{imageName, jdbcType=VARCHAR}</if>
+        </set>
+        WHERE uid=#{uid, jdbcType=INTEGER}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE <include refid="BASE_TABLE"></include>
+        <set>
+            <if test="password != null">password=#{password}</if>
+        </set>
+        WHERE uid=#{uid}
+    </update>
+</mapper>

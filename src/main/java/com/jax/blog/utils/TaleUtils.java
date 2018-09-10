@@ -2,7 +2,7 @@ package com.jax.blog.utils;
 
 import com.jax.blog.constant.WebConst;
 import com.jax.blog.exception.BusinessException;
-import com.jax.blog.model.Blogger;
+import com.jax.blog.model.User;
 import com.jax.blog.service.URLMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.commonmark.Extension;
@@ -24,7 +24,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.Normalizer;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -144,12 +143,12 @@ public class TaleUtils {
      * @param request
      * @return
      */
-    public static Blogger getLoginBlogger(HttpServletRequest request) {
+    public static User getLoginUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if(null == session) {
             return null;
         }
-        return (Blogger) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
+        return (User) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
     }
 
     /**

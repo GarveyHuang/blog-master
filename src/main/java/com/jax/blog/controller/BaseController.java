@@ -1,6 +1,6 @@
 package com.jax.blog.controller;
 
-import com.jax.blog.model.Blogger;
+import com.jax.blog.model.User;
 import com.jax.blog.utils.MapCache;
 import com.jax.blog.utils.TaleUtils;
 
@@ -36,12 +36,12 @@ public abstract class BaseController {
      * @param request
      * @return
      */
-    public Blogger blogger(HttpServletRequest request) {
-        return TaleUtils.getLoginBlogger(request);
+    public User user(HttpServletRequest request) {
+        return TaleUtils.getLoginUser(request);
     }
 
     public Integer getBid(HttpServletRequest request) {
-        return this.blogger(request).getId();
+        return this.user(request).getUid();
     }
 
     /**

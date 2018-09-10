@@ -11,27 +11,126 @@ import java.util.Date;
  **/
 
 public class Comment {
-    private Integer id;
-    private String userIp;      //用户IP
-    private String content;     //评论内容
-    private Date commentDate;   //评论日期
-    private Integer state;      //是否审核通过
-    private Blog blog;          //所评论的博客
+    /** comment表主键 */
+    private Integer cmid;
 
-    public Integer getId() {
-        return id;
+    /** contents表主键,关联字段 */
+    private Integer contentid;
+
+    /** 评论生成时的GMT unix时间戳 */
+    private Integer created;
+
+    /** 评论作者 */
+    private String author;
+
+    /** 评论所属用户id */
+    private Integer authorId;
+
+    /** 评论所属内容作者id */
+    private Integer ownerId;
+
+    /** 评论者邮件 */
+    private String email;
+
+    /** 评论者网址 */
+    private String url;
+
+    /** 评论者ip地址 */
+    private String ip;
+
+    /** 评论者客户端 */
+    private String agent;
+
+    /** 评论内容 */
+    private String content;
+
+    /** 评论类型 */
+    private String type;
+
+    /** 评论状态 */
+    private String status;
+
+    /** 父级评论 */
+    private Integer parent;
+
+    public Integer getCmid() {
+        return cmid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCmid(Integer cmid) {
+        this.cmid = cmid;
     }
 
-    public String getUserIp() {
-        return userIp;
+    public Integer getContentid() {
+        return contentid;
     }
 
-    public void setUserIp(String userIp) {
-        this.userIp = userIp;
+    public void setContentid(Integer contentid) {
+        this.contentid = contentid;
+    }
+
+    public Integer getCreated() {
+        return created;
+    }
+
+    public void setCreated(Integer created) {
+        this.created = created;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getAgent() {
+        return agent;
+    }
+
+    public void setAgent(String agent) {
+        this.agent = agent;
     }
 
     public String getContent() {
@@ -42,27 +141,27 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getCommentDate() {
-        return commentDate;
+    public String getType() {
+        return type;
     }
 
-    public void setCommentDate(Date commentDate) {
-        this.commentDate = commentDate;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Integer getState() {
-        return state;
+    public String getStatus() {
+        return status;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Blog getBlog() {
-        return blog;
+    public Integer getParent() {
+        return parent;
     }
 
-    public void setBlog(Blog blog) {
-        this.blog = blog;
+    public void setParent(Integer parent) {
+        this.parent = parent;
     }
 }
