@@ -49,4 +49,25 @@
             </if>
         </where>
     </select>
+
+    <update id="updateUserInfo">
+        UPDATE <include refid="BASE_TABLE"></include>
+        <set>
+            <if test="profile != null">profile=#{proflie, jdbcType=VARCHAR}</if>
+            <if test="email != null">email=#{emial, jdbcType=VARCHAR}</if>
+            <if test="homeUrl != null">homeUrl=#{homeUrl, jdbcType=VARCHAR}</if>
+            <if test="screenName != null">screenName=#{screenName, jdbcType=VARCHAR}</if>
+            <if test="sign != null">sign=#{sign, jdbcType=VARCHAR}</if>
+            <if test="imageName != null">imageName=#{imageName, jdbcType=VARCHAR}</if>
+        </set>
+        WHERE uid=#{uid, jdbcType=INTEGER}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE <include refid="BASE_TABLE"></include>
+        <set>
+            <if test="password != null">password=#{password}</if>
+        </set>
+        WHERE uid=#{uid}
+    </update>
 </mapper>

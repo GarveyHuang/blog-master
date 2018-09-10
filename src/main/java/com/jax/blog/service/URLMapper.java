@@ -12,7 +12,14 @@ public class URLMapper {
     /** 登录页 */
     public static final String ADMIN_LOGIN = "/admin/login";
     /** 注销 */
-    public static final String LOGOUT = "/logout";
+    public static final String ADMIN_LOGOUT = "/admin/logout";
+    /** 后台主页 */
+    public static final String ADMIN_MAIN = "/admin/main";
+
+    /** 修改个人信息 */
+    public static final String ADMIN_USER_MODIFY = "/admin/user/modify.do";
+    /** 修改密码 */
+    public static final String ADMIN_PASSWORD_MODIFY = "/admin/password/modify";
 
     /** 博客主页 */
     public static final String HOME = "/home";

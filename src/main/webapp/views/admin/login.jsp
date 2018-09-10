@@ -239,9 +239,10 @@
             data: JSON.stringify({
                 username: username,
                 password: password,
-                remember_me: ""
+                isRemember: ""
             }),
             success: function (result) {
+                console.log(result);
                 if(result && result.code == 'success') {
                     window.location.href = '/admin/main';
                 } else {

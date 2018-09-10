@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
         //String pwd = TaleUtils.MD5encode(username + password); //md5 加密，暂时不实现
         User user = dao.getUserInfoByCond(username, password);
+        //User user = dao.getUserInfoById(2);
         if(null == user) {
             throw BusinessException.withErrorCode(ErrorConstant.Auth.USERNAME_PASSWORD_ERROR);
         }

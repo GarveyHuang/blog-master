@@ -4,6 +4,7 @@ import com.jax.blog.constant.WebConst;
 import com.jax.blog.controller.BaseController;
 import com.jax.blog.exception.BusinessException;
 import com.jax.blog.model.User;
+import com.jax.blog.model.request.user.UserLoginAuthRQ;
 import com.jax.blog.service.user.UserService;
 import com.jax.blog.service.URLMapper;
 import com.jax.blog.utils.APIResponse;
@@ -31,18 +32,12 @@ public class AuthController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @ResponseBody
-    @RequestMapping(value = "/admin/getUser", method = RequestMethod.GET)
-    public User getUserById(@RequestParam("id") Integer userId) {
-        return userService.getUserInfoById(userId);
-    }
-
     /**
      * 跳转登录页
      * @return
      */
     @RequestMapping(value = URLMapper.ADMIN_LOGIN, method = RequestMethod.GET)
-    public String loginHomepage() {
+    public String loginPage() {
         return URLMapper.ADMIN_LOGIN;
     }
 
@@ -50,22 +45,27 @@ public class AuthController extends BaseController {
      * 登录验证
      * @param request
      * @param response
-     * @param username
-     * @param password
-     * @param remember_me
+     * @param userLoginAuthRQ
+     *  {
+     *      username: username,
+     *      password: password,
+     *      isRemember: isRemember
+     *  }
      * @return
      */
     @RequestMapping(value = URLMapper.ADMIN_LOGIN, method = RequestMethod.POST)
+    @ResponseBody
     public APIResponse doLogin(HttpServletRequest request,
-                               HttpServletResponse response) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String remember_me = request.getParameter("remember_me");
+                               HttpServletResponse response,
+                               @RequestBody UserLoginAuthRQ userLoginAuthRQ) {
+        String username = userLoginAuthRQ.getUsername();
+        String password = userLoginAuthRQ.getPassword();
+        String isRemember = userLoginAuthRQ.getIsRemember();
         Integer error_count = cache.get("login_error_count");
         try {
             User userInfo = userService.login(username, password);
             request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, userInfo);
-            if(StringUtils.isNoneBlank(remember_me)) {
+            if(StringUtils.isNoneBlank(isRemember)) {
                 TaleUtils.setCookie(response, userInfo.getUid());
             }
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class AuthController extends BaseController {
             }
             return APIResponse.fail(msg);
         }
-        return APIResponse.success();
+        return APIResponse.success(userLoginAuthRQ);
     }
 
     /**
@@ -91,7 +91,7 @@ public class AuthController extends BaseController {
      * @param response
      * @param request
      */
-    @RequestMapping(value = URLMapper.LOGOUT)
+    @RequestMapping(value = URLMapper.ADMIN_LOGOUT)
     public void logout(HttpSession session, HttpServletResponse response, org.apache.catalina.servlet4preview.http.HttpServletRequest request) {
         session.removeAttribute(WebConst.LOGIN_SESSION_KEY);
         Cookie cookie = new Cookie(WebConst.USER_IN_COOKIE, "");

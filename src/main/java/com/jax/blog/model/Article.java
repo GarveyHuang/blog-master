@@ -5,14 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @ClassName Content
+ * @ClassName Article
  * @Description 博客实体
  * @Author huangjw
  * @Date 2018/9/5 16:55
  * @Version 1.0
  **/
 
-public class Content {
+public class Article {
     /** 文章id */
     private Integer cmid;
 
