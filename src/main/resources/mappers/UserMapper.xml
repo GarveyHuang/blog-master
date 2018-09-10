@@ -9,7 +9,7 @@
         <result property="profile" column="profile" jdbcType="VARCHAR" />
         <result property="email" column="email" jdbcType="VARCHAR" />
         <result property="homeUrl" column="homeUrl" jdbcType="VARCHAR" />
-        <result property="screenName" column="screenName" jdbcType="VARCHAR" />
+        <result property="nickName" column="nickName" jdbcType="VARCHAR" />
         <result property="sign" column="sign" jdbcType="VARCHAR" />
         <result property="imageName" column="imageName" jdbcType="VARCHAR" />
         <result property="created" column="created" jdbcType="INTEGER" />
@@ -23,7 +23,7 @@
     </sql>
 
     <sql id="BASE_COLUMN">
-        a.uid, a.username, a.password, a.profile, a.email ,a.screenName, a.sign, a.imagename, a.created, a.activated, a.logged,
+        a.uid, a.username, a.password, a.profile, a.email ,a.nickName, a.sign, a.imagename, a.created, a.activated, a.logged,
     </sql>
     <select id="getUserInfoById" resultMap="UserResultMapper">
         SELECT
@@ -53,21 +53,28 @@
     <update id="updateUserInfo">
         UPDATE <include refid="BASE_TABLE"></include>
         <set>
-            <if test="profile != null">profile=#{proflie, jdbcType=VARCHAR}</if>
-            <if test="email != null">email=#{emial, jdbcType=VARCHAR}</if>
-            <if test="homeUrl != null">homeUrl=#{homeUrl, jdbcType=VARCHAR}</if>
-            <if test="screenName != null">screenName=#{screenName, jdbcType=VARCHAR}</if>
-            <if test="sign != null">sign=#{sign, jdbcType=VARCHAR}</if>
-            <if test="imageName != null">imageName=#{imageName, jdbcType=VARCHAR}</if>
+            <if test="password != null and password != ''">
+                password=#{password, jdbcType=VARCHAR},
+            </if>
+            <if test="profile != null and profile != ''">
+                profile=#{proflie, jdbcType=VARCHAR}
+            </if>
+            <if test="email != null and email != ''">
+                email=#{emial, jdbcType=VARCHAR}
+            </if>
+            <if test="homeUrl != null and homeUrl != ''">
+                homeUrl=#{homeUrl, jdbcType=VARCHAR}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nickName=#{nickName, jdbcType=VARCHAR}
+            </if>
+            <if test="sign != null and sign != ''">
+                sign=#{sign, jdbcType=VARCHAR}
+            </if>
+            <if test="imageName != null and imageName != ''">
+                imageName=#{imageName, jdbcType=VARCHAR}
+            </if>
         </set>
         WHERE uid=#{uid, jdbcType=INTEGER}
-    </update>
-
-    <update id="updatePassword">
-        UPDATE <include refid="BASE_TABLE"></include>
-        <set>
-            <if test="password != null">password=#{password}</if>
-        </set>
-        WHERE uid=#{uid}
     </update>
 </mapper>

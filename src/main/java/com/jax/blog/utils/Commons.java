@@ -134,6 +134,16 @@ public class Commons {
     }
 
     /**
+     *  格式化当前日期
+     */
+    public static String getCurrentDateStr()throws Exception{
+        Date date=new Date();
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyMMddhhmmss");
+        return sdf.format(date);
+    }
+
+    /**
      * 格式化unix时间戳为日期
      *
      * @param unixTime

@@ -36,9 +36,4 @@ public interface UserDAO {
      * @return
      */
     int updateUserInfo(User user);
-
-    /**
-     * 修改密码
-     */
-    int updatePassword(User user);
 }

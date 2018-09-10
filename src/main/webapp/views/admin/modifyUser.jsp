@@ -45,61 +45,60 @@
 <%
     User user = (User) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
 %>
-<body style="margin: 10px; width: 800px; height: 600px; font-family: 'microsoft yahei';">
-    <div id="p" class="easyui-panel" title="修改个人信息" style="padding: 10px;">
+<body style="margin: 5px; height:100%; font-family: 'microsoft yahei';">
+    <div id="p" class="easyui-panel" title="修改个人信息" style="padding: 5px; width: auto;">
         <form id="modifyForm" action="" method="post" enctype="multipart/form-data">
             <table cellspacing="20px">
                 <tr>
                     <td width="80px">用户名：</td>
                     <td>
-                        <input type="hidden" id="id" name="id" value="<%=user.getUid()%>"/>
-                        <input type="text" id="username" name="username" style="width:200px" readonly="readonly"
+                        <input type="hidden" id="uid" name="uid" value="<%=user.getUid()%>"/>
+                        <input type="text" id="username" name="username" style="width:200px; border: 0;" readonly="readonly"
                                value="<%=user.getUsername()%>"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>昵称：</td>
+                    <td>昵&nbsp;&nbsp;&nbsp;称：</td>
                     <td>
                         <input type="text" id="nickname" name="nickname" style="width:200px"
-                               class="easyui-validatebox" value="<%=user.getScreenName()%>"/>
+                               class="easyui-validatebox" value="<%=user.getNickName()%>"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>个人邮箱：</td>
+                    <td>邮&nbsp;&nbsp;&nbsp;箱：</td>
                     <td>
                         <input type="text" id="email" name="email" style="width:400px" class="easyui-validatebox"
-                               value="<%=user.getEmail()%>" required="true"/>
+                               value="<%=null==user.getEmail() ? "" : user.getEmail()%>" required="true"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>个人主页：</td>
+                    <td>主&nbsp;&nbsp;&nbsp;页：</td>
                     <td>
                         <input type="text" id="homeUrl" name="homeUrl" style="width:400px" class="easyui-validatebox"
-                               value="<%=user.getHomeUrl()%>" />
+                               value="<%=null==user.getHomeUrl() ? "" : user.getHomeUrl()%>" />
                     </td>
                 </tr>
                 <tr>
-                    <td>个性签名：</td>
+                    <td>签&nbsp;&nbsp;&nbsp;名：</td>
                     <td>
                         <input type="text" id="sign" name="sign" style="width:400px" class="easyui-validatebox"
-                               value="<%=user.getSign()%>" required="true"/>
+                               value="<%=null==user.getSign() ? "" : user.getSign()%>" />
                     </td>
                 </tr>
                 <tr>
-                    <td>个人头像：</td>
+                    <td>头&nbsp;&nbsp;&nbsp;像：</td>
                     <td>
                         <input type="file" id="imageFile" name="imageFile"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>个人简介：</td>
+                    <td>简&nbsp;&nbsp;&nbsp;介：</td>
                     <td>
-                        <script id="profile" type="text/plain" style="width:80%; height:500px;"></script>
-                        <input type="hidden" id="profile" name="profile" > <%-- UEditor不能作为表单的一部分提交，所以用这种隐藏域的方式 --%>
+                        <%--<script id="profile" type="text/plain" style="width:80%; height:500px;"></script>--%>
+                        <input type="hidden" id="profile" name="profile" /> <%-- UEditor不能作为表单的一部分提交，所以用这种隐藏域的方式 --%>
                     </td>
                 </tr>
-                <tr>
-                    <td></td>
+                <tr><td></td>
                     <td><a href="javascript:submitData()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">提交</a></td>
                 </tr>
             </table>
@@ -107,7 +106,7 @@
     </div>
 
     <%-- 实例化编辑器 --%>
-    <%--<script type="text/javascript">
+    <script type="text/javascript">
         var ue = UE.getEditor('profile');
         ue.addListener("ready", function(){
             //通过UE自己封装的ajax请求数据
@@ -124,6 +123,6 @@
                         }
                     });
         });
-    </script>--%>
+    </script>
 </body>
 </html>
