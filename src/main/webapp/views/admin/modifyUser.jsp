@@ -3,7 +3,7 @@
 <%@ page import="com.jax.blog.constant.WebConst" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>修改个人信息</title>
@@ -22,20 +22,20 @@
     <script type="text/javascript">
         function submitData() {
 
-            $("#fm").form("submit",{
-                url: "${pageContext.request.contextPath}/admin/user/modify.do",
+            $("#modifyForm").form("submit",{
+                url: "${pageContext.request.contextPath}/admin/user/update.do",
                 onSubmit: function() {
-                    var profile = UE.getEditor("profile").getContent();
-                    $("#pf").val(profile); //将UEditor编辑器中的内容放到隐藏域中提交到后台
+                    var profile = UE.getEditor("ueProfile").getContent();
+                    $("#profile").val(profile); //将UEditor编辑器中的内容放到隐藏域中提交到后台
                     return $(this).form("validate");
                 }, //进行验证，通过才让提交
                 success: function(result) {
-                    var result = eval("(" + result + ")"); //将json格式的result转换成js对象
-                    if(result.success) {
+                    result = eval("(" + result + ")"); //将json格式的result转换成js对象
+                    console.log(result);
+                    if(result.code == "success") {
                         $.messager.alert("系统提示", "个人信息更新成功");
                     } else {
                         $.messager.alert("系统提示", "个人信息更新失败");
-                        return;
                     }
                 }
             });
@@ -94,8 +94,9 @@
                 <tr>
                     <td>简&nbsp;&nbsp;&nbsp;介：</td>
                     <td>
-                        <%--<script id="profile" type="text/plain" style="width:80%; height:500px;"></script>--%>
-                        <input type="hidden" id="profile" name="profile" /> <%-- UEditor不能作为表单的一部分提交，所以用这种隐藏域的方式 --%>
+                        <script id="ueProfile" type="text/plain" style="width:80%; height:500px;"></script>
+                        <input type="hidden" id="profile" name="profile" value="<%=null==user.getProfile() ? "" : user.getProfile()%>" />
+                        <%-- UEditor不能作为表单的一部分提交，所以用这种隐藏域的方式 --%>
                     </td>
                 </tr>
                 <tr><td></td>
@@ -107,19 +108,22 @@
 
     <%-- 实例化编辑器 --%>
     <script type="text/javascript">
-        var ue = UE.getEditor('profile');
+        var ue = UE.getEditor('ueProfile');
         ue.addListener("ready", function(){
             //通过UE自己封装的ajax请求数据
-            UE.ajax.request("${pageContext.request.contextPath}/admin/blogger/findBlogger.do",
+            UE.ajax.request("${pageContext.request.contextPath}/admin/user/query.do",
                     {
                         method: "post",
                         async: false,
                         data: {},
-                        onsuccess: function(result) { //
-                            result = eval("(" + result.responseText + ")");
-                            $("#nickname").val(result.nickname);
-                            $("#sign").val(result.sign);
-                            UE.getEditor('profile').setContent(result.profile);
+                        onsuccess: function(result) {
+                            var jsonResult = eval('(' + result.responseText + ')');
+                            console.log(jsonResult);
+                            //$("#nickname").val(jsonResult.nickname);
+                            $("#sign").val(jsonResult.sign);
+                            $("#email").val(jsonResult.email);
+                            $("#homeUrl").val(jsonResult.homeUrl);
+                            UE.getEditor('ueProfile').setContent(jsonResult.profile);
                         }
                     });
         });
