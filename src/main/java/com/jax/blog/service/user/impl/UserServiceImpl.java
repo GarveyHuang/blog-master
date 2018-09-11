@@ -23,19 +23,18 @@ public class UserServiceImpl implements UserService {
     private UserDAO dao;
 
     @Override
-    public User getUserInfoById(Integer uid) {
+    public User getUserInfoById(Integer uid) throws Exception {
         return dao.getUserInfoById(uid);
     }
 
     @Override
-    public User login(String username, String password) {
+    public User login(String username, String password) throws Exception {
         if(StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             throw BusinessException.withErrorCode(ErrorConstant.Auth.USERNAME_PASSWORD_IS_EMPTY);
         }
 
         //String pwd = TaleUtils.MD5encode(username + password); //md5 加密，暂时不实现
         User user = dao.getUserInfoByCond(username, password);
-        //User user = dao.getUserInfoById(2);
         if(null == user) {
             throw BusinessException.withErrorCode(ErrorConstant.Auth.USERNAME_PASSWORD_ERROR);
         }
@@ -44,9 +43,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public int updateUserInfo(User user) {
-        if(null == user.getUid()) {
-            throw BusinessException.withErrorCode("用户id不能为空");
+    public int updateUserInfo(User user) throws Exception {
+        if(user == null || null == user.getUid()) {
+            throw BusinessException.withErrorCode("用户信息不能为空");
         }
         return dao.updateUserInfo(user);
     }

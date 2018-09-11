@@ -9,7 +9,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @ClassName HomeController
@@ -26,7 +29,11 @@ public class HomeController extends BaseController {
      * @return
      */
     @RequestMapping(value = URLMapper.ADMIN_MAIN, method = RequestMethod.GET)
-    public String homePage() {
+    public String homePage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User loginUser = (User) request.getSession().getAttribute(WebConst.LOGIN_SESSION_KEY);
+        if(loginUser == null) {
+            return URLMapper.ADMIN_LOGIN;
+        }
         return URLMapper.ADMIN_MAIN;
     }
 }

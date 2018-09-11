@@ -1,9 +1,5 @@
 package com.jax.blog.model;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * @ClassName Article
  * @Description 博客实体
@@ -14,7 +10,7 @@ import java.util.List;
 
 public class Article {
     /** 文章id */
-    private Integer cmid;
+    private Integer aid;
 
     /** 文章标题 */
     private String title;
@@ -64,12 +60,12 @@ public class Article {
     /** 允许出现在聚合中 */
     private Integer allowFeed;
 
-    public Integer getCmid() {
-        return cmid;
+    public Integer getAid() {
+        return aid;
     }
 
-    public void setCmid(Integer cmid) {
-        this.cmid = cmid;
+    public void setAid(Integer aid) {
+        this.aid = aid;
     }
 
     public String getTitle() {

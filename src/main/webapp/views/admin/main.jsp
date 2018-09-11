@@ -2,7 +2,7 @@
 <%@ page import="com.jax.blog.model.User" %>
 <%@ page import="com.jax.blog.constant.WebConst" %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>个人博客系统后台管理</title>
@@ -49,13 +49,12 @@
                     return true;
                 }, //进行验证，通过才让提交
                 success: function(result) {
-                    var result = eval("(" + result + ")"); //将json格式的result转换成js对象
-                    if(result.success) {
+                    var jsonResult = eval('(' + result + ')');
+                    if(jsonResult && jsonResult.code == 'success') {
                         $.messager.alert("系统提示", "密码修改成功，下一次登陆生效");
                         closePasswordModifyDialog();
                     } else {
                         $.messager.alert("系统提示", "密码修改失败");
-                        return;
                     }
                 }
             });
@@ -122,7 +121,7 @@
         </div>
         <div title="博客管理"  data-options="iconCls:'icon-bkgl'" style="padding:10px;">
             <a href="javascript:openTab('写博客','writeArticle.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px;">写博客</a>
-            <a href="javascript:openTab('博客信息管理','blogManage.jsp','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
+            <a href="javascript:openTab('博文管理','articleManage.jsp','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博文管理</a>
         </div>
         <div title="博客类别管理" data-options="iconCls:'icon-bklb'" style="padding:10px">
             <a href="javascript:openTab('博客类别信息管理','articleTypeManage.jsp','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>

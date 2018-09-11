@@ -73,7 +73,7 @@ public class AuthController extends BaseController {
             if(error_count > 3) {
                 return APIResponse.fail("您已经连续超过3次输入错误密码，请10分钟后尝试！");
             }
-            cache.set("login_error_count", error_count, 10 * 60);
+            cache.set("login_error_count", error_count, 60);
             String msg = "登录失败";
             if(e instanceof BusinessException) {
                 msg = e.getMessage();

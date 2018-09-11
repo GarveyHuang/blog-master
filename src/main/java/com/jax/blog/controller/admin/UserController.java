@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
 /**
@@ -30,13 +29,23 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @RequestMapping(value = URLMapper.ADMIN_USER_QUERY, method = RequestMethod.POST)
+    @ResponseBody
+    public User queryUserInfo(HttpServletRequest request) throws Exception {
+        User loginUser = (User) request.getSession().getAttribute(WebConst.LOGIN_SESSION_KEY);
+        if(loginUser == null && loginUser.getUid() == null) {
+            return null;
+        }
+        return userService.getUserInfoById(loginUser.getUid());
+    }
+
     @RequestMapping(value = URLMapper.ADMIN_USER_UPDATE, method = RequestMethod.POST)
     @ResponseBody
-    public APIResponse updateUserInfo(@RequestParam("imageFile") MultipartFile imageFile, User user, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public APIResponse updateUserInfo(@RequestParam("imageFile") MultipartFile imageFile, User user, HttpServletRequest request) throws Exception {
         if(! imageFile.isEmpty()) {
             String filePath = request.getServletContext().getRealPath("/"); // 获取服务器根路径
             String imageName = Commons.getCurrentDateStr() + "." + imageFile.getOriginalFilename().split("\\.")[1]; // 获取头像名
-            imageFile.transferTo(new File(filePath + "images\\userImages\\" + imageName)); // 复制到新地址
+            imageFile.transferTo(new File(filePath + "images\\upload\\userImages\\" + imageName)); // 复制到新地址
             user.setImageName(imageName);
         }
 
@@ -50,19 +59,18 @@ public class UserController {
 
     @RequestMapping(value = URLMapper.ADMIN_PASSWORD_MODIFY, method = RequestMethod.POST)
     @ResponseBody
-    public APIResponse updatePassword(@RequestParam("password") String password, HttpServletRequest request, HttpServletResponse response) {
-        //User user = new User();
-        //user.setPassword(password);
+    public APIResponse updatePassword(@RequestParam("password") String password, HttpServletRequest request) throws Exception {
+        User user = new User();
+        user.setPassword(password);
         User loginUser = (User) request.getSession().getAttribute(WebConst.LOGIN_SESSION_KEY); // 获取登录用户的uid
-        int resultTotal = 1;
-        /*if(loginUser != null && loginUser.getUid() != null) {
+        int resultTotal;
+        if(loginUser != null && loginUser.getUid() != null) {
             user.setUid(loginUser.getUid());
             resultTotal = userService.updateUserInfo(user);
-        }*/
-
-        if(resultTotal > 0) {
-            request.getSession().getServletContext().setAttribute(WebConst.LOGIN_SESSION_KEY, userService.getUserInfoById(loginUser.getUid()));
-            return APIResponse.success();
+            if(resultTotal > 0) {
+                request.getSession().getServletContext().setAttribute(WebConst.LOGIN_SESSION_KEY, userService.getUserInfoById(loginUser.getUid()));
+                return APIResponse.success();
+            }
         }
         return APIResponse.fail("修改密码发生错误");
     }
