@@ -14,11 +14,7 @@
 
     <script type="text/javascript">
         function formatTitle(val, row) {
-            return "<a target='_blank' href='${pageContext.request.contextPath}/admin/articles/"+row.id+".html'>"+val+"</a>";
-        }
-
-        function formatArticleType(val, row) {
-            return val.typeName;
+            return "<a target='_blank' href='${pageContext.request.contextPath}/admin/articles/" + row.id + ".html'>" + val + "</a>";
         }
 
         function searchArticle() {
@@ -68,19 +64,7 @@
         }
     </script>
 </head>
-<body style="margin: 1px; font-family: microsoft yahei">
-<table id="dg" title="博文管理" class="easyui-datagrid" fitColumns="true" pagination="true"
-       url="${pageContext.request.contextPath}/admin/article/queryAll.do" toolbar="#tb">
-    <thead>
-    <tr>
-        <th field="cb" checkbox="true" align="center"></th>
-        <th field="aid" width="20" align="center">编号</th>
-        <th field="title" width="200" formatter="formatTitle">标题</th>
-        <th field="created" width="100" align="center">发布时间</th>
-        <th field="type" width="100" align="center" formatter="formatArticleType">博客类型</th>
-    </tr>
-    </thead>
-</table>
+<body style="margin: 1px; font-family: microsoft yahei;">
 <div id="tb">
     <div>
         &nbsp;标题&nbsp;<input type="text" id="s_title" size="20" onkeydown="if(event.keyCode==13) searchArticle()">
@@ -90,5 +74,18 @@
         <a href="javascript:reload()" class="easyui-linkbutton" iconCls="icon-reload" plain="true">刷新</a>
     </div>
 </div>
+
+<table id="dg" title="博文管理" class="easyui-datagrid" style="width: auto; height: auto;" rownumbers="true" fitcolumns="true"  pagination="true"
+       url="${pageContext.request.contextPath}/admin/article/queryAll.do" toolbar="#tb">
+    <thead>
+    <tr>
+        <th field="cb" checkbox="true" align="center"></th>
+        <th field="aid" width="20" hidden="hidden" align="center">ID</th>
+        <th field="title" width="200" formatter="formatTitle">标题</th>
+        <th field="created" width="100" align="center">发布时间</th>
+        <th field="type" width="100" align="center">博客类型</th>
+    </tr>
+    </thead>
+</table>
 </body>
 </html>

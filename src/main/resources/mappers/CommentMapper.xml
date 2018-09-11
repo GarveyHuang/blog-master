@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 评论信息映射 -->
+<mapper namespace="com.jax.blog.dao.CommentDAO">
+    <resultMap id="CommentResultMap" type="com.jax.blog.model.Comment">
+        <id property="cmid" column="cmid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="BASE_TABLE">
+        t_comment
+    </sql>
+
+    <sql id="BASE_COLUMN">
+        a.cmid,
+    </sql>
+
+    <!-- 查询评论信息 -->
+    <select id="queryComment" resultMap="CommentResultMap">
+        SELECT
+        <trim suffix="" suffixOverrides=",">
+            <include refid="BASE_COLUMN"></include>
+        </trim>
+        FROM <include refid="BASE_TABLE"></include> AS a
+    </select>
+
+    <!-- 添加评论 -->
+    <insert id="addComment">
+        INSERT INTO <include refid="BASE_TABLE"></include>
+    </insert>
+
+    <!-- 修改评论 -->
+    <update id="updateComment">
+        UPDATE <include refid="BASE_TABLE"></include>
+        <set>
+            <if test="">
+
+            </if>
+        </set>
+    </update>
+
+    <!-- 删除评论 -->
+    <delete id="deleteComment">
+        DELETE FROM <include refid="BASE_TABLE"></include>
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 根据博客id删除评论 -->
+    <delete id="deleteCommentByArticleId">
+        DELETE FROM <include refid="BASE_TABLE"></include>
+        WHERE articleId = #{articleId}
+    </delete>
+</mapper>

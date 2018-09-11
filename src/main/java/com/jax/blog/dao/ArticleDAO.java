@@ -19,6 +19,7 @@ import java.util.List;
 public interface ArticleDAO {
     /**
      * 查询所有文章信息
+     * @return
      */
     List<Article> queryArticleList();
 

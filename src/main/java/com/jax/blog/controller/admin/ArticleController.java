@@ -26,7 +26,7 @@ public class ArticleController extends BaseController {
     @Autowired
     ArticleService articleService;
 
-    @RequestMapping(value = URLMapper.ADMIN_ARTICLE_QUERYALL, method = RequestMethod.GET)
+    @RequestMapping(value = URLMapper.ADMIN_ARTICLE_QUERYALL, method = RequestMethod.POST)
     @ResponseBody
     public List<Article> queryArticleList() throws Exception {
         return articleService.queryArticleList();
