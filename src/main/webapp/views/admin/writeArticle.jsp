@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>发表博文</title>
+    <title>发表文章</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/plugins/jquery-easyui-1.3.3/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/plugins/jquery-easyui-1.3.3/themes/icon.css">
@@ -22,7 +22,7 @@
 
 <body style="margin: 10px; font-family: microsoft yahei;">
 
-<div id="p" class="easyui-panel" title="发表博文" style="padding: 10px;">
+<div id="p" class="easyui-panel" title="发表文章" style="padding: 10px;">
 
     <table cellspacing="20px">
         <tr>
@@ -34,7 +34,7 @@
             <td><select id="blogTypeId" class="easyui-combobox"
                         name="blogType.id" style="width:154px" editable="false"
                         panelHeight="auto">
-                <option value="">请选择博客类别...</option>
+                <option value="">请选择文章类别...</option>
                 <c:forEach items="${blogTypeList }" var="blogType">
                     <option value="${blogType.id }">${blogType.typeName }</option>
                 </c:forEach>
@@ -42,7 +42,7 @@
             <td></td>
         </tr>
         <tr>
-            <td valign="top">博客内容：</td>
+            <td valign="top">文章内容：</td>
             <td><script id="editor" name="content" type="text/plain"
                         style="width:80%; height:500px;"></script></td>
         </tr>
@@ -54,7 +54,7 @@
         <tr>
             <td></td>
             <td><a href="javascript:submitData()" class="easyui-linkbutton"
-                   data-options="iconCls:'icon-submit'">发布博客</a></td>
+                   data-options="iconCls:'icon-submit'">发布文章</a></td>
         </tr>
     </table>
 </div>
@@ -78,9 +78,9 @@
         if (title == null || title == '') {
             $.messager.alert("系统提示", "请输入标题！");
         } else if (blogTypeId == null || blogTypeId == '') {
-            $.messager.alert("系统提示", "请选择博客类型！");
+            $.messager.alert("系统提示", "请选择文章类型！");
         } else if (content == null || content == '') {
-            $.messager.alert("系统提示", "请编辑博客内容！");
+            $.messager.alert("系统提示", "请编辑文章内容！");
         } else {
             $.post("${pageContext.request.contextPath}/admin/blog/save.do",
                 {
@@ -92,10 +92,10 @@
                     'contentNoTag' : contentNoTag
                 }, function(result) {
                     if (result.success) {
-                        $.messager.alert("系统提示", "博客发布成功！");
+                        $.messager.alert("系统提示", "文章发布成功！");
                         clearValues();
                     } else {
-                        $.messager.alert("系统提示", "博客发布失败！");
+                        $.messager.alert("系统提示", "文章发布失败！");
                     }
                 }, "json");
         }

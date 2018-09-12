@@ -3,10 +3,12 @@
 <%@ page import="com.jax.blog.constant.WebConst" %>
 
 <!DOCTYPE HTML>
-<html>
+<html lang="zh-CN">
 <head>
     <title>个人博客系统后台管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/Logo_40.png" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/plugins/jquery-easyui-1.3.3/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/plugins/jquery-easyui-1.3.3/themes/icon.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/plugins/jquery-easyui-1.3.3/jquery.min.js"></script>
@@ -116,15 +118,15 @@
 <div region="west" style="width: 220px;" title="导航菜单" split="true">
     <div class="easyui-accordion" data-options="border:false">
         <div title="常用操作" data-options="selected:true,iconCls:'icon-item'" style="padding: 10px">
-            <a href="javascript:openTab('写博客','writeArticle.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
+            <a href="javascript:openTab('发表文章','writeArticle.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px">写博客</a>
             <a href="javascript:openTab('评论审核','commentReview.jsp','icon-review')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-review'" style="width: 150px">评论审核</a>
         </div>
-        <div title="博客管理"  data-options="iconCls:'icon-bkgl'" style="padding:10px;">
-            <a href="javascript:openTab('写博客','writeArticle.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px;">写博客</a>
-            <a href="javascript:openTab('博文管理','articleManage.jsp','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博文管理</a>
+        <div title="文章管理"  data-options="iconCls:'icon-bkgl'" style="padding:10px;">
+            <a href="javascript:openTab('发表文章','writeArticle.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px;">写博客</a>
+            <a href="javascript:openTab('文章信息管理','articleManage.jsp','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">文章信息管理</a>
         </div>
-        <div title="博客类别管理" data-options="iconCls:'icon-bklb'" style="padding:10px">
-            <a href="javascript:openTab('博客类别信息管理','articleTypeManage.jsp','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>
+        <div title="文章类别管理" data-options="iconCls:'icon-bklb'" style="padding:10px">
+            <a href="javascript:openTab('文章类别信息管理','articleTypeManage.jsp','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">文章类别信息管理</a>
         </div>
         <div title="评论管理"  data-options="iconCls:'icon-plgl'" style="padding:10px">
             <a href="javascript:openTab('评论审核','commentReview.jsp','icon-review')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-review'" style="width: 150px">评论审核</a>

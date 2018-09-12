@@ -28,7 +28,7 @@ import java.io.IOException;
  * @Version 1.0
  **/
 @Controller
-public class AuthController extends BaseController {
+public class LoginAuthController extends BaseController {
     @Autowired
     private UserService userService;
 
@@ -53,8 +53,8 @@ public class AuthController extends BaseController {
      *  }
      * @return
      */
-    @RequestMapping(value = URLMapper.ADMIN_LOGIN, method = RequestMethod.POST)
     @ResponseBody
+    @RequestMapping(value = URLMapper.ADMIN_LOGIN, method = RequestMethod.POST)
     public APIResponse doLogin(HttpServletRequest request,
                                HttpServletResponse response,
                                @RequestBody UserLoginAuthRQ userLoginAuthRQ) {

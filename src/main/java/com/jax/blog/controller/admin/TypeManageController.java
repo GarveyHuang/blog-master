@@ -1,5 +1,6 @@
 package com.jax.blog.controller.admin;
 
+import com.jax.blog.controller.BaseController;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -10,5 +11,5 @@ import org.springframework.stereotype.Controller;
  * @Version 1.0
  **/
 @Controller
-public class BlogTypeAdminController {
+public class TypeManageController extends BaseController {
 }

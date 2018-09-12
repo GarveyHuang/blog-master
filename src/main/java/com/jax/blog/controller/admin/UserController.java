@@ -1,6 +1,7 @@
 package com.jax.blog.controller.admin;
 
 import com.jax.blog.constant.WebConst;
+import com.jax.blog.controller.BaseController;
 import com.jax.blog.model.User;
 import com.jax.blog.service.URLMapper;
 import com.jax.blog.service.user.UserService;
@@ -25,14 +26,14 @@ import java.io.File;
  * @Version 1.0
  **/
 @Controller
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     UserService userService;
 
     @RequestMapping(value = URLMapper.ADMIN_USER_QUERY, method = RequestMethod.POST)
     @ResponseBody
     public User queryUserInfo(HttpServletRequest request) throws Exception {
-        User loginUser = (User) request.getSession().getAttribute(WebConst.LOGIN_SESSION_KEY);
+        User loginUser = user(request);
         if(loginUser == null && loginUser.getUid() == null) {
             return null;
         }
@@ -62,7 +63,7 @@ public class UserController {
     public APIResponse updatePassword(@RequestParam("password") String password, HttpServletRequest request) throws Exception {
         User user = new User();
         user.setPassword(password);
-        User loginUser = (User) request.getSession().getAttribute(WebConst.LOGIN_SESSION_KEY); // 获取登录用户的uid
+        User loginUser = user(request); // 获取登录用户的uid
         int resultTotal;
         if(loginUser != null && loginUser.getUid() != null) {
             user.setUid(loginUser.getUid());

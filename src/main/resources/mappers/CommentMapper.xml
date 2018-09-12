@@ -4,6 +4,14 @@
 <mapper namespace="com.jax.blog.dao.CommentDAO">
     <resultMap id="CommentResultMap" type="com.jax.blog.model.Comment">
         <id property="cmid" column="cmid" jdbcType="INTEGER"/>
+        <result property="articleId" column="articleId" jdbcType="INTEGER"/>
+        <result property="created" column="created" jdbcType="INTEGER"/>
+        <result property="author" column="author" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="homePage" column="homePage" jdbcType="VARCHAR"/>
+        <result property="authorIp" column="authorIp" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="TEXT"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="BASE_TABLE">
@@ -11,7 +19,7 @@
     </sql>
 
     <sql id="BASE_COLUMN">
-        a.cmid,
+        a.cmid, a.articleId, a.created, a.author, a.email, a.homePage, a.authorIp, a.content, a.status
     </sql>
 
     <!-- 查询评论信息 -->
