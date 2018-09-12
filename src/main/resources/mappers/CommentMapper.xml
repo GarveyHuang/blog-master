@@ -10,7 +10,7 @@
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="homePage" column="homePage" jdbcType="VARCHAR"/>
         <result property="authorIp" column="authorIp" jdbcType="VARCHAR"/>
-        <result property="content" column="content" jdbcType="TEXT"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
     </resultMap>
 

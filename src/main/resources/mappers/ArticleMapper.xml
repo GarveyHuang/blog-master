@@ -17,9 +17,7 @@
         <result property="categories" column="categories" jdbcType="VARCHAR" />
         <result property="hits" column="hits" jdbcType="INTEGER" />
         <result property="commentsNum" column="commentsNum" jdbcType="INTEGER" />
-        <result property="allowComment" column="allowComment" jdbcType="INTEGER" />
-        <result property="allowPing" column="allowPing" jdbcType="INTEGER" />
-        <result property="allowFeed" column="allowFeed" jdbcType="INTEGER" />
+        <result property="isAllowComment" column="allowComment" jdbcType="INTEGER" />
     </resultMap>
 
     <sql id="BASE_TABLE">
@@ -27,8 +25,8 @@
     </sql>
 
     <sql id="BASE_COLUMN">
-        a.aid, a.title, a.titlePic, a.slug, a.created, a.modified, a.content, a.typeid, a.type, a.status, a.tags,
-        a.categories, a.hits, a.commentsNum, a.allowComment, a.allowPing, a.allowFeed
+        a.aid, a.title, a.titlePic, a.slug, a.created, a.modified, a.content, a.typeid, a.type, a.status,
+        a.tags, a.categories, a.hits, a.commentsNum, a.isAllowComment
     </sql>
 
     <!-- 查询所有文章 -->
@@ -49,6 +47,11 @@
         FROM <include refid="BASE_TABLE"></include> AS a
         WHERE aid = #{aid}
     </select>
+
+    <!-- 添加文章 -->
+    <insert id="addArticle">
+        INSERT INTO <include refid="BASE_TABLE"></include>
+    </insert>
 
     <!-- 更新文章 -->
     <update id="updateArticle">
@@ -93,14 +96,8 @@
             <if test="commentsNum != null and commentsNum != ''">
                 commentsNum = #{commentsNum},
             </if>
-            <if test="allowComment != null and allowComment != ''">
-                allowComment = #{allowComment},
-            </if>
-            <if test="allowPing != null and allowPing != ''">
-                allowPing = #{allowPing},
-            </if>
-            <if test="allowFeed != null and allowFeed != ''">
-                allowFeed = #{allowFeed},
+            <if test="isAllowComment != null and isAllowComment != ''">
+                isAllowComment = #{isAllowComment},
             </if>
         </set>
         WHERE aid = #{aid}

@@ -39,11 +39,8 @@ public class User {
     /** 用户注册时的GMT unix时间戳 */
     private Integer created;
 
-    /** 最后活动时间 */
+    /** 最后活跃时间 */
     private Integer activated;
-
-    /** 上次登录最后活跃时间 */
-    private Integer logged;
 
     /** 用户组 */
     private String groupName;
@@ -136,14 +133,6 @@ public class User {
         this.activated = activated;
     }
 
-    public Integer getLogged() {
-        return logged;
-    }
-
-    public void setLogged(Integer logged) {
-        this.logged = logged;
-    }
-
     public String getGroupName() {
         return groupName;
     }
@@ -166,7 +155,6 @@ public class User {
                 ", imageName='" + imageName + '\'' +
                 ", created=" + created +
                 ", activated=" + activated +
-                ", logged=" + logged +
                 ", groupName='" + groupName + '\'' +
                 '}';
     }

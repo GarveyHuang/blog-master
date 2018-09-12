@@ -2,7 +2,7 @@ package com.jax.blog.model;
 
 /**
  * @ClassName Tag
- * @Description 博客类型
+ * @Description 文章标签
  * @Author huangjw
  * @Date 2018/9/5 16:55
  * @Version 1.0
@@ -18,6 +18,9 @@ public class Tag {
 
     /** 描述 */
     private String description;
+
+    /** 热度 */
+    private Integer popular;
 
     /** 项目排序 */
     private Integer sort;
@@ -47,6 +50,14 @@ public class Tag {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getPopular() {
+        return popular;
+    }
+
+    public void setPopular(Integer popular) {
+        this.popular = popular;
     }
 
     public Integer getSort() {

@@ -52,13 +52,7 @@ public class Article {
     private Integer commentsNum;
 
     /** 是否允许评论 */
-    private Integer allowComment;
-
-    /** 是否允许ping */
-    private Integer allowPing;
-
-    /** 允许出现在聚合中 */
-    private Integer allowFeed;
+    private Integer isAllowComment;
 
     public Integer getAid() {
         return aid;
@@ -172,27 +166,11 @@ public class Article {
         this.commentsNum = commentsNum;
     }
 
-    public Integer getAllowComment() {
-        return allowComment;
+    public Integer getIsAllowComment() {
+        return isAllowComment;
     }
 
-    public void setAllowComment(Integer allowComment) {
-        this.allowComment = allowComment;
-    }
-
-    public Integer getAllowPing() {
-        return allowPing;
-    }
-
-    public void setAllowPing(Integer allowPing) {
-        this.allowPing = allowPing;
-    }
-
-    public Integer getAllowFeed() {
-        return allowFeed;
-    }
-
-    public void setAllowFeed(Integer allowFeed) {
-        this.allowFeed = allowFeed;
+    public void setIsAllowComment(Integer isAllowComment) {
+        this.isAllowComment = isAllowComment;
     }
 }

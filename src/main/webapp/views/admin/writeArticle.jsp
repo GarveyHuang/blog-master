@@ -82,7 +82,7 @@
         } else if (content == null || content == '') {
             $.messager.alert("系统提示", "请编辑文章内容！");
         } else {
-            $.post("${pageContext.request.contextPath}/admin/blog/save.do",
+            $.post("${pageContext.request.contextPath}/admin/article/save.do",
                 {
                     'title' : title,
                     'blogType.id' : blogTypeId,
