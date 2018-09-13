@@ -1,9 +1,6 @@
 package com.jax.blog.utils;
-/**
- * Created by huangjw on 2018/9/13.
- */
 
-import com.jax.blog.model.Tag;
+import com.jax.blog.model.Meta;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -22,11 +19,11 @@ public class AdminCommons {
      * @param cats
      * @return
      */
-    public static boolean exist_cat(Tag category, String cats) {
+    public static boolean exist_cat(Meta category, String cats) {
         String[] arr = StringUtils.split(cats, ",");
         if (null != arr && arr.length > 0) {
             for (String c : arr) {
-                if (c.trim().equals(category.getTagName())) {
+                if (c.trim().equals(category.getName())) {
                     return true;
                 }
             }

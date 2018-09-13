@@ -21,6 +21,12 @@ public class Comment {
     /** 评论作者 */
     private String author;
 
+    /** 文章所属用户id */
+    private Integer authorId;
+
+    /** 评论作者id */
+    private Integer ownerId;
+
     /** 评论者ip地址 */
     private String authorIp;
 
@@ -38,6 +44,11 @@ public class Comment {
 
     /** 评论状态 */
     private String status;
+
+    /**
+     * 父级评论
+     */
+    private Integer parent;
 
     public Integer getCmid() {
         return cmid;
@@ -71,6 +82,21 @@ public class Comment {
         this.author = author;
     }
 
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
+    public Integer getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
+    }
 
     public String getEmail() {
         return email;
@@ -119,5 +145,13 @@ public class Comment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getParent() {
+        return parent;
+    }
+
+    public void setParent(Integer parent) {
+        this.parent = parent;
     }
 }

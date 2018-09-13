@@ -60,7 +60,7 @@
                                         "<input type=\"text\" value=\"" + selection + "\" data-alt />" +
                                         "<br/>" +
                                         "<label>" + imageLang.link + "</label>" +
-                                        "<input type=\"text\" value=\"http://\" data-link />" +
+                                        "<input type=\"text\" value=\"http://\" data-meta />" +
                                         "<br/>" +
                                     ( (settings.imageUpload) ? "</form>" : "</div>");
 
@@ -83,7 +83,7 @@
                         enter : [lang.buttons.enter, function() {
                             var url  = this.find("[data-url]").val();
                             var alt  = this.find("[data-alt]").val();
-                            var link = this.find("[data-link]").val();
+                            var link = this.find("[data-meta]").val();
 
                             if (url === "")
                             {
@@ -183,7 +183,7 @@
 			dialog = editor.find("." + dialogName);
 			dialog.find("[type=\"text\"]").val("");
 			dialog.find("[type=\"file\"]").val("");
-			dialog.find("[data-link]").val("http://");
+			dialog.find("[data-meta]").val("http://");
 
 			this.dialogShowMask(dialog);
 			this.dialogLockScreen();

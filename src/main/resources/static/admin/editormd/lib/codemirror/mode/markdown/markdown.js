@@ -352,7 +352,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       }
     }
 
-    // Matches link titles present on next line
+    // Matches meta titles present on next line
     if (state.linkTitle) {
       state.linkTitle = false;
       var matchCh = ch;
@@ -557,7 +557,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     var ch = stream.next();
     if (ch === '(' || ch === '[') {
       state.f = state.inline = getLinkHrefInside(ch === "(" ? ")" : "]");
-      if (modeCfg.highlightFormatting) state.formatting = "link-string";
+      if (modeCfg.highlightFormatting) state.formatting = "meta-string";
       state.linkHref = true;
       return getType(state);
     }
@@ -570,7 +570,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
 
       if (ch === endChar) {
         state.f = state.inline = inlineNormal;
-        if (modeCfg.highlightFormatting) state.formatting = "link-string";
+        if (modeCfg.highlightFormatting) state.formatting = "meta-string";
         var returnState = getType(state);
         state.linkHref = false;
         return returnState;
@@ -617,10 +617,10 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
     }
     // Match URL
     stream.match(/^[^\s]+/, true);
-    // Check for link title
+    // Check for meta title
     if (stream.peek() === undefined) { // End of line, set flag to check next line
       state.linkTitle = true;
-    } else { // More content on line, check if link title
+    } else { // More content on line, check if meta title
       stream.match(/^(?:\s+(?:"(?:[^"\\]|\\\\|\\.)+"|'(?:[^'\\]|\\\\|\\.)+'|\((?:[^)\\]|\\\\|\\.)+\)))?/, true);
     }
     state.f = state.inline = inlineNormal;

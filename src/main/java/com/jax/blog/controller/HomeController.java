@@ -3,7 +3,7 @@ package com.jax.blog.controller;
 import com.jax.blog.constant.URLMapper;
 import com.jax.blog.service.article.ArticleService;
 import com.jax.blog.service.comment.CommentService;
-import com.jax.blog.service.link.LinkService;
+import com.jax.blog.service.meta.MetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ public class HomeController extends BaseController {
     private CommentService commentService;
 
     @Autowired
-    private LinkService linkService;
+    private MetaService linkService;
 
     /**
      * 博客首页

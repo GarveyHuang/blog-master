@@ -347,13 +347,13 @@ CodeMirror.defineMode("perl",function(){
                 lc                              :1,     // - return lower-case version of a string
                 lcfirst                         :1,     // - return a string with just the next letter in lower case
                 length                          :1,     // - return the number of bytes in a string
-                'link'                          :1,     // - create a hard link in the filesytem
+                'link'                          :1,     // - create a hard meta in the filesytem
                 listen                          :1,     // - register your socket as a server
                 local                           : 2,    // - create a temporary value for a global variable (dynamic scoping)
                 localtime                       :1,     // - convert UNIX time into record or string using local time
                 lock                            :1,     // - get a thread lock on a variable, subroutine, or method
                 'log'                           :1,     // - retrieve the natural logarithm for a number
-                lstat                           :1,     // - stat a symbolic link
+                lstat                           :1,     // - stat a symbolic meta
                 m                               :null,  // - match a string with a regular expression pattern
                 map                             :1,     // - apply a change to a list to get back a new list with the changes
                 mkdir                           :1,     // - create a directory
@@ -389,7 +389,7 @@ CodeMirror.defineMode("perl",function(){
                 read                            :1,     // - fixed-length buffered input from a filehandle
                 readdir                         :1,     // - get a directory from a directory handle
                 readline                        :1,     // - fetch a record from a file
-                readlink                        :1,     // - determine where a symbolic link is pointing
+                readlink                        :1,     // - determine where a symbolic meta is pointing
                 readpipe                        :1,     // - execute a system command and collect standard output
                 recv                            :1,     // - receive a message over a Socket
                 redo                            :1,     // - start this loop iteration over again
@@ -442,7 +442,7 @@ CodeMirror.defineMode("perl",function(){
                 study                           :1,     // - optimize input data for repeated searches
                 'sub'                           :1,     // - declare a subroutine, possibly anonymously
                 'substr'                        :1,     // - get or alter a portion of a stirng
-                symlink                         :1,     // - create a symbolic link to a file
+                symlink                         :1,     // - create a symbolic meta to a file
                 syscall                         :1,     // - execute an arbitrary system call
                 sysopen                         :1,     // - open a file, pipe, or descriptor
                 sysread                         :1,     // - fixed-length unbuffered input from a filehandle
@@ -461,7 +461,7 @@ CodeMirror.defineMode("perl",function(){
                 ucfirst                         :1,     // - return a string with just the next letter in upper case
                 umask                           :1,     // - set file creation mode mask
                 undef                           :1,     // - remove a variable or function definition
-                unlink                          :1,     // - remove one link to a file
+                unlink                          :1,     // - remove one meta to a file
                 unpack                          :1,     // - convert binary structure into normal perl variables
                 unshift                         :1,     // - prepend more elements to the beginning of a list
                 untie                           :1,     // - break a tie binding to a variable

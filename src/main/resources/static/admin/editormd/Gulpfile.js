@@ -28,7 +28,7 @@ var headerComment = ["/*",
 					" * @description <%= pkg.description %>",
 					" * @license     MIT License",
 					" * @author      <%= pkg.author %>",
-					" * {@link       <%= pkg.homepage %>}",
+					" * {@meta       <%= pkg.homepage %>}",
 					" * @updateTime  <%= pkg.today('Y-m-d') %>",
 					" */", 
 					"\r\n"].join("\r\n");

@@ -13,7 +13,7 @@
 
     var factory = function (exports) {
 
-		var pluginName   = "link-dialog";
+		var pluginName   = "meta-dialog";
 
 		exports.fn.linkDialog = function() {
 

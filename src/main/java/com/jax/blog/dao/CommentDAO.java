@@ -17,43 +17,25 @@ import java.util.List;
 @Mapper
 public interface CommentDAO {
     /**
-     * 查询评论信息
+     * 新增评论
+     * @param commentDomain
      * @return
-     * @throws Exception
      */
-    List<Comment> getComments() throws Exception;
-
-    /**
-     * 添加评论
-     * @param comment
-     * @return
-     * @throws Exception
-     */
-    int addComment(Comment comment) throws Exception;
-
-    /**
-     * 修改评论
-     * @param comment
-     * @return
-     * @throws Exception
-     */
-    int updateComment(Comment comment) throws Exception;
+    int addComment(Comment commentDomain);
 
     /**
      * 删除评论
-     * @param id
+     * @param cmid
      * @return
-     * @throws Exception
      */
-    int deleteComment(Integer id) throws Exception;
+    int deleteComment(@Param("cmid") Integer cmid);
 
     /**
-     * 根据博文id删除对应评论
-     * @param articleId
+     * 更新评论的状态
+     * @param cmid
      * @return
-     * @throws Exception
      */
-    int deleteCommentByArticleId(Integer articleId) throws Exception;
+    int updateCommentStatus(@Param("cmid") Integer cmid, @Param("status") String status);
 
     /**
      * 获取单条评论
@@ -63,10 +45,10 @@ public interface CommentDAO {
     Comment getCommentById(@Param("cmid") Integer cmid);
     /**
      * 根据文章编号获取评论列表
-     * @param cid
+     * @param aid
      * @return
      */
-    List<Comment> getCommentsByCId(@Param("cid") Integer cid);
+    List<Comment> getCommentsByCId(@Param("aid") Integer aid);
 
     /**
      * 根据条件获取评论列表

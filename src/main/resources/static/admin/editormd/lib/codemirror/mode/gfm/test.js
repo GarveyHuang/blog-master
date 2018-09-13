@@ -80,13 +80,13 @@
      "    [variable-3 1. ][property [x]]][variable-3  foo]"); // Valid; can be nested
 
   MT("SHA",
-     "foo [link be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2] bar");
+     "foo [meta be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2] bar");
 
   MT("SHAEmphasis",
-     "[em *foo ][em&link be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2][em *]");
+     "[em *foo ][em&meta be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2][em *]");
 
   MT("shortSHA",
-     "foo [link be6a8cc] bar");
+     "foo [meta be6a8cc] bar");
 
   MT("tooShortSHA",
      "foo be6a8c bar");
@@ -98,64 +98,64 @@
      "foo be6a8cc1c1ecfe9489fb51e4869af15a13fc2cg2 bar");
 
   MT("userSHA",
-     "foo [link bar@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2] hello");
+     "foo [meta bar@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2] hello");
 
   MT("userSHAEmphasis",
-     "[em *foo ][em&link bar@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2][em *]");
+     "[em *foo ][em&meta bar@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2][em *]");
 
   MT("userProjectSHA",
-     "foo [link bar/hello@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2] world");
+     "foo [meta bar/hello@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2] world");
 
   MT("userProjectSHAEmphasis",
-     "[em *foo ][em&link bar/hello@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2][em *]");
+     "[em *foo ][em&meta bar/hello@be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2][em *]");
 
   MT("num",
-     "foo [link #1] bar");
+     "foo [meta #1] bar");
 
   MT("numEmphasis",
-     "[em *foo ][em&link #1][em *]");
+     "[em *foo ][em&meta #1][em *]");
 
   MT("badNum",
      "foo #1bar hello");
 
   MT("userNum",
-     "foo [link bar#1] hello");
+     "foo [meta bar#1] hello");
 
   MT("userNumEmphasis",
-     "[em *foo ][em&link bar#1][em *]");
+     "[em *foo ][em&meta bar#1][em *]");
 
   MT("userProjectNum",
-     "foo [link bar/hello#1] world");
+     "foo [meta bar/hello#1] world");
 
   MT("userProjectNumEmphasis",
-     "[em *foo ][em&link bar/hello#1][em *]");
+     "[em *foo ][em&meta bar/hello#1][em *]");
 
   MT("vanillaLink",
-     "foo [link http://www.example.com/] bar");
+     "foo [meta http://www.example.com/] bar");
 
   MT("vanillaLinkPunctuation",
-     "foo [link http://www.example.com/]. bar");
+     "foo [meta http://www.example.com/]. bar");
 
   MT("vanillaLinkExtension",
-     "foo [link http://www.example.com/index.html] bar");
+     "foo [meta http://www.example.com/index.html] bar");
 
   MT("vanillaLinkEmphasis",
-     "foo [em *][em&link http://www.example.com/index.html][em *] bar");
+     "foo [em *][em&meta http://www.example.com/index.html][em *] bar");
 
   MT("notALink",
      "[comment ```css]",
      "[tag foo] {[property color]:[keyword black];}",
-     "[comment ```][link http://www.example.com/]");
+     "[comment ```][meta http://www.example.com/]");
 
   MT("notALink",
      "[comment ``foo `bar` http://www.example.com/``] hello");
 
   MT("notALink",
      "[comment `foo]",
-     "[link http://www.example.com/]",
+     "[meta http://www.example.com/]",
      "[comment `foo]",
      "",
-     "[link http://www.example.com/]");
+     "[meta http://www.example.com/]");
 
   MT("headerCodeBlockGithub",
      "[header&header-1 # heading]",
@@ -164,9 +164,9 @@
      "[comment code]",
      "[comment ```]",
      "",
-     "Commit: [link be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2]",
-     "Issue: [link #1]",
-     "Link: [link http://www.example.com/]");
+     "Commit: [meta be6a8cc1c1ecfe9489fb51e4869af15a13fc2cd2]",
+     "Issue: [meta #1]",
+     "Link: [meta http://www.example.com/]");
 
   MT("strikethrough",
      "[strikethrough ~~foo~~]");

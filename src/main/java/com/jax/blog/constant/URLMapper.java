@@ -25,6 +25,8 @@ public class URLMapper {
     /** 修改密码 */
     public static final String ADMIN_PASSWORD_MODIFY = "/admin/password/modify.do";
 
+    /** 文章管理页 */
+    public static final String ADMIN_ARTICLE = "/admin/article";
     /** 查询文章信息 */
     public static final String ADMIN_ARTICLE_QUERYALL = "/admin/article/queryAll.do";
     public static final String ADMIN_ARTICLE_QUERY = "/admin/article/query.do";
@@ -44,13 +46,13 @@ public class URLMapper {
     public static final String ADMIN_TAG_DELETE = "/admin/tag/delete.do";
 
     /** 查询友链信息 */
-    public static final String ADMIN_LINK_QUERY = "/admin/link/query.do";
+    public static final String ADMIN_LINK_QUERY = "/admin/meta/query.do";
     /** 添加友链信息 */
-    public static final String ADMIN_LINK_ADD = "/admin/link/add.do";
+    public static final String ADMIN_LINK_ADD = "/admin/meta/add.do";
     /** 修改友链信息 */
-    public static final String ADMIN_LINK_UPDATE = "/admin/link/update.do";
+    public static final String ADMIN_LINK_UPDATE = "/admin/meta/update.do";
     /** 删除友链信息 */
-    public static final String ADMIN_LINK_DELETE = "/admin/link/delete.do";
+    public static final String ADMIN_LINK_DELETE = "/admin/meta/delete.do";
 
     /** 查询评论 */
     public static final String ADMIN_COMMENT_QUERY = "/admin/comment/query.do";

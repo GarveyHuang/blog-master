@@ -137,7 +137,7 @@ Annotation.prototype = {
 
 		group.add(chart.annotations.group);
 
-		// link annotations to point or series
+		// meta annotations to point or series
 		annotation.linkObjects();
 
 		if (redraw !== false) {
@@ -309,7 +309,7 @@ Annotation.prototype = {
 	update: function (options, redraw) {
 		extend(this.options, options);
 
-		// update link to point or series
+		// update meta to point or series
 		this.linkObjects();
 
 		this.render(redraw);
@@ -383,10 +383,10 @@ Chart.prototype.callbacks.push(function (chart) {
 	// initialize empty array for annotations
 	chart.annotations.allItems = [];
 
-	// link chart object to annotations
+	// meta chart object to annotations
 	chart.annotations.chart = chart;
 
-	// link annotations group element to the chart
+	// meta annotations group element to the chart
 	chart.annotations.group = group;
 
 	if (isArray(options) && options.length > 0) {

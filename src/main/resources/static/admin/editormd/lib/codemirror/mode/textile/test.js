@@ -39,12 +39,12 @@
       '3 ** 3 = 27');
 
   MT('simpleLink',
-      '[link "CodeMirror":http://codemirror.net]');
+      '[meta "CodeMirror":http://codemirror.net]');
 
   MT('referenceLink',
-      '[link "CodeMirror":code_mirror]',
+      '[meta "CodeMirror":code_mirror]',
       'Normal Text.',
-      '[link [[code_mirror]]http://codemirror.net]');
+      '[meta [[code_mirror]]http://codemirror.net]');
 
   MT('footCite',
       'foo bar[qualifier [[1]]]');
@@ -286,7 +286,7 @@
       ' has an id.');
 
   MT('linkWithClass',
-      '[link "(my-class). This is a link with class":http://redcloth.org]');
+      '[meta "(my-class). This is a meta with class":http://redcloth.org]');
 
   /*
    * Layouts

@@ -15,7 +15,7 @@ public enum Types {
     PUBLISH("publish"),
     PAGE("page"),
     DRAFT("draft"),
-    LINK("link"),
+    LINK("meta"),
     IMAGE("image"),
     FILE("file"),
     CSRF_TOKEN("csrf_token"),

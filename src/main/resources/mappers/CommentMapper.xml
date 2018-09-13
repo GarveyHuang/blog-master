@@ -8,42 +8,87 @@
     </sql>
 
     <sql id="BASE_COLUMN">
-        a.cmid, a.articleId, a.created, a.author, a.email, a.homePage, a.authorIp, a.content, a.status
+        cm.cmid, cm.articleId, cm.created, cm.author, cm.authorId, cm.ownerId, cm.email,
+        cm.homePage, cm.ip, cm.agent, cm.status, cm.parent, cm.content
     </sql>
 
-    <!-- 查询评论信息 -->
-    <select id="queryComment" resultType="com.jax.blog.model.Comment">
-        SELECT
-        <trim suffix="" suffixOverrides=",">
-            <include refid="BASE_COLUMN"></include>
+    <!-- 新增评论 -->
+    <insert id="addComment" parameterType="com.jax.blog.model.Comment">
+        INSERT INTO
+        <include refid="BASE_TABLE"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            articleId, created, author, authorId, ownerId, email,
+            homePage, ip, agent, type, status, parent, content,
         </trim>
-        FROM <include refid="BASE_TABLE"></include> AS a
-    </select>
-
-    <!-- 添加评论 -->
-    <insert id="addComment">
-        INSERT INTO <include refid="BASE_TABLE"></include>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            #{articleId,jdbcType=INTEGER}, #{created, jdbcType=INTEGER},
+            #{author, jdbcType=VARCHAR}, #{authorId, jdbcType=INTEGER}, #{ownerId, jdbcType=INTEGER},
+            #{email, jdbcType=VARCHAR}, #{homePage, jdbcType=VARCHAR}, #{ip, jdbcType=VARCHAR}, #{agent, jdbcType=VARCHAR},
+            #{status, jdbcType=VARCHAR}, #{parent, jdbcType=INTEGER}, #{content, jdbcType=LONGVARCHAR},
+        </trim>
     </insert>
-
-    <!-- 修改评论 -->
-    <update id="updateComment">
-        UPDATE <include refid="BASE_TABLE"></include>
-        <set>
-            <if test="">
-
-            </if>
-        </set>
-    </update>
 
     <!-- 删除评论 -->
     <delete id="deleteComment">
-        DELETE FROM <include refid="BASE_TABLE"></include>
-        WHERE id = #{id}
+        DELETE FROM
+        <include refid="BASE_TABLE"/>
+        WHERE cmid = #{cmid, jdbcType=INTEGER}
     </delete>
 
-    <!-- 根据博客id删除评论 -->
-    <delete id="deleteCommentByArticleId">
-        DELETE FROM <include refid="BASE_TABLE"></include>
-        WHERE articleId = #{articleId}
-    </delete>
+    <!-- 更新评论的状态 -->
+    <update id="updateCommentStatus">
+        UPDATE
+        <include refid="BASE_TABLE"/>
+        SET status = #{status, jdbcType=VARCHAR}
+        WHERE cmid = #{cmid, jdbcType=INTEGER}
+    </update>
+
+    <select id="getCommentById" resultType="com.jax.blog.model.Comment">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/> AS cm
+        WHERE cm.cmid = #{cmid, jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据文章的主键获取评论列表:只显示正常的评论 -->
+    <select id="getCommentsByCId" resultType="com.jax.blog.model.Comment">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/> AS cm
+        WHERE cm.articleId =  #{articleId,jdbcType=INTEGER}
+        AND cm.status = 'approved'
+        ORDER BY cm.created
+    </select>
+
+    <!-- 根据条件查找评论列表 -->
+    <select id="getCommentsByCond" resultType="com.jax.blog.model.Comment"
+            parameterType="com.jax.blog.dto.cond.CommentCond">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/> AS cm
+        <where>
+            <if test="status != null">
+                AND cm.status = #{status, jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND cm.created &gt;= #{startTime, jdbcType=INTEGER}
+            </if>
+            <if test="endTime != null">
+                AND cm.created &lt;= #{endTime, jdbcType=INTEGER}
+            </if>
+            <if test="parent != null">
+                AND cm.parent = #{parent,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY cm.created
+    </select>
+
+    <select id="getCommentsCount" resultType="java.lang.Long">
+        SELECT count(*)
+        FROM
+        <include refid="BASE_TABLE"/>
+    </select>
 </mapper>

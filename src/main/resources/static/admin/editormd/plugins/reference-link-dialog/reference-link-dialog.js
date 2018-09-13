@@ -13,7 +13,7 @@
 
     var factory = function (exports) {
 
-		var pluginName   = "reference-link-dialog";
+		var pluginName   = "reference-meta-dialog";
 		var ReLinkId     = 1;
 
 		exports.fn.referenceLinkDialog = function() {

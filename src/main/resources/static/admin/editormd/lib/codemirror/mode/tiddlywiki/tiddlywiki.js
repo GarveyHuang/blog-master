@@ -143,7 +143,7 @@ CodeMirror.defineMode("tiddlywiki", function () {
       return chain(stream, state, twTokenCode);
     }
 
-    // rudimentary html:// file:// link matching. TW knows much more ...
+    // rudimentary html:// file:// meta matching. TW knows much more ...
     if (/[hf]/i.test(ch)) {
       if (/[ti]/i.test(stream.peek()) && stream.match(/\b(ttps?|tp|ile):\/\/[\-A-Z0-9+&@#\/%?=~_|$!:,.;]*[A-Z0-9+&@#\/%=~_|$]/i)) {
         return ret("link", "link");
@@ -162,7 +162,7 @@ CodeMirror.defineMode("tiddlywiki", function () {
         return ret('brace', 'brace');
       }
     }
-    if (ch == "@") {    // check for space link. TODO fix @@...@@ highlighting
+    if (ch == "@") {    // check for space meta. TODO fix @@...@@ highlighting
       stream.eatWhile(isSpaceName);
       return ret("link", "link");
     }

@@ -16,6 +16,9 @@ public class CommentCond {
     /** 结束时间戳 */
     private Integer endTime;
 
+    /** 父评论编号 */
+    private Integer parent;
+
     public String getStatus() {
         return status;
     }
@@ -38,5 +41,13 @@ public class CommentCond {
 
     public void setEndTime(Integer endTime) {
         this.endTime = endTime;
+    }
+
+    public Integer getParent() {
+        return parent;
+    }
+
+    public void setParent(Integer parent) {
+        this.parent = parent;
     }
 }

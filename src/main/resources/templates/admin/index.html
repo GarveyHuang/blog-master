@@ -17,7 +17,7 @@
                             <div class="mini-stat clearfix bx-shadow bg-info">
                                 <span class="mini-stat-icon"><i class="fa fa-quote-right" aria-hidden="true"></i></span>
                                 <div class="mini-stat-info text-right">
-                                    发表了<span class="counter" th:text="${statistics.articles}"></span>篇文章
+                                    发表了<span class="counter" th:text="${statistics.articlesCount}"></span>篇文章
                                 </div>
                             </div>
                         </div>
@@ -25,7 +25,7 @@
                             <div class="mini-stat clearfix bg-purple bx-shadow">
                                 <span class="mini-stat-icon"><i class="fa fa-comments-o" aria-hidden="true"></i></span>
                                 <div class="mini-stat-info text-right">
-                                    收到了<span class="counter" th:text="${statistics.comments}"></span>条留言
+                                    收到了<span class="counter" th:text="${statistics.commentsCount}"></span>条留言
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 <span class="mini-stat-icon"><i class="fa fa-cloud-upload"
                                                                 aria-hidden="true"></i></span>
                                 <div class="mini-stat-info text-right">
-                                    上传了<span class="counter" th:text="${statistics.attachs}"></span>个附件
+                                    上传了<span class="counter" th:text="${statistics.attachsCount}"></span>个附件
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                             <div class="mini-stat clearfix bg-primary bx-shadow">
                                 <span class="mini-stat-icon"><i class="fa fa-link" aria-hidden="true"></i></span>
                                 <div class="mini-stat-info text-right">
-                                    友链了<span class="counter" th:text="${statistics.links}"></span>个好友
+                                    友链了<span class="counter" th:text="${statistics.linksCount}"></span>个好友
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                         <li class="list-group-item" th:each="article : ${articles}">
                             <span class="badge badge-primary"
                                   th:title="${article.commentsNum}+'条评论'" th:text="${article.commentsNum}"></span>
-                                            <a target="_blank" th:href="${commons.site_url('/blog/article/')}+${article.cid}"
+                                            <a target="_blank" th:href="${commons.site_url('/admin/article/')}+${article.aid}"
                                                th:text="${article.title}"></a>
                                         </li>
                                     </ul>
@@ -82,13 +82,13 @@
                                     <ul class="list-group"
                                         th:unless="${comments}==null and ${#lists.size(comments)}==0">
                                         <li class="list-group-item" th:each="comment : ${comments}">
-                                            <div th:if="${comment.url}!=null and ${comment.url}!=''">
-                                                <a th:href="@{${comment.url}}" target="_blank"
+                                            <div th:if="${comment.homePage!=null and ${comment.homePage}!=''">
+                                                <a th:href="@{${comment.homePage}}" target="_blank"
                                                    th:text="${comment.author}"></a>
                                             </div>
-                                            <th:block th:unless="${comment.url}!=null and ${comment.url}!=''" th:text="${comment.author}"/>
+                                            <th:block th:unless="${comment.homePage}!=null and ${comment.homePage}!=''" th:text="${comment.author}"/>
                                             于<th:block th:text="${commons.fmtdate(comment.created,'MM月dd日HH:mm')}"/>：<a
-                                                th:href="${commons.site_url('/blog/article/')}+${comment.cid}+'#comments-content'"
+                                                th:href="${commons.site_url('/admin/article/')}+${comment.articleId}+'#comments-content'"
                                                 target="_blank" th:utext="${commons.article(comment.content)}"></a>
                                         </li>
                                     </ul>

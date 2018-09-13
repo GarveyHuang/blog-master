@@ -6923,7 +6923,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                     'body{margin:8px;font-family:sans-serif;font-size:16px;}' +
                     //设置段落间距
                     'p{margin:5px 0;}</style>' +
-                    ( options.iframeCssUrl ? '<link rel=\'stylesheet\' type=\'text/css\' href=\'' + utils.unhtml(options.iframeCssUrl) + '\'/>' : '' ) +
+                    ( options.iframeCssUrl ? '<meta rel=\'stylesheet\' type=\'text/css\' href=\'' + utils.unhtml(options.iframeCssUrl) + '\'/>' : '' ) +
                     (options.initialStyle ? '<style>' + options.initialStyle + '</style>' : '') +
                     '</head><body class=\'view\' ></body>' +
                     '<script type=\'text/javascript\' ' + (ie ? 'defer=\'defer\'' : '' ) +' id=\'_initialScript\'>' +
@@ -7260,7 +7260,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
             if (browser.ie && browser.version > 8) {
                 var headHtmlForIE9 = '';
                 utils.each(me.document.styleSheets, function (si) {
-                    headHtmlForIE9 += ( si.href ? '<link rel="stylesheet" type="text/css" href="' + si.href + '" />' : '<style>' + si.cssText + '</style>');
+                    headHtmlForIE9 += ( si.href ? '<meta rel="stylesheet" type="text/css" href="' + si.href + '" />' : '<style>' + si.cssText + '</style>');
                 });
                 utils.each(me.document.getElementsByTagName('script'), function (si) {
                     headHtmlForIE9 += si.outerHTML;
@@ -7661,7 +7661,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * 检查编辑区域中是否有内容
          * @method  hasContents
          * @remind 默认有文本内容，或者有以下节点都不认为是空
-         * table,ul,ol,dl,iframe,area,base,col,hr,img,embed,input,link,meta,param
+         * table,ul,ol,dl,iframe,area,base,col,hr,img,embed,input,meta,meta,param
          * @return { Boolean } 检查有内容返回true，否则返回false
          * @example
          * ```javascript
@@ -11842,7 +11842,7 @@ UE.plugins['font'] = function () {
     }
 };
 
-// plugins/link.js
+// plugins/meta.js
 /**
  * 超链接
  * @file
@@ -11851,13 +11851,13 @@ UE.plugins['font'] = function () {
 
 /**
  * 插入超链接
- * @command link
+ * @command meta
  * @method execCommand
  * @param { String } cmd 命令字符串
  * @param { Object } options   设置自定义属性，例如：url、title、target
  * @example
  * ```javascript
- * editor.execCommand( 'link', '{
+ * editor.execCommand( 'meta', '{
  *     url:'ueditor.baidu.com',
  *     title:'ueditor',
  *     target:'_blank'
@@ -11866,13 +11866,13 @@ UE.plugins['font'] = function () {
  */
 /**
  * 返回当前选中的第一个超链接节点
- * @command link
+ * @command meta
  * @method queryCommandValue
  * @param { String } cmd 命令字符串
  * @return { Element } 超链接节点
  * @example
  * ```javascript
- * editor.queryCommandValue( 'link' );
+ * editor.queryCommandValue( 'meta' );
  * ```
  */
 
@@ -27802,7 +27802,7 @@ UE.ui = baidu.editor.ui = {};
     var iframeUrlMap = {
         'anchor':'~/dialogs/anchor/anchor.html',
         'insertimage':'~/dialogs/image/image.html',
-        'link':'~/dialogs/link/link.html',
+        'link':'~/dialogs/meta/meta.html',
         'spechars':'~/dialogs/spechars/spechars.html',
         'searchreplace':'~/dialogs/searchreplace/searchreplace.html',
         'map':'~/dialogs/map/map.html',

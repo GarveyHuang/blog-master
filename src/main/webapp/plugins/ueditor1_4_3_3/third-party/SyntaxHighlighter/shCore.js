@@ -181,7 +181,7 @@ if (XRegExp) {
         return match;
     };
 
-    // Breaks the unrestorable link to XRegExp's private list of tokens, thereby preventing
+    // Breaks the unrestorable meta to XRegExp's private list of tokens, thereby preventing
     // syntax and flag changes. Should be run after XRegExp and any plugins are loaded
     XRegExp.freezeTokens = function () {
         XRegExp.addToken = function () {
@@ -3103,7 +3103,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			'getnetbyname getnetent getpeername getpgrp getppid getpriority ' + 
 			'getprotobyname getprotobynumber getprotoent getpwent getpwnam getpwuid ' + 
 			'getservbyname getservbyport getservent getsockname getsockopt glob ' + 
-			'gmtime grep hex index int ioctl join keys kill lc lcfirst length link ' + 
+			'gmtime grep hex index int ioctl join keys kill lc lcfirst length meta ' + 
 			'listen localtime lock log lstat map mkdir msgctl msgget msgrcv msgsnd ' + 
 			'oct open opendir ord pack pipe pop pos print printf prototype push ' + 
 			'quotemeta rand read readdir readline readlink readpipe recv rename ' + 
@@ -3281,7 +3281,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'checkpoint aggregate add';
 
 		// I can't find a way to match the comment based help in multi-line comments, because SH won't highlight in highlights, and javascript doesn't support lookbehind
-		var commenthelp = ' component description example externalhelp forwardhelpcategory forwardhelptargetname forwardhelptargetname functionality inputs link notes outputs parameter remotehelprunspace role synopsis';
+		var commenthelp = ' component description example externalhelp forwardhelpcategory forwardhelptargetname forwardhelptargetname functionality inputs meta notes outputs parameter remotehelprunspace role synopsis';
 
 		this.regexList = [
 			{ regex: new RegExp('^\\s*#[#\\s]*\\.('+this.getKeywords(commenthelp)+').*$', 'gim'),			css: 'preprocessor help bold' },		// comment-based help

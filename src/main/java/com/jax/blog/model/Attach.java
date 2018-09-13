@@ -2,7 +2,7 @@ package com.jax.blog.model;
 
 /**
  * @ClassName Attach
- * @Description TODO
+ * @Description 网站图片文件相关
  * @Author huangjw
  * @Date 2018/9/5 16:56
  * @Version 1.0
@@ -26,9 +26,6 @@ public class Attach {
 
     /** 创建的时间戳 */
     private Integer created;
-
-    /** 文章id */
-    private Integer cid;
 
     public Integer getFid() {
         return fid;
@@ -76,13 +73,5 @@ public class Attach {
 
     public void setCreated(Integer created) {
         this.created = created;
-    }
-
-    public Integer getCid() {
-        return cid;
-    }
-
-    public void setCid(Integer cid) {
-        this.cid = cid;
     }
 }

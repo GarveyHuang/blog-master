@@ -3323,7 +3323,7 @@ jQuery.support = (function( support ) {
 
 	// Setup
 	div.setAttribute( "className", "t" );
-	div.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>";
+	div.innerHTML = "  <meta/><table></table><a href='/a'>a</a><input type='checkbox'/>";
 
 	// Finish early in limited (non-browser) environments
 	all = div.getElementsByTagName("*") || [];
@@ -3349,7 +3349,7 @@ jQuery.support = (function( support ) {
 	// IE will insert them into empty tables
 	support.tbody = !div.getElementsByTagName("tbody").length;
 
-	// Make sure that link elements get serialized correctly by innerHTML
+	// Make sure that meta elements get serialized correctly by innerHTML
 	// This requires a wrapper element in IE
 	support.htmlSerialize = !!div.getElementsByTagName("link").length;
 
@@ -6023,7 +6023,7 @@ var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figca
 		col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
 		td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ],
 
-		// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
+		// IE6-8 can't serialize meta, script, style, or any html5 (NoScope) tags,
 		// unless wrapped in a div with non-breaking characters in front of it.
 		_default: jQuery.support.htmlSerialize ? [ 0, "", "" ] : [ 1, "X<div>", "</div>"  ]
 	},

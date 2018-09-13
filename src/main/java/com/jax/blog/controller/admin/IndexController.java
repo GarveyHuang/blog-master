@@ -70,6 +70,10 @@ public class IndexController extends BaseController {
         request.setAttribute("statistics", statistics);
         request.setAttribute("logs", list);
 
+        User user = (User) request.getSession().getAttribute(WebConst.LOGIN_SESSION_KEY);
+        String nickname = user.getNickName();
+        request.setAttribute("nickname", nickname);
+
         LOGGER.info("Exit admin index method");
         return URLMapper.ADMIN_INDEX;
     }

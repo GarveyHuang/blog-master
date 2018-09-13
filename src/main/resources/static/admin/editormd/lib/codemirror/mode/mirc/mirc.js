@@ -39,7 +39,7 @@ CodeMirror.defineMode("mirc", function() {
                             "$inelipse $ini $inmidi $inpaste $inpoly $input $inrect $inroundrect " +
                             "$insong $instok $int $inwave $ip $isalias $isbit $isdde $isdir $isfile " +
                             "$isid $islower $istok $isupper $keychar $keyrpt $keyval $knick $lactive " +
-                            "$lactivecid $lactivewid $left $len $level $lf $line $lines $link $lock " +
+                            "$lactivecid $lactivewid $left $len $level $lf $line $lines $meta $lock " +
                             "$lock $locked $log $logstamp $logstampfmt $longfn $longip $lower $ltimer " +
                             "$maddress $mask $matchkey $matchtok $md5 $me $menu $menubar $menucontext " +
                             "$menutype $mid $middir $mircdir $mircexe $mircini $mklogfn $mnick $mode " +
@@ -80,7 +80,7 @@ CodeMirror.defineMode("mirc", function() {
                             "isalpha isaop isavoice isban ischan ishop isignore isin isincs isletter islower " +
                             "isnotify isnum ison isop isprotect isreg isupper isvoice iswm iswmcs " +
                             "elseif else goto menu nicklist status title icon size option text edit " +
-                            "button check radio box scroll list combo link tab item");
+                            "button check radio box scroll list combo meta tab item");
   var functions = parseWords("if elseif else and not or eq ne in ni for foreach while switch");
   var isOperatorChar = /[+\-*&%=<>!?^\/\|]/;
   function chain(stream, state, f) {

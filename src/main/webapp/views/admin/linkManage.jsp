@@ -18,7 +18,7 @@
 
         function openLinkAddDialog() {
             $("#dlg").dialog("open").dialog("setTitle", "添加友情链接");
-            url = "${pageContext.request.contextPath}/admin/link/add.do";
+            url = "${pageContext.request.contextPath}/admin/meta/add.do";
         }
 
         function openLinkModifyDialog() {
@@ -30,7 +30,7 @@
             var row = selectedRows[0];
             $("#dlg").dialog("open").dialog("setTitle", "修改链接信息");
             $("#fm").form("load", row);//会自动识别name属性，将row中对应的数据，填充到form表单对应的name属性中
-            url = "${pageContext.request.contextPath}/admin/link/update.do?id=" + row.id;
+            url = "${pageContext.request.contextPath}/admin/meta/update.do?id=" + row.id;
         }
 
         function saveLink() {
@@ -74,7 +74,7 @@
             var ids = idsStr.join(","); //1,2,3,4
             $.messager.confirm("系统提示", "<font color=red>您确定要删除选中的"+selectedRows.length+"条数据么？</font>", function(r) {
                 if(r) {
-                    $.post("${pageContext.request.contextPath}/admin/link/delete.do",
+                    $.post("${pageContext.request.contextPath}/admin/meta/delete.do",
                             {ids: ids}, function(result){
                                 if(result.success) {
                                     $.messager.alert("系统提示", "友链删除成功！");

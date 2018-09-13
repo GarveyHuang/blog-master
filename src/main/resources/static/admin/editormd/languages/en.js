@@ -24,7 +24,7 @@
                 "list-ol"        : "Ordered list",
                 hr               : "Horizontal rule",
                 link             : "Link",
-                "reference-link" : "Reference link",
+                "reference-link" : "Reference meta",
                 image            : "Image",
                 code             : "Code inline",
                 "preformatted-text" : "Preformatted text / Code block (Tab indent)",
@@ -53,17 +53,17 @@
                     title    : "Link",
                     url      : "Address",
                     urlTitle : "Title",
-                    urlEmpty : "Error: Please fill in the link address."
+                    urlEmpty : "Error: Please fill in the meta address."
                 },
                 referenceLink : {
-                    title    : "Reference link",
+                    title    : "Reference meta",
                     name     : "Name",
                     url      : "Address",
                     urlId    : "ID",
                     urlTitle : "Title",
                     nameEmpty: "Error: Reference name can't be empty.",
-                    idEmpty  : "Error: Please fill in reference link id.",
-                    urlEmpty : "Error: Please fill in reference link url address."
+                    idEmpty  : "Error: Please fill in reference meta id.",
+                    urlEmpty : "Error: Please fill in reference meta url address."
                 },
                 image : {
                     title    : "Image",

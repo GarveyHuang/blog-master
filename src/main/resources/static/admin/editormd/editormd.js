@@ -159,8 +159,8 @@
         tocStartLevel        : 1,              // Said from H1 to create ToC
         htmlDecode           : false,          // Open the HTML tag identification 
         pageBreak            : true,           // Enable parse page break [========]
-        atLink               : true,           // for @link
-        emailLink            : true,           // for email address auto link
+        atLink               : true,           // for @meta
+        emailLink            : true,           // for email address auto meta
         taskList             : false,          // Enable Github Flavored Markdown task lists
         emoji                : false,          // :emoji: , Support Github emoji, Twitter Emoji (Twemoji);
                                                // Support FontAwesome icon emoji :fa-xxx: > Using fontAwesome icon web fonts;
@@ -203,7 +203,7 @@
             "list-ul"        : "fa-list-ul",
             "list-ol"        : "fa-list-ol",
             hr               : "fa-minus",
-            link             : "fa-link",
+            link             : "fa-meta",
             "reference-link" : "fa-anchor",
             image            : "fa-picture-o",
             code             : "fa-code",
@@ -1314,8 +1314,8 @@
                 "<div class=\"" + classPrefix + "dialog-container\">",
                 "<h1><i class=\"editormd-logo editormd-logo-lg editormd-logo-color\"></i> " + editormd.title + "<small>v" + editormd.version + "</small></h1>",
                 "<p>" + this.lang.description + "</p>",
-                "<p style=\"margin: 10px 0 20px 0;\"><a href=\"" + editormd.homePage + "\" target=\"_blank\">" + editormd.homePage + " <i class=\"fa fa-external-link\"></i></a></p>",
-                "<p style=\"font-size: 0.85em;\">Copyright &copy; 2015 <a href=\"https://github.com/pandao\" target=\"_blank\" class=\"hover-link\">Pandao</a>, The <a href=\"https://github.com/pandao/editor.md/blob/master/LICENSE\" target=\"_blank\" class=\"hover-link\">MIT</a> License.</p>",
+                "<p style=\"margin: 10px 0 20px 0;\"><a href=\"" + editormd.homePage + "\" target=\"_blank\">" + editormd.homePage + " <i class=\"fa fa-external-meta\"></i></a></p>",
+                "<p style=\"font-size: 0.85em;\">Copyright &copy; 2015 <a href=\"https://github.com/pandao\" target=\"_blank\" class=\"hover-meta\">Pandao</a>, The <a href=\"https://github.com/pandao/editor.md/blob/master/LICENSE\" target=\"_blank\" class=\"hover-meta\">MIT</a> License.</p>",
                 "</div>",
                 "<a href=\"javascript:;\" class=\"fa fa-close " + classPrefix + "dialog-close\"></a>",
                 "</div>"
@@ -1995,8 +1995,8 @@
                 taskList             : settings.taskList,
                 emoji                : settings.emoji,
                 tex                  : settings.tex,
-                atLink               : settings.atLink,           // for @link
-                emailLink            : settings.emailLink,        // for mail address auto link
+                atLink               : settings.atLink,           // for @meta
+                emailLink            : settings.emailLink,        // for mail address auto meta
                 flowChart            : settings.flowChart,
                 sequenceDiagram      : settings.sequenceDiagram,
                 previewCodeHighlight : settings.previewCodeHighlight,
@@ -3084,11 +3084,11 @@
         },
 
         link : function() {
-            this.executePlugin("linkDialog", "link-dialog/link-dialog");
+            this.executePlugin("linkDialog", "meta-dialog/meta-dialog");
         },
 
         "reference-link" : function() {
-            this.executePlugin("referenceLinkDialog", "reference-link-dialog/reference-link-dialog");
+            this.executePlugin("referenceLinkDialog", "reference-meta-dialog/reference-meta-dialog");
         },
 
         pagebreak : function() {
@@ -3389,8 +3389,8 @@
             tocm                 : false,
             tocStartLevel        : 1,              // Said from H1 to create ToC  
             pageBreak            : true,
-            atLink               : true,           // for @link
-            emailLink            : true,           // for mail address auto link
+            atLink               : true,           // for @meta
+            emailLink            : true,           // for mail address auto meta
             taskList             : false,          // Enable Github Flavored Markdown task lists
             emoji                : false,          // :emoji: , Support Twemoji, fontAwesome, Editor.md logo emojis.
             tex                  : false,          // TeX(LaTeX), based on KaTeX
@@ -3491,7 +3491,7 @@
                     });
 
                     text = text.replace(atLinkReg, function($1, $2) {
-                        return "<a href=\"" + editormd.urls.atLinkBase + "" + $2 + "\" title=\"&#64;" + $2 + "\" class=\"at-link\">" + $1 + "</a>";
+                        return "<a href=\"" + editormd.urls.atLinkBase + "" + $2 + "\" title=\"&#64;" + $2 + "\" class=\"at-meta\">" + $1 + "</a>";
                     }).replace(/_#_&#64;_#_/g, "@");
                 }
                 
@@ -3578,8 +3578,8 @@
             
             var headingHTML = "<h" + level + " id=\"h"+ level + "-" + this.options.headerPrefix + id +"\">";
             
-            headingHTML    += "<a name=\"" + text + "\" class=\"reference-link\"></a>";
-            headingHTML    += "<span class=\"header-link octicon octicon-link\"></span>";
+            headingHTML    += "<a name=\"" + text + "\" class=\"reference-meta\"></a>";
+            headingHTML    += "<span class=\"header-meta octicon octicon-meta\"></span>";
             headingHTML    += (hasLinkReg) ? this.atLink(this.emoji(linkText)) : this.atLink(this.emoji(text));
             headingHTML    += "</h" + level + ">";
 
@@ -3906,8 +3906,8 @@
             htmlDecode           : false,
             autoLoadKaTeX        : true,
             pageBreak            : true,
-            atLink               : true,    // for @link
-            emailLink            : true,    // for mail address auto link
+            atLink               : true,    // for @meta
+            emailLink            : true,    // for mail address auto meta
             tex                  : false,
             taskList             : false,   // Github Flavored Markdown task lists
             emoji                : false,
@@ -3939,8 +3939,8 @@
             emoji                : settings.emoji,
             tex                  : settings.tex,
             pageBreak            : settings.pageBreak,
-            atLink               : settings.atLink,           // for @link
-            emailLink            : settings.emailLink,        // for mail address auto link
+            atLink               : settings.atLink,           // for @meta
+            emailLink            : settings.emailLink,        // for mail address auto meta
             flowChart            : settings.flowChart,
             sequenceDiagram      : settings.sequenceDiagram,
             previewCodeHighlight : settings.previewCodeHighlight,

@@ -1262,7 +1262,7 @@ pathAnim = {
 		inArray: $.inArray,
 		
 		/**
-		 * A direct link to jQuery methods. MooTools and Prototype adapters must be implemented for each case of method.
+		 * A direct meta to jQuery methods. MooTools and Prototype adapters must be implemented for each case of method.
 		 * @param {Object} elem The HTML element
 		 * @param {String} method Which method to run on the wrapped element
 		 */
@@ -7478,7 +7478,7 @@ Axis.prototype = {
 			axis.min = pick(linkedParentExtremes.min, linkedParentExtremes.dataMin);
 			axis.max = pick(linkedParentExtremes.max, linkedParentExtremes.dataMax);
 			if (options.type !== axis.linkedParent.options.type) {
-				error(11, 1); // Can't link axes of different type
+				error(11, 1); // Can't meta axes of different type
 			}
 		} else { // initial min and max from the extreme data values
 			axis.min = pick(axis.userMin, options.min, axis.dataMin);
@@ -10753,7 +10753,7 @@ Chart.prototype = {
 		// Adjust title layout (reflow multiline text)
 		chart.layOutTitles();
 
-		// link stacked series
+		// meta stacked series
 		while (i--) {
 			serie = series[i];
 

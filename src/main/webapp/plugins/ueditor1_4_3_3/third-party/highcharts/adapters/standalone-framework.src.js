@@ -95,7 +95,7 @@ function augment(obj) {
 						el.HCProxiedMethods = {};
 					}
 
-					// link wrapped fn with original fn, so we can get this in removeEvent
+					// meta wrapped fn with original fn, so we can get this in removeEvent
 					el.HCProxiedMethods[fn.toString()] = wrappedFn;
 
 					el.attachEvent('on' + name, wrappedFn);
@@ -470,7 +470,7 @@ return {
 
 
 	/**
-	 * A direct link to adapter methods
+	 * A direct meta to adapter methods
 	 */
 	adapterRun: function (elem, method) {
 		return parseInt(HighchartsAdapter._getStyle(elem, method), 10);

@@ -3,7 +3,10 @@ package com.jax.blog.service.site;
  * Created by huangjw on 2018/9/13.
  */
 
+import com.jax.blog.dto.ArchiveDto;
+import com.jax.blog.dto.MetaDto;
 import com.jax.blog.dto.StatisticsDto;
+import com.jax.blog.dto.cond.ArticleCond;
 import com.jax.blog.model.Article;
 import com.jax.blog.model.Comment;
 
@@ -47,17 +50,17 @@ public interface SiteService {
 
     /**
      * 获取归档列表 - 只是获取日期和数量
-     * @param contentCond
+     * @param articleCond
      * @return
      */
-    //List<ArchiveDto> getArchivesSimple(ContentCond contentCond);
+    List<ArchiveDto> getArchivesSimple(ArticleCond articleCond);
 
     /**
      * 获取归档列表
-     * @param contentCond 查询条件（只包含开始时间和结束时间）
+     * @param articleCond 查询条件（只包含开始时间和结束时间）
      * @return
      */
-    //List<ArchiveDto> getArchives(ContentCond contentCond);
+    List<ArchiveDto> getArchives(ArticleCond articleCond);
 
 
 
@@ -68,5 +71,5 @@ public interface SiteService {
      * @param limit
      * @return
      */
-    //List<MetaDto> getMetas(String type, String orderBy, int limit);
+    List<MetaDto> getMetas(String type, String orderBy, int limit);
 }
