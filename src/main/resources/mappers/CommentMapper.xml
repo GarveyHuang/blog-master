@@ -2,17 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 评论信息映射 -->
 <mapper namespace="com.jax.blog.dao.CommentDAO">
-    <resultMap id="CommentResultMap" type="com.jax.blog.model.Comment">
-        <id property="cmid" column="cmid" jdbcType="INTEGER"/>
-        <result property="articleId" column="articleId" jdbcType="INTEGER"/>
-        <result property="created" column="created" jdbcType="INTEGER"/>
-        <result property="author" column="author" jdbcType="VARCHAR"/>
-        <result property="email" column="email" jdbcType="VARCHAR"/>
-        <result property="homePage" column="homePage" jdbcType="VARCHAR"/>
-        <result property="authorIp" column="authorIp" jdbcType="VARCHAR"/>
-        <result property="content" column="content" jdbcType="VARCHAR"/>
-        <result property="status" column="status" jdbcType="VARCHAR"/>
-    </resultMap>
 
     <sql id="BASE_TABLE">
         t_comment
@@ -23,7 +12,7 @@
     </sql>
 
     <!-- 查询评论信息 -->
-    <select id="queryComment" resultMap="CommentResultMap">
+    <select id="queryComment" resultType="com.jax.blog.model.Comment">
         SELECT
         <trim suffix="" suffixOverrides=",">
             <include refid="BASE_COLUMN"></include>

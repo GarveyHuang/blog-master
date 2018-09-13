@@ -28,6 +28,7 @@ public abstract class BaseController {
      * @return
      */
     /*public BaseController blogBaseData(HttpServletRequest request, ContentCond contentCond) {
+        //List<Tag> tags =
         return this;
     }*/
 
@@ -40,7 +41,7 @@ public abstract class BaseController {
         return TaleUtils.getLoginUser(request);
     }
 
-    public Integer getBid(HttpServletRequest request) {
+    public Integer getUid(HttpServletRequest request) {
         return this.user(request).getUid();
     }
 

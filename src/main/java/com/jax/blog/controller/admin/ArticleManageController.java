@@ -2,7 +2,7 @@ package com.jax.blog.controller.admin;
 
 import com.jax.blog.controller.BaseController;
 import com.jax.blog.model.Article;
-import com.jax.blog.service.URLMapper;
+import com.jax.blog.constant.URLMapper;
 import com.jax.blog.service.article.ArticleService;
 import com.jax.blog.utils.APIResponse;
 import org.springframework.beans.factory.annotation.Autowired;

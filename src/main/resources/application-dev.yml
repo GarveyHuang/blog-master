@@ -5,10 +5,6 @@ spring:
     application:
       name: blog-master
 
-    mvc:
-      view:
-        prefix: /views/
-        suffix: .jsp
     datasource:
         name: mysql_test
         type: com.alibaba.druid.pool.DruidDataSource
@@ -38,6 +34,13 @@ spring:
           #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
           pool-prepared-statements: false
           max-pool-prepared-statement-per-connection-size: 20
+    thymeleaf:
+            prefix: classpath:/templates/
+            suffix: .html
+            check-template-location: true
+            encoding: utf-8
+            mode: LEGACYHTML5
+            cache: false
     aop:
       auto: true
       proxy-target-class: true
@@ -47,21 +50,21 @@ spring:
             max-request-size: 100Mb
 
 mybatis:
-  mapper-locations: classpath:/mappers/*.xml
+  mapper-locations: classpath:mappers/*.xml
   type-aliases-package: com.jax.blog.model
 
 
 #pagehelper
-#pagehelper:
-    #helperDialect: mysql
-    #reasonable: true
-    #supportMethodsArguments: true
-    #params: count=countSql
-    #returnPageInfo: check
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+    returnPageInfo: check
 
-#logging:
-  #level:
-    #cn.luischen.dao : DEBUG
+logging:
+  level:
+    com.jax.blog.dao : DEBUG
 
 #swagger:
   #show: true

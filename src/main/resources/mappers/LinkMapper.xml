@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 友情链接映射 -->
 <mapper namespace="com.jax.blog.dao.LinkDAO">
-    <resultMap id="LinkResultMap" type="com.jax.blog.model.Link">
-        <id property="id" column="id" jdbcType="INTEGER"/>
-    </resultMap>
 
     <sql id="BASE_TABLE">
         t_link
@@ -15,7 +12,7 @@
     </sql>
 
     <!-- 查询友链信息 -->
-    <select id="queryLink" resultMap="LinkResultMap">
+    <select id="queryLink" resultType="com.jax.blog.model.Link">
         SELECT
         <trim suffix="" suffixOverrides=",">
             <include refid="BASE_COLUMN"></include>

@@ -2,13 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 文章类别信息映射 -->
 <mapper namespace="com.jax.blog.dao.ArticleTypeDAO">
-    <resultMap id="ArticleTypeResultMap" type="com.jax.blog.model.ArticleType">
-        <id property="id" column="id"/>
-        <result property="typename" column="typename"/>
-        <result property="orderNum" column="orderNum"/>
-        <result property="description" column="description"/>
-        <result property="parentid" column="parentid"/>
-    </resultMap>
 
     <sql id="BASE_TABLE">
         t_articletype
@@ -18,7 +11,7 @@
         a.id, a.typename, a.orderNum, a.description, a.parentid,
     </sql>
 
-    <select id="queryArticleTypeList" resultMap="ArticleTypeResultMap">
+    <select id="queryArticleTypeList" resultType="com.jax.blog.model.ArticleType">
         SELECT
         <trim suffix="" suffixOverrides=",">
             <include refid="BASE_COLUMN"></include>
@@ -38,7 +31,7 @@
     </update>
 
     <delete id="deleteArticleType">
-        DELETE FROM <include refid="BASE_RABLE"></include>
+        DELETE FROM <include refid="BASE_TABLE"></include>
         WHERE id=#{id}
     </delete>
 </mapper>

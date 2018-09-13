@@ -2,13 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 标签信息映射 -->
 <mapper namespace="com.jax.blog.dao.TagDAO">
-    <resultMap id="TagResultMap" type="com.jax.blog.model.Tag">
-        <id property="tid" column="tid"/>
-        <result property="tagName" column="tagName"/>
-        <result property="popular" column="popular"/>
-        <result property="orderNum" column="orderNum"/>
-        <result property="description" column="description"/>
-    </resultMap>
 
     <sql id="BASE_TABLE">
         t_tag
@@ -18,7 +11,7 @@
         a.tid, a.tagName, a.popular, a.orderNum, a.description
     </sql>
 
-    <select id="queryTagList" resultMap="TagResultMap">
+    <select id="queryTagList" resultType="com.jax.blog.model.Tag">
         SELECT
         <trim suffix="" suffixOverrides=",">
             <include refid="BASE_COLUMN"></include>
@@ -38,7 +31,7 @@
     </update>
 
     <delete id="deleteTag">
-        DELETE FROM <include refid="BASE_RABLE"></include>
+        DELETE FROM <include refid="BASE_TABLE"></include>
         WHERE tid=#{tid}
     </delete>
 </mapper>

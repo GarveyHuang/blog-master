@@ -1,7 +1,9 @@
 package com.jax.blog.dao;
 
+import com.jax.blog.dto.cond.CommentCond;
 import com.jax.blog.model.Comment;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface CommentDAO {
      * @return
      * @throws Exception
      */
-    List<Comment> queryComment() throws Exception;
+    List<Comment> getComments() throws Exception;
 
     /**
      * 添加评论
@@ -52,4 +54,30 @@ public interface CommentDAO {
      * @throws Exception
      */
     int deleteCommentByArticleId(Integer articleId) throws Exception;
+
+    /**
+     * 获取单条评论
+     * @param cmid
+     * @return
+     */
+    Comment getCommentById(@Param("cmid") Integer cmid);
+    /**
+     * 根据文章编号获取评论列表
+     * @param cid
+     * @return
+     */
+    List<Comment> getCommentsByCId(@Param("cid") Integer cid);
+
+    /**
+     * 根据条件获取评论列表
+     * @param commentCond
+     * @return
+     */
+    List<Comment> getCommentsByCond(CommentCond commentCond);
+
+    /**
+     * 获取文章数量
+     * @return
+     */
+    Long getCommentsCount();
 }

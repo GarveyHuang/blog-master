@@ -3,7 +3,7 @@ package com.jax.blog.utils;
 import com.jax.blog.constant.WebConst;
 import com.jax.blog.exception.BusinessException;
 import com.jax.blog.model.User;
-import com.jax.blog.service.URLMapper;
+import com.jax.blog.constant.URLMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TablesExtension;

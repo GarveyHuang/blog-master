@@ -2,23 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 文章信息映射 -->
 <mapper namespace="com.jax.blog.dao.ArticleDAO">
-    <resultMap id="ArticleResultMap" type="com.jax.blog.model.Article">
-        <id property="aid" column="aid" jdbcType="INTEGER" />
-        <result property="title" column="title" jdbcType="VARCHAR" />
-        <result property="titlePic" column="titlePic" jdbcType="VARCHAR" />
-        <result property="slug" column="slug" jdbcType="VARCHAR" />
-        <result property="created" column="created" jdbcType="INTEGER" />
-        <result property="modified" column="modified" jdbcType="INTEGER" />
-        <result property="content" column="content" jdbcType="VARCHAR" />
-        <result property="typeid" column="typeid" jdbcType="INTEGER" />
-        <result property="type" column="type" jdbcType="VARCHAR" />
-        <result property="status" column="status" jdbcType="VARCHAR" />
-        <result property="tags" column="tags" jdbcType="VARCHAR" />
-        <result property="categories" column="categories" jdbcType="VARCHAR" />
-        <result property="hits" column="hits" jdbcType="INTEGER" />
-        <result property="commentsNum" column="commentsNum" jdbcType="INTEGER" />
-        <result property="isAllowComment" column="allowComment" jdbcType="INTEGER" />
-    </resultMap>
 
     <sql id="BASE_TABLE">
         t_article
@@ -30,7 +13,7 @@
     </sql>
 
     <!-- 查询所有文章 -->
-    <select id="queryArticleList" resultMap="ArticleResultMap">
+    <select id="queryArticleList" resultType="com.jax.blog.model.Article">
         SELECT
         <trim suffix="" suffixOverrides=",">
             <include refid="BASE_COLUMN"></include>
@@ -39,7 +22,7 @@
     </select>
 
     <!-- 根据id查询文章 -->
-    <select id="queryArticleById" resultMap="ArticleResultMap">
+    <select id="queryArticleById" resultType="com.jax.blog.model.Article">
         SELECT
         <trim suffix="" suffixOverrides=",">
             <include refid="BASE_COLUMN"></include>
