@@ -3,6 +3,7 @@ package com.jax.blog.utils;
 import com.jax.blog.constant.WebConst;
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -18,7 +19,7 @@ import java.util.regex.Pattern;
  * @Date 2018/9/7 15:32
  * @Version 1.0
  **/
-
+@Component
 public class Commons {
     /**
      * 网站链接
@@ -533,7 +534,7 @@ public class Commons {
             String[] arr = categories.split(",");
             StringBuffer sbuf = new StringBuffer();
             for (String c : arr) {
-                sbuf.append("<a class=\"article-category-link\" href=\"/blog/category/" + URLEncoder.encode(c, "UTF-8") + "\">" + c + "</a>");
+                sbuf.append("<a class=\"article-category-meta\" href=\"/blog/category/" + URLEncoder.encode(c, "UTF-8") + "\">" + c + "</a>");
             }
             return sbuf.toString();
         }

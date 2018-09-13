@@ -1,7 +1,5 @@
 package com.jax.blog.model;
 
-import java.util.Date;
-
 /**
  * @ClassName Comment
  * @Description 博客评论
@@ -14,8 +12,8 @@ public class Comment {
     /** comment表主键 */
     private Integer cmid;
 
-    /** contents表主键,关联字段 */
-    private Integer contentid;
+    /** article表主键,关联字段 */
+    private Integer articleid;
 
     /** 评论生成时的GMT unix时间戳 */
     private Integer created;
@@ -23,20 +21,20 @@ public class Comment {
     /** 评论作者 */
     private String author;
 
-    /** 评论所属用户id */
+    /** 文章所属用户id */
     private Integer authorId;
 
-    /** 评论所属内容作者id */
+    /** 评论作者id */
     private Integer ownerId;
+
+    /** 评论者ip地址 */
+    private String authorIp;
 
     /** 评论者邮件 */
     private String email;
 
-    /** 评论者网址 */
-    private String url;
-
-    /** 评论者ip地址 */
-    private String ip;
+    /** 评论者主页 */
+    private String homePage;
 
     /** 评论者客户端 */
     private String agent;
@@ -44,13 +42,12 @@ public class Comment {
     /** 评论内容 */
     private String content;
 
-    /** 评论类型 */
-    private String type;
-
     /** 评论状态 */
     private String status;
 
-    /** 父级评论 */
+    /**
+     * 父级评论
+     */
     private Integer parent;
 
     public Integer getCmid() {
@@ -61,12 +58,12 @@ public class Comment {
         this.cmid = cmid;
     }
 
-    public Integer getContentid() {
-        return contentid;
+    public Integer getArticleid() {
+        return articleid;
     }
 
-    public void setContentid(Integer contentid) {
-        this.contentid = contentid;
+    public void setArticleid(Integer articleid) {
+        this.articleid = articleid;
     }
 
     public Integer getCreated() {
@@ -109,20 +106,20 @@ public class Comment {
         this.email = email;
     }
 
-    public String getUrl() {
-        return url;
+    public String getHomePage() {
+        return homePage;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setHomePage(String homePage) {
+        this.homePage = homePage;
     }
 
-    public String getIp() {
-        return ip;
+    public String getAuthorIp() {
+        return authorIp;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setAuthorIp(String authorIp) {
+        this.authorIp = authorIp;
     }
 
     public String getAgent() {
@@ -141,13 +138,6 @@ public class Comment {
         this.content = content;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getStatus() {
         return status;

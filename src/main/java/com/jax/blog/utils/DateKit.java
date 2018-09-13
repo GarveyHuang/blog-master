@@ -107,7 +107,6 @@ public class DateKit {
         return "";
     }
 
-
     public static String birthdayFormat(Date date) {
         if(date != null) {
             SimpleDateFormat format = null;

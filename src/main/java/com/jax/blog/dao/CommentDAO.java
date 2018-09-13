@@ -1,7 +1,9 @@
 package com.jax.blog.dao;
 
+import com.jax.blog.dto.cond.CommentCond;
 import com.jax.blog.model.Comment;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,41 +17,49 @@ import java.util.List;
 @Mapper
 public interface CommentDAO {
     /**
-     * 查询评论信息
+     * 新增评论
+     * @param commentDomain
      * @return
-     * @throws Exception
      */
-    List<Comment> queryComment() throws Exception;
-
-    /**
-     * 添加评论
-     * @param comment
-     * @return
-     * @throws Exception
-     */
-    int addComment(Comment comment) throws Exception;
-
-    /**
-     * 修改评论
-     * @param comment
-     * @return
-     * @throws Exception
-     */
-    int updateComment(Comment comment) throws Exception;
+    int addComment(Comment commentDomain);
 
     /**
      * 删除评论
-     * @param id
+     * @param cmid
      * @return
-     * @throws Exception
      */
-    int deleteComment(Integer id) throws Exception;
+    int deleteComment(@Param("cmid") Integer cmid);
 
     /**
-     * 根据博文id删除对应评论
-     * @param articleId
+     * 更新评论的状态
+     * @param cmid
      * @return
-     * @throws Exception
      */
-    int deleteCommentByArticleId(Integer articleId) throws Exception;
+    int updateCommentStatus(@Param("cmid") Integer cmid, @Param("status") String status);
+
+    /**
+     * 获取单条评论
+     * @param cmid
+     * @return
+     */
+    Comment getCommentById(@Param("cmid") Integer cmid);
+    /**
+     * 根据文章编号获取评论列表
+     * @param aid
+     * @return
+     */
+    List<Comment> getCommentsByCId(@Param("aid") Integer aid);
+
+    /**
+     * 根据条件获取评论列表
+     * @param commentCond
+     * @return
+     */
+    List<Comment> getCommentsByCond(CommentCond commentCond);
+
+    /**
+     * 获取文章数量
+     * @return
+     */
+    Long getCommentsCount();
 }

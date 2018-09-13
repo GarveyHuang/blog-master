@@ -2,120 +2,202 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 文章信息映射 -->
 <mapper namespace="com.jax.blog.dao.ArticleDAO">
-    <resultMap id="ArticleResultMap" type="com.jax.blog.model.Article">
-        <id property="aid" column="aid" jdbcType="INTEGER" />
-        <result property="title" column="title" jdbcType="VARCHAR" />
-        <result property="titlePic" column="titlePic" jdbcType="VARCHAR" />
-        <result property="slug" column="slug" jdbcType="VARCHAR" />
-        <result property="created" column="created" jdbcType="INTEGER" />
-        <result property="modified" column="modified" jdbcType="INTEGER" />
-        <result property="content" column="content" jdbcType="VARCHAR" />
-        <result property="typeid" column="typeid" jdbcType="INTEGER" />
-        <result property="type" column="type" jdbcType="VARCHAR" />
-        <result property="status" column="status" jdbcType="VARCHAR" />
-        <result property="tags" column="tags" jdbcType="VARCHAR" />
-        <result property="categories" column="categories" jdbcType="VARCHAR" />
-        <result property="hits" column="hits" jdbcType="INTEGER" />
-        <result property="commentsNum" column="commentsNum" jdbcType="INTEGER" />
-        <result property="allowComment" column="allowComment" jdbcType="INTEGER" />
-        <result property="allowPing" column="allowPing" jdbcType="INTEGER" />
-        <result property="allowFeed" column="allowFeed" jdbcType="INTEGER" />
-    </resultMap>
 
     <sql id="BASE_TABLE">
         t_article
     </sql>
 
-    <sql id="BASE_COLUMN">
-        a.aid, a.title, a.titlePic, a.slug, a.created, a.modified, a.content, a.typeid, a.type, a.status, a.tags,
-        a.categories, a.hits, a.commentsNum, a.allowComment, a.allowPing, a.allowFeed
+    <!-- 用户表 -->
+    <sql id="TABLE_USER">
+        <include refid="com.jax.blog.dao.UserDAO.BASE_TABLE"/>
     </sql>
 
-    <!-- 查询所有文章 -->
-    <select id="queryArticleList" resultMap="ArticleResultMap">
-        SELECT
-        <trim suffix="" suffixOverrides=",">
-            <include refid="BASE_COLUMN"></include>
-        </trim>
-        FROM <include refid="BASE_TABLE"></include> AS a
-    </select>
+    <sql id="BASE_COLUMN">
+        a.aid, a.title, a.titlePic, a.slug, a.created, a.modified, a.content, a.type, a.status,
+        c.authorId, a.tags, a.categories, a.hits, a.commentsNum, a.isAllowComment, a.isAllowPing, a.isAllowFeed
+    </sql>
 
-    <!-- 根据id查询文章 -->
-    <select id="queryArticleById" resultMap="ArticleResultMap">
-        SELECT
-        <trim suffix="" suffixOverrides=",">
-            <include refid="BASE_COLUMN"></include>
-        </trim>
-        FROM <include refid="BASE_TABLE"></include> AS a
-        WHERE aid = #{aid}
-    </select>
+    <!-- 关联查询的用户表需要的字段 -->
+    <sql id="REL_USER_COLUMN">
+        u.username,
+    </sql>
 
-    <!-- 更新文章 -->
-    <update id="updateArticle">
-        UPDATE <include refid="BASE_TABLE"></include>
-        <set>
-            <if test="title != null and title != ''">
-                title = #{title},
-            </if>
-            <if test="titlePic != null and titlePic != ''">
-                titlePic = #{titlePic},
-            </if>
-            <if test="slug != null and slug != ''">
-                slug = #{slug},
-            </if>
-            <if test="created != null and created != ''">
-                created = #{created},
-            </if>
-            <if test="modified != null and modified != ''">
-                modified = #{modified},
-            </if>
-            <if test="content != null and content != ''">
-                content = #{content},
-            </if>
-            <if test="typeid != null and typeid != ''">
-                typeid = #{typeid},
-            </if>
-            <if test="type != null and type != ''">
-                type = #{type},
-            </if>
-            <if test="status != null and status != ''">
-                status = #{status},
-            </if>
-            <if test="tags != null and tags != ''">
-                tags = #{tags},
-            </if>
-            <if test="categories != null and categories != ''">
-                categories = #{categories},
-            </if>
-            <if test="hits != null and hits != ''">
-                hits = #{hits},
-            </if>
-            <if test="commentsNum != null and commentsNum != ''">
-                commentsNum = #{commentsNum},
-            </if>
-            <if test="allowComment != null and allowComment != ''">
-                allowComment = #{allowComment},
-            </if>
-            <if test="allowPing != null and allowPing != ''">
-                allowPing = #{allowPing},
-            </if>
-            <if test="allowFeed != null and allowFeed != ''">
-                allowFeed = #{allowFeed},
-            </if>
-        </set>
-        WHERE aid = #{aid}
-    </update>
+    <!-- 添加文章 -->
+    <insert id="addArticle" parameterType="com.jax.blog.model.Article" useGeneratedKeys="true" keyProperty="aid">
+        INSERT INTO
+        <include refid="BASE_TABLE"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            title, titlePic, slug, created, content, authorId,
+            type, status, tags, categories, hits, commentsNum, isAllowComment,
+            isAllowPing, isAllowFeed,
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            #{title, jdbcType=VARCHAR}, #{titlePic, jdbcType=VARCHAR}, #{slug, jdbcType=VARCHAR}, UNIX_TIMESTAMP(NOW()),
+            #{content, jdbcType=LONGVARCHAR}, #{authorId, jdbcType=INTEGER},
+            #{type, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{tags, jdbcType=VARCHAR},
+            #{categories, jdbcType=VARCHAR}, #{hits, jdbcType=INTEGER}, #{commentsNum, jdbcType=INTEGER},
+            #{isAllowComment, jdbcType=INTEGER}, #{isAllowPing, jdbcType=INTEGER}, #{isAllowFeed, jdbcType=INTEGER},
+        </trim>
+    </insert>
 
     <!-- 删除文章 -->
-    <delete id="deleteArticle">
-        DELETE FROM <include refid="BASE_TABLE"></include> WHERE aid = #{aid}
+    <delete id="deleteArticleById">
+        DELETE FROM
+        <include refid="BASE_TABLE"/>
+        WHERE aid = #{aid, jdbcType=INTEGER}
     </delete>
 
-    <delete id="batchDeleteArticles">
-        DELETE FROM <include refid="BASE_TABLE"></include> WHERE aid IN
-        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </delete>
+    <!-- 更新文章信息 -->
+    <update id="updateArticleById" parameterType="com.jax.blog.model.Article">
+        UPDATE
+        <include refid="BASE_TABLE"/>
+        <set>
+            <if test="title != null">
+                title = #{title, jdbcType=VARCHAR},
+            </if>
+            <if test="titlePic != null">
+                titlePic = #{titlePic, jdbcType=VARCHAR},
+            </if>
+            <if test="slug != null">
+                slug = #{slug, jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content, jdbcType=LONGVARCHAR},
+            </if>
+            modified = UNIX_TIMESTAMP(NOW()),
+            <if test="type != null">
+                type = #{type, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=VARCHAR},
+            </if>
+            <if test="tags != null">
+                tags = #{tags, jdbcType=VARCHAR},
+            </if>
+            <if test="categories != null">
+                categories = #{categories, jdbcType=VARCHAR},
+            </if>
+            <if test="hits != null">
+                hits = #{hits, jdbcType=INTEGER},
+            </if>
+            <if test="commentsNum != null">
+                commentsNum = #{commentsNum, jdbcType=INTEGER},
+            </if>
+            <if test="isAllowComment != null">
+                isAllowComment = #{isAllowComment, jdbcType=INTEGER},
+            </if>
+            <if test="isAllowPing != null">
+                isAllowPing = #{isAllowPing, jdbcType=INTEGER},
+            </if>
+            <if test="isAllowFeed != null">
+                isAllowFeed = #{isAllowFeed, jdbcType=INTEGER},
+            </if>
+        </set>
+        WHERE aid = #{aid, jdbcType=INTEGER}
+    </update>
+
+    <update id="updateArticleCommentCountById" >
+        UPDATE
+        <include refid="BASE_TABLE"/>
+        SET commentsNum = #{commentsNum, jdbcType=INTEGER}
+        WHERE aid = #{aid, jdbcType=INTEGER}
+    </update>
+
+
+    <!-- 根据主键编号获取文章信息 -->
+    <select id="getArticleById" resultType="com.jax.blog.model.Article">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/> AS c
+        WHERE c.aid = #{aid, jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据条件查询文章 -->
+    <select id="getArticlesByCond" resultType="com.jax.blog.model.Article"
+            parameterType="com.jax.blog.dto.cond.ArticleCond">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/> AS c
+        <where>
+            <if test="tag != null">
+                AND c.tags LIKE CONCAT('%',#{tag, jdbcType=VARCHAR},'%')
+            </if>
+            <if test="category != null">
+                AND c.categories LIKE CONCAT('%',#{category, jdbcType=VARCHAR},'%')
+            </if>
+            <if test="status != null">
+                AND c.status = #{status, jdbcType=VARCHAR}
+            </if>
+            <if test="title != null">
+                AND c.title LIKE CONCAT('%',#{title, jdbcType=VARCHAR},'%')
+            </if>
+            <if test="content != null">
+                AND c.content LIKE CONCAT('%',#{content, jdbcType=VARCHAR},'%')
+            </if>
+            <if test="type != null">
+                AND c.type = #{type, jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                AND c.created &gt;= #{startTime, jdbcType=INTEGER}
+            </if>
+            <if test="endTime != null">
+                AND c.created &lt;= #{endTime, jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY c.created DESC
+    </select>
+
+    <select id="getArticleCount" resultType="java.lang.Long">
+        SELECT count(*)
+        FROM <include refid="BASE_TABLE"/>
+    </select>
+
+    <resultMap id="archiveDtoMap" type="com.jax.blog.dto.ArchiveDto">
+        <id column="date" property="date"/>
+        <result column="count" property="count"/>
+    </resultMap>
+
+    <select id="getArchive" resultMap="archiveDtoMap"
+            parameterType="com.jax.blog.dto.cond.ArticleCond">
+        select
+        FROM_UNIXTIME(created, '%Y年%m月') as date,
+        count(*)                         as count
+        from <include refid="BASE_TABLE"/>
+        <where>
+            type = 'post'
+            and status = 'publish'
+            <if test="startTime != null">
+                AND created &gt;= #{startTime, jdbcType=INTEGER}
+            </if>
+            <if test="endTime != null">
+                AND created &lt;= #{endTime, jdbcType=INTEGER}
+            </if>
+        </where>
+        group by date
+        order by date desc
+    </select>
+
+    <select id="getRecentlyArticle" resultType="com.jax.blog.model.Article">
+        SELECT
+        aid, title
+        FROM
+        <include refid="BASE_TABLE"/>
+        ORDER BY created DESC
+    </select>
+
+    <!-- 模糊搜索 -->
+    <select id="searchArticle" resultType="com.jax.blog.model.Article">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/> AS c
+        <where>
+            c.title LIKE CONCAT('%',#{param, jdbcType=VARCHAR},'%')
+            OR
+            c.content LIKE CONCAT('%',#{param, jdbcType=VARCHAR},'%')
+        </where>
+    </select>
 
 </mapper>

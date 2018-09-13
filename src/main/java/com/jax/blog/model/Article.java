@@ -27,22 +27,30 @@ public class Article {
     /** 内容更改的GMT unix时间戳 */
     private Integer modified;
 
-    /** 正文内容 */
+    /**
+     * 内容文字
+     */
     private String content;
 
-    /** 博文类别id */
-    private Integer typeid;
-
-    /** 博文类别 */
+    /**
+     * 内容所属用户id
+     */
+    private Integer authorId;
+    /**
+     * 内容类别
+     */
     private String type;
-
-    /** 博文状态 */
+    /**
+     * 内容状态
+     */
     private String status;
-
-    /** 标签 */
+    /**
+     * 标签列表
+     */
     private String tags;
-
-    /** 分类 */
+    /**
+     * 分类列表
+     */
     private String categories;
 
     /** 点击数 */
@@ -52,13 +60,7 @@ public class Article {
     private Integer commentsNum;
 
     /** 是否允许评论 */
-    private Integer allowComment;
-
-    /** 是否允许ping */
-    private Integer allowPing;
-
-    /** 允许出现在聚合中 */
-    private Integer allowFeed;
+    private Integer isAllowComment;
 
     public Integer getAid() {
         return aid;
@@ -116,12 +118,12 @@ public class Article {
         this.content = content;
     }
 
-    public Integer getTypeid() {
-        return typeid;
+    public Integer getAuthorId() {
+        return authorId;
     }
 
-    public void setTypeid(Integer typeid) {
-        this.typeid = typeid;
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
     }
 
     public String getType() {
@@ -172,27 +174,11 @@ public class Article {
         this.commentsNum = commentsNum;
     }
 
-    public Integer getAllowComment() {
-        return allowComment;
+    public Integer getIsAllowComment() {
+        return isAllowComment;
     }
 
-    public void setAllowComment(Integer allowComment) {
-        this.allowComment = allowComment;
-    }
-
-    public Integer getAllowPing() {
-        return allowPing;
-    }
-
-    public void setAllowPing(Integer allowPing) {
-        this.allowPing = allowPing;
-    }
-
-    public Integer getAllowFeed() {
-        return allowFeed;
-    }
-
-    public void setAllowFeed(Integer allowFeed) {
-        this.allowFeed = allowFeed;
+    public void setIsAllowComment(Integer isAllowComment) {
+        this.isAllowComment = isAllowComment;
     }
 }

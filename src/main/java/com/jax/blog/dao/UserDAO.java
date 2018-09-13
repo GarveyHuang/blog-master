@@ -3,7 +3,6 @@ package com.jax.blog.dao;
 import com.jax.blog.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 /**
  * @ClassName UserMapper
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @Version 1.0
  **/
 @Mapper
-@Component
 public interface UserDAO {
     /**
      * 根据主键编号获取用户信息
