@@ -27,42 +27,41 @@ public class URLMapper {
 
     /** 文章管理页 */
     public static final String ADMIN_ARTICLE = "/admin/article";
-    /** 查询文章信息 */
-    public static final String ADMIN_ARTICLE_QUERYALL = "/admin/article/queryAll.do";
-    public static final String ADMIN_ARTICLE_QUERY = "/admin/article/query.do";
-    /** 修改文章信息 */
-    public static final String ADMIN_ARTICLE_MODIFY = "/admin/article/modify.do";
+    /** 发布文章 */
+    public static final String ADMIN_ARTICLE_PUBLISH = "/admin/article/publish";
+    /** 保存文章 */
+    public static final String ADMIN_ARTICLE_SAVE = "/admin/article/save";
     /** 删除文章 */
-    public static final String ADMIN_ARTICLE_DELETE = "/admin/article/delete.do";
-    public static final String ADMIN_ARTICLE_BATCHDELETE = "/admin/article/batchDelete.do";
+    public static final String ADMIN_ARTICLE_DELETE = "/admin/article/delete";
 
-    /** 查询标签 */
-    public static final String ADMIN_TAG_QUERY = "/admin/tag/query.do";
-    /** 添加标签 */
-    public static final String ADMIN_TAG_ADD = "/admin/tag/add.do";
-    /** 修改标签 */
-    public static final String ADMIN_TAG_UPDATE = "/admin/tag/update.do";
-    /** 删除标签 */
-    public static final String ADMIN_TAG_DELETE = "/admin/tag/delete.do";
-
-    /** 查询友链信息 */
-    public static final String ADMIN_LINK_QUERY = "/admin/meta/query.do";
-    /** 添加友链信息 */
-    public static final String ADMIN_LINK_ADD = "/admin/meta/add.do";
-    /** 修改友链信息 */
-    public static final String ADMIN_LINK_UPDATE = "/admin/meta/update.do";
-    /** 删除友链信息 */
-    public static final String ADMIN_LINK_DELETE = "/admin/meta/delete.do";
-
-    /** 查询评论 */
-    public static final String ADMIN_COMMENT_QUERY = "/admin/comment/query.do";
-    /** 审核评论 */
-    public static final String ADMIN_COMMENT_REVIEW = "/admin/comment/review.do";
+    /** 评论管理页 */
+    public static final String ADMIN_COMMENT = "/admin/comment";
     /** 删除评论 */
-    public static final String ADMIN_COMMENT_DELETE = "/admin/comment/delete.do";
+    public static final String ADMIN_COMMENT_DELETE = "/admin/comment/delete";
+    /** 更改评论状态 */
+    public static final String ADMIN_COMMENT_STATUS = "/admin/comment/status";
 
-    /** 查询日志信息 */
-    public static final String ADMIN_LOG_QUERY = "/admin/log/query.do";
+    /** 系统设置页 */
+    public static final String ADMIN_SETTING = "/admin/setting";
+
+    /** 友链管理页 */
+    public static final String ADMIN_LINKS = "/admin/links";
+    /** 新增友链 */
+    public static final String ADMIN_LINKS_SAVE = "/admin/links/save";
+    /** 删除友链 */
+    public static final String ADMIN_LINKS_DELETE = "/admin/links/delete";
+
+    /** 标签和分类 */
+    public static final String ADMIN_CATEGORY = "/admin/category";
+    /** 保存分类 */
+    public static final String ADMIN_CATEGORY_SAVE = "/admin/category/sava";
+    /** 删除分类 */
+    public static final String ADMIN_CATEGORY_DELETE = "/admin/category/delete";
+
+    /** 附件管理页 */
+    public static final String ADMIN_ATTACH = "/admin/attach";
+    /** 附件上传 */
+    public static final String ADMIN_ATTACH_UPLOAD = "/admin/attach/upload";
 
     /** 博客主页 */
     public static final String INDEX = "/index";

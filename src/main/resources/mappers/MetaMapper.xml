@@ -20,11 +20,11 @@
         INSERT INTO
         <include refid="BASE_TABLE"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            name, slug, type, description, sort, parent
+            name, slug, type, description, orderNum, parent
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
             #{name, jdbcType=VARCHAR}, #{slug, jdbcType=VARCHAR}, #{type, jdbcType=VARCHAR},
-            #{description, jdbcType=VARCHAR}, #{sort, jdbcType=INTEGER}, #{parent, jdbcType=INTEGER}
+            #{description, jdbcType=VARCHAR}, #{orderNum, jdbcType=INTEGER}, #{parent, jdbcType=INTEGER}
         </trim>
     </insert>
 
@@ -86,7 +86,7 @@
                 AND m.type = #{type, jdbcType=VARCHAR}
             </if>
         </where>
-        ORDER BY m.sort
+        ORDER BY m.orderNum
     </select>
 
     <select id="getMetasCountByType" resultType="java.lang.Long">

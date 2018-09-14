@@ -45,9 +45,7 @@ public class Comment {
     /** 评论状态 */
     private String status;
 
-    /**
-     * 父级评论
-     */
+    /** 父级评论 */
     private Integer parent;
 
     public Integer getCmid() {

@@ -122,9 +122,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @CacheEvict(value = {"articleCache","articleCaches"}, allEntries = true, beforeInvocation = true)
-    public void updateArticleByAid(Article content) {
-        if (null != content && null != content.getAid()) {
-            articleDAO.updateArticleById(content);
+    public void updateArticleByAid(Article article) {
+        if (null != article && null != article.getAid()) {
+            articleDAO.updateArticleById(article);
         }
     }
 
