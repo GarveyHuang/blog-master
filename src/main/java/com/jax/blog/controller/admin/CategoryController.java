@@ -38,8 +38,10 @@ public class CategoryController extends BaseController {
     public String categoryList(HttpServletRequest request) {
         List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);
         List<MetaDto> tags = metaService.getMetaList(Types.TAG.getType(), null, WebConst.MAX_POSTS);
+        String nickname = this.getNickName(request);
         request.setAttribute("categories", categories);
         request.setAttribute("tags", tags);
+        request.setAttribute("nickname", nickname);
         return URLMapper.ADMIN_CATEGORY;
     }
 

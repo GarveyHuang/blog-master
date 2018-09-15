@@ -23,12 +23,12 @@ public class UserServiceImpl implements UserService {
     private UserDAO dao;
 
     @Override
-    public User getUserInfoById(Integer uid) throws Exception {
+    public User getUserInfoById(Integer uid) {
         return dao.getUserInfoById(uid);
     }
 
     @Override
-    public User login(String username, String password) throws Exception {
+    public User login(String username, String password) {
         if(StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             throw BusinessException.withErrorCode(ErrorConstant.Auth.USERNAME_PASSWORD_IS_EMPTY);
         }
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public int updateUserInfo(User user) throws Exception {
+    public int updateUserInfo(User user) {
         if(user == null || null == user.getUid()) {
             throw BusinessException.withErrorCode("用户信息不能为空");
         }

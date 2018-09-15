@@ -48,7 +48,7 @@ public interface CommentDAO {
      * @param aid
      * @return
      */
-    List<Comment> getCommentsByCId(@Param("aid") Integer aid);
+    List<Comment> getCommentsByAId(@Param("aid") Integer aid);
 
     /**
      * 根据条件获取评论列表

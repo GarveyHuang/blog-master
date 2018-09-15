@@ -21,7 +21,7 @@
             homePage, ip, agent, type, status, parent, content,
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{articleId,jdbcType=INTEGER}, #{created, jdbcType=INTEGER},
+            #{aid,jdbcType=INTEGER}, #{created, jdbcType=INTEGER},
             #{author, jdbcType=VARCHAR}, #{authorId, jdbcType=INTEGER}, #{ownerId, jdbcType=INTEGER},
             #{email, jdbcType=VARCHAR}, #{homePage, jdbcType=VARCHAR}, #{ip, jdbcType=VARCHAR}, #{agent, jdbcType=VARCHAR},
             #{status, jdbcType=VARCHAR}, #{parent, jdbcType=INTEGER}, #{content, jdbcType=LONGVARCHAR},
@@ -52,12 +52,12 @@
     </select>
 
     <!-- 根据文章的主键获取评论列表:只显示正常的评论 -->
-    <select id="getCommentsByCId" resultType="com.jax.blog.model.Comment">
+    <select id="getCommentsByAId" resultType="com.jax.blog.model.Comment">
         SELECT
         <include refid="BASE_COLUMN"/>
         FROM
         <include refid="BASE_TABLE"/> AS cm
-        WHERE cm.articleId =  #{articleId,jdbcType=INTEGER}
+        WHERE cm.articleId =  #{aid,jdbcType=INTEGER}
         AND cm.status = 'approved'
         ORDER BY cm.created
     </select>

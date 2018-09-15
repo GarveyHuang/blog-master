@@ -11,9 +11,9 @@ import com.jax.blog.model.User;
  **/
 
 public interface UserService {
-    User getUserInfoById(Integer uid) throws Exception;
+    User getUserInfoById(Integer uid);
 
-    User login(String username, String password) throws Exception;
+    User login(String username, String password);
 
-    int updateUserInfo(User user) throws Exception;
+    int updateUserInfo(User user);
 }

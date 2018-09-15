@@ -45,6 +45,10 @@ public abstract class BaseController {
         return this.user(request).getUid();
     }
 
+    public String getNickName(HttpServletRequest request) {
+        return this.user(request).getNickName();
+    }
+
     /**
      * 数组转字符串
      * @param arr

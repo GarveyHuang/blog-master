@@ -52,9 +52,11 @@ public class AttachController extends BaseController {
                              @RequestParam(name = "page", required = false, defaultValue = "1") int page,
                              @RequestParam(name = "limit", required = false, defaultValue = "15") int limit) {
         PageInfo<AttachDto> atts = attachService.getAtts(page, limit);
+        String nickname = this.getNickName(request);
         request.setAttribute("atts", atts);
         request.setAttribute(Types.ATTACH_URL.getType(), Commons.site_option(Types.ATTACH_URL.getType(), Commons.site_url()));
         request.setAttribute("max_file_size", WebConst.MAX_FILE_SIZE / 1024);
+        request.setAttribute("nickname", nickname);
         return URLMapper.ADMIN_ATTACH;
     }
 

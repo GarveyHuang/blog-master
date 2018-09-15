@@ -41,9 +41,10 @@ public class CommentManageController extends BaseController {
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "limit", required = false, defaultValue = "15") int limit) {
         User user = this.user(request);
-
+        String nickname = user.getNickName();
         PageInfo<Comment> comments = commentService.getCommentsByCond(new CommentCond(), page, limit);
         request.setAttribute("comments", comments);
+        request.setAttribute("nickname", nickname);
         return "admin/comment_list";
     }
 

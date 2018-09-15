@@ -40,7 +40,9 @@ public class LinksController extends BaseController {
         MetaCond metaCond = new MetaCond();
         metaCond.setType(Types.LINK.getType());
         List<Meta> metas = metaService.getMetas(metaCond);
+        String nickname = this.getNickName(request);
         request.setAttribute("links", metas);
+        request.setAttribute("nickname", nickname);
         return URLMapper.ADMIN_LINKS;
     }
 

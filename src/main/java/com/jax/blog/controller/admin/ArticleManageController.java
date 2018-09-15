@@ -43,7 +43,9 @@ public class ArticleManageController extends BaseController {
                               @RequestParam(name = "page", required = false, defaultValue = "1") int page,
                               @RequestParam(name = "limit", required = false, defaultValue = "15") int limit) {
         PageInfo<Article> articles = articleService.getArticlesByCond(new ArticleCond(), page, limit);
+        String nickname = this.getNickName(request);
         request.setAttribute("articles", articles);
+        request.setAttribute("nickname", nickname);
         return "admin/article_list";
     }
 
@@ -52,7 +54,9 @@ public class ArticleManageController extends BaseController {
         MetaCond metaCond = new MetaCond();
         metaCond.setType(Types.CATEGORY.getType());
         List<Meta> metas = metaService.getMetas(metaCond);
+        String nickname = this.getNickName(request);
         request.setAttribute("categories", metas);
+        request.setAttribute("nickname", nickname);
         return "admin/article_edit";
     }
 
@@ -92,8 +96,10 @@ public class ArticleManageController extends BaseController {
         MetaCond metaCond = new MetaCond();
         metaCond.setType(Types.CATEGORY.getType());
         List<Meta> categories = metaService.getMetas(metaCond);
+        String nickname = this.getNickName(request);
         request.setAttribute("categories", categories);
         request.setAttribute("active", "article");
+        request.setAttribute("nickname", nickname);
         return "admin/article_edit";
     }
 
