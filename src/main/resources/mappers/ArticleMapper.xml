@@ -14,7 +14,7 @@
 
     <sql id="BASE_COLUMN">
         a.aid, a.title, a.titlePic, a.slug, a.created, a.modified, a.content, a.type, a.status,
-        c.authorId, a.tags, a.categories, a.hits, a.commentsNum, a.isAllowComment, a.isAllowPing, a.isAllowFeed
+        a.authorId, a.tags, a.categories, a.hits, a.commentsNum, a.isAllowComment, a.isAllowPing, a.isAllowFeed
     </sql>
 
     <!-- 关联查询的用户表需要的字段 -->
@@ -109,8 +109,8 @@
         SELECT
         <include refid="BASE_COLUMN"/>
         FROM
-        <include refid="BASE_TABLE"/> AS c
-        WHERE c.aid = #{aid, jdbcType=INTEGER}
+        <include refid="BASE_TABLE"/> AS a
+        WHERE a.aid = #{aid, jdbcType=INTEGER}
     </select>
 
     <!-- 根据条件查询文章 -->
@@ -119,34 +119,34 @@
         SELECT
         <include refid="BASE_COLUMN"/>
         FROM
-        <include refid="BASE_TABLE"/> AS c
+        <include refid="BASE_TABLE"/> AS a
         <where>
             <if test="tag != null">
-                AND c.tags LIKE CONCAT('%',#{tag, jdbcType=VARCHAR},'%')
+                AND a.tags LIKE CONCAT('%',#{tag, jdbcType=VARCHAR},'%')
             </if>
             <if test="category != null">
-                AND c.categories LIKE CONCAT('%',#{category, jdbcType=VARCHAR},'%')
+                AND a.categories LIKE CONCAT('%',#{category, jdbcType=VARCHAR},'%')
             </if>
             <if test="status != null">
-                AND c.status = #{status, jdbcType=VARCHAR}
+                AND a.status = #{status, jdbcType=VARCHAR}
             </if>
             <if test="title != null">
-                AND c.title LIKE CONCAT('%',#{title, jdbcType=VARCHAR},'%')
+                AND a.title LIKE CONCAT('%',#{title, jdbcType=VARCHAR},'%')
             </if>
             <if test="content != null">
-                AND c.content LIKE CONCAT('%',#{content, jdbcType=VARCHAR},'%')
+                AND a.content LIKE CONCAT('%',#{content, jdbcType=VARCHAR},'%')
             </if>
             <if test="type != null">
-                AND c.type = #{type, jdbcType=VARCHAR}
+                AND a.type = #{type, jdbcType=VARCHAR}
             </if>
             <if test="startTime != null">
-                AND c.created &gt;= #{startTime, jdbcType=INTEGER}
+                AND a.created &gt;= #{startTime, jdbcType=INTEGER}
             </if>
             <if test="endTime != null">
-                AND c.created &lt;= #{endTime, jdbcType=INTEGER}
+                AND a.created &lt;= #{endTime, jdbcType=INTEGER}
             </if>
         </where>
-        ORDER BY c.created DESC
+        ORDER BY a.created DESC
     </select>
 
     <select id="getArticleCount" resultType="java.lang.Long">
@@ -192,11 +192,11 @@
         SELECT
         <include refid="BASE_COLUMN"/>
         FROM
-        <include refid="BASE_TABLE"/> AS c
+        <include refid="BASE_TABLE"/> AS a
         <where>
-            c.title LIKE CONCAT('%',#{param, jdbcType=VARCHAR},'%')
+            a.title LIKE CONCAT('%',#{param, jdbcType=VARCHAR},'%')
             OR
-            c.content LIKE CONCAT('%',#{param, jdbcType=VARCHAR},'%')
+            a.content LIKE CONCAT('%',#{param, jdbcType=VARCHAR},'%')
         </where>
     </select>
 

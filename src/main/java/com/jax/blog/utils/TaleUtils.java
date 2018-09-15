@@ -1,9 +1,10 @@
 package com.jax.blog.utils;
 
+import com.jax.blog.constant.URLMapper;
 import com.jax.blog.constant.WebConst;
+import com.jax.blog.controller.admin.AttachController;
 import com.jax.blog.exception.BusinessException;
 import com.jax.blog.model.User;
-import com.jax.blog.constant.URLMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.commonmark.Extension;
 import org.commonmark.ext.gfm.tables.TablesExtension;
@@ -24,6 +25,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.Normalizer;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -392,10 +394,10 @@ public class TaleUtils {
         return file.getAbsolutePath() + "/";
     }
 
-    /*public static String getFileKey(String name) {
+    public static String getFileKey(String name) {
         String prefix = "/upload/" + DateKit.dateFormat(new Date(), "yyyy/MM");
-        if (!new File(AttAchController.CLASSPATH + prefix).exists()) {
-            new File(AttAchController.CLASSPATH + prefix).mkdirs();
+        if (!new File(AttachController.CLASSPATH + prefix).exists()) {
+            new File(AttachController.CLASSPATH + prefix).mkdirs();
         }
 
         name = StringUtils.trimToNull(name);
@@ -411,5 +413,5 @@ public class TaleUtils {
             }
             return prefix + "/" + UUID.UU32() + "." + (ext == null ? null : (ext));
         }
-    }*/
+    }
 }

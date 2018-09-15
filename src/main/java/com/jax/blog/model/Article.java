@@ -11,56 +11,36 @@ package com.jax.blog.model;
 public class Article {
     /** 文章id */
     private Integer aid;
-
     /** 文章标题 */
     private String title;
-
     /** 标题图片 */
     private String titlePic;
-
     /** 缩略名 */
     private String slug;
-
     /** 内容生成时的GMT unix时间戳 */
     private Integer created;
-
     /** 内容更改的GMT unix时间戳 */
     private Integer modified;
-
-    /**
-     * 内容文字
-     */
+    /** 内容文字 */
     private String content;
-
-    /**
-     * 内容所属用户id
-     */
+    /** 内容所属用户id */
     private Integer authorId;
-    /**
-     * 内容类别
-     */
+    /** 内容类别 */
     private String type;
-    /**
-     * 内容状态
-     */
+    /** 状态*/
     private String status;
-    /**
-     * 标签列表
-     */
+    /** 标签列表 */
     private String tags;
-    /**
-     * 分类列表
-     */
+    /** 分类列表 */
     private String categories;
-
     /** 点击数 */
     private Integer hits;
-
     /** 评论数 */
     private Integer commentsNum;
-
     /** 是否允许评论 */
     private Integer isAllowComment;
+    private Integer isAllowPing;
+    private Integer isAllowFeed;
 
     public Integer getAid() {
         return aid;
@@ -180,5 +160,21 @@ public class Article {
 
     public void setIsAllowComment(Integer isAllowComment) {
         this.isAllowComment = isAllowComment;
+    }
+
+    public Integer getIsAllowPing() {
+        return isAllowPing;
+    }
+
+    public void setIsAllowPing(Integer isAllowPing) {
+        this.isAllowPing = isAllowPing;
+    }
+
+    public Integer getIsAllowFeed() {
+        return isAllowFeed;
+    }
+
+    public void setIsAllowFeed(Integer isAllowFeed) {
+        this.isAllowFeed = isAllowFeed;
     }
 }

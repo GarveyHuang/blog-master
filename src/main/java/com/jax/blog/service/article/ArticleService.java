@@ -4,8 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.jax.blog.dto.cond.ArticleCond;
 import com.jax.blog.model.Article;
 
-import java.util.List;
-
 /**
  * @ClassName ArticleService
  * @Description 文章服务层
@@ -47,9 +45,9 @@ public interface ArticleService {
 
     /**
      * 添加文章点击量
-     * @param content
+     * @param article
      */
-    void updateArticleByAid(Article content);
+    void updateArticleByAid(Article article);
 
     /**
      * 根据编号获取文章
