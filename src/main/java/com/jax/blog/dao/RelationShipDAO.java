@@ -32,10 +32,10 @@ public interface RelationShipDAO {
 
     /**
      * 根据文章编号删除关联
-     * @param cid
+     * @param aid
      * @return
      */
-    int deleteRelationShipByCid(@Param("cid") Integer cid);
+    int deleteRelationShipByAid(@Param("aid") Integer aid);
 
     /**
      * 根据meta编号删除关联
@@ -56,7 +56,7 @@ public interface RelationShipDAO {
      * @param aid
      * @return
      */
-    List<RelationShip> getRelationShipByCid(@Param("aid") Integer aid);
+    List<RelationShip> getRelationShipByAid(@Param("aid") Integer aid);
 
     /**
      * 根据meta编号获取关联
@@ -67,9 +67,9 @@ public interface RelationShipDAO {
 
     /**
      * 获取数量
-     * @param cid
+     * @param aid
      * @param mid
      * @return
      */
-    Long getCountById(@Param("cid") Integer cid, @Param("mid") Integer mid);
+    Long getCountById(@Param("aid") Integer aid, @Param("mid") Integer mid);
 }

@@ -58,7 +58,7 @@ public class ArticleManageController extends BaseController {
 
     @ResponseBody
     @PostMapping(value = URLMapper.ADMIN_ARTICLE_PUBLISH)
-    public APIResponse pulishArticle(
+    public APIResponse publishArticle(
             HttpServletRequest request,
             @RequestParam(name = "title", required = true) String title,
             @RequestParam(name = "titlePic", required = false) String titlePic,
@@ -98,8 +98,8 @@ public class ArticleManageController extends BaseController {
     }
 
     @ResponseBody
-    @PostMapping(value = URLMapper.ADMIN_ARTICLE_SAVE)
-    public APIResponse saveArticle(
+    @PostMapping(value = URLMapper.ADMIN_ARTICLE_MODIFY)
+    public APIResponse modifyArticle(
             HttpServletRequest request,
             @RequestParam(name = "aid", required = true) Integer aid,
             @RequestParam(name = "title", required = true) String title,

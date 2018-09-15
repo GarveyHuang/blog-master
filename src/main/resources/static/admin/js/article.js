@@ -42,7 +42,7 @@ function subArticle(status) {
     $("#articleForm #categories").val($('#multiple-sel').val());
     $("#articleForm #type").val($('#multiple-type').val());
     var params = $("#articleForm").serialize();
-    var url = $('#articleForm #cid').val() != '' ? '/admin/article/modify' : '/admin/article/publish';
+    var url = $('#articleForm #aid').val() != '' ? '/admin/article/modify' : '/admin/article/publish';
     tale.post({
         url:url,
         data:params,

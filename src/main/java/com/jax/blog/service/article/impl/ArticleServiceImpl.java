@@ -33,6 +33,7 @@ import java.util.List;
  **/
 @Service("articleService")
 public class ArticleServiceImpl implements ArticleService {
+
     @Autowired
     private ArticleDAO articleDAO;
 
@@ -86,9 +87,9 @@ public class ArticleServiceImpl implements ArticleService {
             });
         }
         //删除标签和分类关联
-        List<RelationShip> relationShips = relationShipDAO.getRelationShipByCid(aid);
+        List<RelationShip> relationShips = relationShipDAO.getRelationShipByAid(aid);
         if (null != relationShips && relationShips.size() > 0){
-            relationShipDAO.deleteRelationShipByCid(aid);
+            relationShipDAO.deleteRelationShipByAid(aid);
         }
     }
 
@@ -101,10 +102,10 @@ public class ArticleServiceImpl implements ArticleService {
         String categories = article.getCategories();
 
         articleDAO.updateArticleById(article);
-        int cid = article.getAid();
-        relationShipDAO.deleteRelationShipByCid(cid);
-        metaService.addMetas(cid, tags, Types.TAG.getType());
-        metaService.addMetas(cid, categories, Types.CATEGORY.getType());
+        int aid = article.getAid();
+        relationShipDAO.deleteRelationShipByAid(aid);
+        metaService.addMetas(aid, tags, Types.TAG.getType());
+        metaService.addMetas(aid, categories, Types.CATEGORY.getType());
     }
 
     @Override

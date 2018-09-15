@@ -1,6 +1,8 @@
 package com.jax.blog.utils;
 
+import com.github.pagehelper.PageInfo;
 import com.jax.blog.constant.WebConst;
+import com.jax.blog.model.Article;
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -325,12 +327,12 @@ public class Commons {
     /**
      * 返回文章链接地址
      *
-     * @param contents
+     * @param article
      * @return
      */
-    /*public static String permalink(ContentDomain contents) {
-        return permalink(contents.getCid(), contents.getSlug());
-    }*/
+    public static String permalink(Article article) {
+        return permalink(article.getAid(), article.getSlug());
+    }
 
 
 
@@ -351,9 +353,9 @@ public class Commons {
      * @param paginator
      * @return
      */
-    /*public static boolean is_empty(PageInfo paginator) {
+    public static boolean is_empty(PageInfo paginator) {
         return paginator == null || (paginator.getList() == null) || (paginator.getList().size() == 0);
-    }*/
+    }
 
     /**
      * 截取字符串

@@ -28,7 +28,7 @@
                                     <td th:text="${link.name}"></td>
                                     <td><a th:href="@{${link.slug}}" target="_blank" th:text="${link.slug}"></a></td>
                                     <td th:text="${link.description}"></td>
-                                    <td th:text="${link.sort}"></td>
+                                    <td th:text="${link.orderNum}"></td>
                                     <td>
                                         <a href="javascript:void(0)" onclick="editLink(this);"
                                            class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
@@ -72,7 +72,7 @@
 
                                         <div class="form-group">
                                             <label class="sr-only">链接排序</label>
-                                            <input type="number" id="sort" name="sort" class="form-control" value="0"/>
+                                            <input type="number" id="orderNum" name="orderNum" class="form-control" value="0"/>
                                         </div>
 
                                         <button type="submit" class="btn btn-success waves-effect waves-light m-l-10">保存链接</button>
@@ -103,7 +103,7 @@
                 data: params,
                 success: function (result) {
                     $('#linkForm input').val('');
-                    $('#linkForm #sort').val('0');
+                    $('#linkForm #orderNum').val('0');
                     if(result && result.code == 'success'){
                         tale.alertOkAndReload('友链保存成功');
                     } else {
@@ -121,13 +121,13 @@
         var title = this_.parents('tr').find('td:eq(0)').text();
         var url = this_.parents('tr').find('td:eq(1)').text();
         var logo = this_.parents('tr').find('td:eq(2)').text();
-        var sort = this_.parents('tr').find('td:eq(3)').text();
+        var orderNum = this_.parents('tr').find('td:eq(3)').text();
 
         $('#linkForm #mid').val(mid);
         $('#linkForm #title').val(title);
         $('#linkForm #url').val(url);
         $('#linkForm #logo').val(logo);
-        $('#linkForm #sort').val(sort);
+        $('#linkForm #orderNum').val(orderNum);
     }
 
     function delLink(mid) {

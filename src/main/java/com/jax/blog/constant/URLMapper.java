@@ -29,8 +29,8 @@ public class URLMapper {
     public static final String ADMIN_ARTICLE = "/admin/article";
     /** 发布文章 */
     public static final String ADMIN_ARTICLE_PUBLISH = "/admin/article/publish";
-    /** 保存文章 */
-    public static final String ADMIN_ARTICLE_SAVE = "/admin/article/save";
+    /** 修改文章 */
+    public static final String ADMIN_ARTICLE_MODIFY = "/admin/article/modify";
     /** 删除文章 */
     public static final String ADMIN_ARTICLE_DELETE = "/admin/article/delete";
 
@@ -54,7 +54,7 @@ public class URLMapper {
     /** 标签和分类 */
     public static final String ADMIN_CATEGORY = "/admin/category";
     /** 保存分类 */
-    public static final String ADMIN_CATEGORY_SAVE = "/admin/category/sava";
+    public static final String ADMIN_CATEGORY_SAVE = "/admin/category/save";
     /** 删除分类 */
     public static final String ADMIN_CATEGORY_DELETE = "/admin/category/delete";
 
