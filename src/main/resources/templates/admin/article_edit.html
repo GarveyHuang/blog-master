@@ -45,8 +45,8 @@
                         <form id="articleForm" role="form" novalidate="novalidate">
                             <input type="hidden" name="categories" id="categories"/>
                             <input type="hidden" name="type" id="type"/>
-                            <input type="hidden" name="cid"
-                                   th:value="${articles!=null and articles.cid!=null}?${articles.cid}: ''" id="cid"/>
+                            <input type="hidden" name="aid"
+                                   th:value="${articles!=null and articles.aid!=null}?${articles.aid}: ''" id="aid"/>
                             <input type="hidden" name="status"
                                    th:value="${articles!=null and articles.status !=null}?${articles.status}: 'publish'"
                                    id="status"/>
