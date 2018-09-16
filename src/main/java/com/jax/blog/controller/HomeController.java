@@ -4,7 +4,9 @@ import com.github.pagehelper.PageInfo;
 import com.jax.blog.constant.Types;
 import com.jax.blog.constant.URLMapper;
 import com.jax.blog.constant.WebConst;
+import com.jax.blog.dto.StatisticsDto;
 import com.jax.blog.dto.cond.ArticleCond;
+import com.jax.blog.dto.cond.CommentCond;
 import com.jax.blog.model.Article;
 import com.jax.blog.model.Comment;
 import com.jax.blog.service.article.ArticleService;
@@ -68,10 +70,17 @@ public class HomeController extends BaseController {
         ArticleCond articleCond = new ArticleCond();
         articleCond.setType(Types.ARTICLE.getType());
         PageInfo<Article> articles = articleService.getArticlesByCond(articleCond, p, limit);
+        PageInfo<Comment> latestComments = commentService.getCommentsByCond(new CommentCond(), 1, 5);
+        StatisticsDto statisticsDto = siteService.getStatistics();
+        Long articlesCount = statisticsDto.getArticlesCount();
+        Long commentsCount = statisticsDto.getCommentsCount();
         request.setAttribute("articles", articles);
         request.setAttribute("types", "articles");
         request.setAttribute("active", "blog");
-        return "site/blog";
+        request.setAttribute("latestComments", latestComments);
+        request.setAttribute("articlesCount", articlesCount);
+        request.setAttribute("commentsCount", commentsCount);
+        return "site/index";
     }
 
     /**
@@ -89,8 +98,15 @@ public class HomeController extends BaseController {
         // 更新文章的阅读量
         this.updateArticleHit(article.getAid(), article.getHits());
         List<Comment> comments = commentService.getCommentsByAId(aid);
+        PageInfo<Comment> latestComments = commentService.getCommentsByCond(new CommentCond(), 1, 5);
+        StatisticsDto statisticsDto = siteService.getStatistics();
+        Long articlesCount = statisticsDto.getArticlesCount();
+        Long commentsCount = statisticsDto.getCommentsCount();
         request.setAttribute("comments", comments);
         request.setAttribute("active", "blog");
+        request.setAttribute("latestComments", latestComments);
+        request.setAttribute("articlesCount", articlesCount);
+        request.setAttribute("commentsCount", commentsCount);
         return "site/article-detail";
     }
 

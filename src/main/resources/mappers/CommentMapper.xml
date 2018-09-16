@@ -30,45 +30,36 @@
 
     <!-- 删除评论 -->
     <delete id="deleteComment">
-        DELETE FROM
-        <include refid="BASE_TABLE"/>
+        DELETE FROM <include refid="BASE_TABLE"/>
         WHERE cmid = #{cmid, jdbcType=INTEGER}
     </delete>
 
     <!-- 更新评论的状态 -->
     <update id="updateCommentStatus">
-        UPDATE
-        <include refid="BASE_TABLE"/>
+        UPDATE <include refid="BASE_TABLE"/>
         SET status = #{status, jdbcType=VARCHAR}
         WHERE cmid = #{cmid, jdbcType=INTEGER}
     </update>
 
     <select id="getCommentById" resultType="com.jax.blog.model.Comment">
-        SELECT
-        <include refid="BASE_COLUMN"/>
-        FROM
-        <include refid="BASE_TABLE"/> AS cm
+        SELECT <include refid="BASE_COLUMN"/>
+        FROM <include refid="BASE_TABLE"/> AS cm
         WHERE cm.cmid = #{cmid, jdbcType=INTEGER}
     </select>
 
     <!-- 根据文章的主键获取评论列表:只显示正常的评论 -->
     <select id="getCommentsByAId" resultType="com.jax.blog.model.Comment">
-        SELECT
-        <include refid="BASE_COLUMN"/>
-        FROM
-        <include refid="BASE_TABLE"/> AS cm
+        SELECT <include refid="BASE_COLUMN"/>
+        FROM <include refid="BASE_TABLE"/> AS cm
         WHERE cm.articleId =  #{aid,jdbcType=INTEGER}
         AND cm.status = 'approved'
         ORDER BY cm.created
     </select>
 
     <!-- 根据条件查找评论列表 -->
-    <select id="getCommentsByCond" resultType="com.jax.blog.model.Comment"
-            parameterType="com.jax.blog.dto.cond.CommentCond">
-        SELECT
-        <include refid="BASE_COLUMN"/>
-        FROM
-        <include refid="BASE_TABLE"/> AS cm
+    <select id="getCommentsByCond" resultType="com.jax.blog.model.Comment" parameterType="com.jax.blog.dto.cond.CommentCond">
+        SELECT <include refid="BASE_COLUMN"/>
+        FROM <include refid="BASE_TABLE"/> AS cm
         <where>
             <if test="status != null">
                 AND cm.status = #{status, jdbcType=VARCHAR}
@@ -86,9 +77,9 @@
         ORDER BY cm.created
     </select>
 
+    <!-- 统计所有评论数 -->
     <select id="getCommentsCount" resultType="java.lang.Long">
         SELECT count(*)
-        FROM
-        <include refid="BASE_TABLE"/>
+        FROM <include refid="BASE_TABLE"/>
     </select>
 </mapper>

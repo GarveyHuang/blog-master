@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="sideBar">
+    <div id="sideBarMain">
+        <div class="newsItem">
+            <a href="http://www.jianshu.com/u/e336bc023b9d" style="font-size:16px; font-weight:600; color:#D33632;">我的简书</a>
+            <div id="profile_block">
+                昵称：<a href="#">旧情如烟</a>
+                <div id="p_b_follow">
+                    <a href="javascript:void(0);" onclick="follow(&#39;8c940dc1-ddb7-e011-8673-842b2b196315&#39;)">+加关注</a>
+                </div>
+            </div>
+            <h3 class="catListTitle">公告</h3>
+            <div id="blog-news"><!-- 小老鼠游戏控件 -->
+                <div classname="sidebarMouse"><object type="application/x-shockwave-flash" style="outline:none;" data="/site/images/hamster.swf" width="240" height="160"><param name="movie" value="http://cdn.abowman.com/widgets/hamster/hamster.swf?up_bodyColor=f0e9cc&amp;up_feetColor=D4C898&amp;up_eyeColor=000567&amp;up_wheelSpokeColor=DEDEDE&amp;up_wheelColor=FFFFFF&amp;up_waterColor=E0EFFF&amp;up_earColor=b0c4de&amp;up_wheelOuterColor=FF4D4D&amp;up_snoutColor=F7F4E9&amp;up_bgColor=F0E4E4&amp;up_foodColor=cba920&amp;up_wheelCenterColor=E4EB2E&amp;up_tailColor=E6DEBE&amp;"><param name="AllowScriptAccess" value="always"><param name="wmode" value="opaque"></object></div>
+
+                <!-- 公告栏时钟控件 -->
+                <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#FDF6E3" width="240" height="110" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+
+                <div>
+                    <div style="ffont-weight:600;background-color:#FFF2C9;margin-top:10px;font-size:14px;padding:8px;">
+                        <em>公告</em>
+                        <p>对本博客样式有兴趣的朋友请参考：<br>
+                            <a href="#">详谈如何定制自己的博客园皮肤</a><br>
+                            私信或留言恕不一一答复。</p>
+                    </div>
+                    <a href="#" style="font-size:16px; font-weight:600; color:#D33632;">我的文章归档</a><br>
+                </div>
+            </div>
+        </div>
+
+        <div id="leftcontentcontainer">
+            <div id="blog-sidecolumn">
+                <div id="sidebar_search" class="sidebar-block mySearch">
+                    <h3 class="catListTitle">搜索</h3>
+                    <div id="sidebar_search_box">
+                        <div id="widget_my_google" class="div_my_zzk">
+                            <input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk"/>&nbsp;
+                            <input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sidebar_toptags">
+                    <div class="catListTag sidebar-block">
+                        <h3 class="catListTitle">我的标签</h3>
+                        <ul>
+                            <li>
+                                <a href="http://www.cnblogs.com/jingmoxukong/tag/">JAVA(42)</a>
+                            </li>
+                            <li>
+                                <a href="http://www.cnblogs.com/jingmoxukong/tag/">Spring(12)</a>
+                            </li>
+                            <li>
+                                <a href="http://www.cnblogs.com/jingmoxukong/tag/">哈哈哈(10)</a>
+                            </li>
+                            <li>
+                                <a href="http://www.cnblogs.com/jingmoxukong/tag/">更多</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="sidebar_categories">
+                    <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+                        <h3 class="catListTitle">文章分类<span style="font-size:11px;font-weight:normal">(148)</span></h3>
+                        <ul>
+                            <li>
+                                <a id="CatList_LinkList_0_Link_0" href="">xxx(文章数)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="sidebar_scorerank" class="sidebar-block">
+                    <div class="catListBlogRank">
+                        <h3 class="catListTitle">积分与排名</h3>
+                        <ul>
+                            <li class="liScore">积分 -	262277</li>
+                            <li class="liRank">排名 -	763</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="sidebar_recentcomments" class="sidebar-block">
+                    <div id="recent_comments_wrap">
+                        <div class="catListComment">
+                            <h3 class="catListTitle">最新评论</h3>
+                            <div id="RecentCommentsBlock">
+                                <ul>
+                                    <li th:each="comment: ${latestComments.list}">
+                                        <span class="recent_comment_title">
+                                            <a href="#"></a>
+                                        </span>
+                                        <span class="recent_comment_body" th:text="${comment.content}"></span>
+                                        <span class="recent_comment_author" th:text="'--'+${comment.author}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+                <div class="catListView">
+                    <h3 class="catListTitle">阅读排行榜</h3>
+                    <div id="TopViewPostsBlock">
+                        <ul>
+                            <li>
+                                <a href="">1.xxxxxxxxxxx(阅读数)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+                <div class="catListFeedback">
+                    <h3 class="catListTitle">评论排行榜</h3>
+                    <div id="TopFeedbackPostsBlock">
+                        <ul>
+                            <li>
+                                <a href="#">1.xxxxxx(评论数)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+                <div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+                    <div class="catListView">
+                    <h3 class="catListTitle">推荐排行榜</h3>
+                    <div id="TopDiggPostsBlock">
+                        <ul>
+                            <li>
+                                <a href="#">1.xxxxxxx(点赞数)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            <!--<script type="text/javascript">loadBlogSideColumn();</script>-->
+        </div>
+    </div><!--end: sideBarMain -->
+</div><!--end: sideBar 侧边栏容器 -->
+</body>
+</html>
