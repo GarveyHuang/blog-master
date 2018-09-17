@@ -19,6 +19,12 @@
         WHERE a.uid = #{uid, jdbcType=INTEGER}
     </select>
 
+    <select id="getUserSaltById" resultType="java.lang.String">
+        SELECT u.salt
+        FROM <include refid="BASE_TABLE"></include> AS u
+        WHERE a.uid = #{uid, jdbcType=INTEGER}
+    </select>
+
     <select id="getUserInfoByCond" resultType="com.jax.blog.model.User">
         SELECT
         <trim suffix="" suffixOverrides=",">

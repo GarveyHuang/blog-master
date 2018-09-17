@@ -14,12 +14,17 @@ import com.jax.blog.service.comment.CommentService;
 import com.jax.blog.service.meta.MetaService;
 import com.jax.blog.service.option.OptionService;
 import com.jax.blog.service.site.SiteService;
+import com.jax.blog.utils.PasswordEncryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName HomeController
@@ -130,5 +135,14 @@ public class HomeController extends BaseController {
         } else {
             cache.hset("article", "hits", hits);
         }
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/blog/test")
+    public Map<String, Object> test(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        Map<String, Object> model = new HashMap<>();
+        String encryptedPwd = PasswordEncryption.getEncryptedPassword("admin"+password, "Mvw61W9elSYzAlek");
+        model.put("encryptedPwd", encryptedPwd);
+        return model;
     }
 }

@@ -2,6 +2,9 @@ package com.jax.blog.service.user;
 
 import com.jax.blog.model.User;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 /**
  * @ClassName UserService
  * @Description TODO
@@ -13,7 +16,7 @@ import com.jax.blog.model.User;
 public interface UserService {
     User getUserInfoById(Integer uid);
 
-    User login(String username, String password);
+    User login(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException;
 
     int updateUserInfo(User user);
 }

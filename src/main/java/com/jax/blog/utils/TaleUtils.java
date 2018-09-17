@@ -23,6 +23,7 @@ import java.awt.*;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.Date;
@@ -109,12 +110,17 @@ public class TaleUtils {
     }
 
     /**
-     * PBKDF2(Password-Based Key Derivation Function) 加密 （推荐使用这个算法，后面可以自己实现）
-     * @param source
+     * PBKDF2(Password-Based Key Derivation Function) 加密算法
+     * @param source 数据源
+     * @param salt 盐值
      * @return
      */
-    public static String PBKDF2encode(String source) {
-        return null;
+    public static String PBKDF2encode(String source, String salt) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        if(StringUtils.isBlank(source) || StringUtils.isBlank(salt)) {
+            return null;
+        }
+
+        return PasswordEncryption.getEncryptedPassword(source, salt);
     }
 
     /**
