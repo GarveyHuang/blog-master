@@ -74,8 +74,15 @@ public class HomeController extends BaseController {
         p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
         ArticleCond articleCond = new ArticleCond();
         articleCond.setType(Types.ARTICLE.getType());
+        // 文章
         PageInfo<Article> articles = articleService.getArticlesByCond(articleCond, p, limit);
+
+        // 最新评论
         PageInfo<Comment> latestComments = commentService.getCommentsByCond(new CommentCond(), 1, 5);
+
+        // 标签
+
+        // 后台统计数据
         StatisticsDto statisticsDto = siteService.getStatistics();
         Long articlesCount = statisticsDto.getArticlesCount();
         Long commentsCount = statisticsDto.getCommentsCount();
@@ -141,7 +148,7 @@ public class HomeController extends BaseController {
     @GetMapping(value = "/blog/test")
     public Map<String, Object> test(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         Map<String, Object> model = new HashMap<>();
-        String encryptedPwd = PasswordEncryption.getEncryptedPassword("admin"+password, "Mvw61W9elSYzAlek");
+        String encryptedPwd = PasswordEncryption.getEncryptedPassword(password, "Mvw61W9elSYzAlek");
         model.put("encryptedPwd", encryptedPwd);
         return model;
     }

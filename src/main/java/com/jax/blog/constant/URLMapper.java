@@ -20,10 +20,8 @@ public class URLMapper {
 
     /** 查询用户信息 */
     public static final String ADMIN_USER_QUERY = "/admin/user/query.do";
-    /** 更新用户信息 */
-    public static final String ADMIN_USER_UPDATE = "/admin/user/update.do";
     /** 修改密码 */
-    public static final String ADMIN_PASSWORD_MODIFY = "/admin/password/modify.do";
+    public static final String ADMIN_PASSWORD = "/admin/password";
 
     /** 文章管理页 */
     public static final String ADMIN_ARTICLE = "/admin/article";

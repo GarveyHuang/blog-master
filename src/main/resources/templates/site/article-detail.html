@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <div th:replace="site/head::head(${commons.site_title()},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
 <body>
 <div id="home">
@@ -11,23 +11,56 @@
     <div id="main">
         <div id="mainContent">
             <div class="forFlow">
-                <h1 class="postTitle">
-                    <a id="cb_post_title_url" class="postTitle2" th:href="'blog/article/'+${article.aid}" th:text="${article.title}"></a>
-                </h1>
-                <div class="clear"></div>
-                <div class="postBody">
-                    <th:block th:utext="${article.content}"></th:block>
+                <div id="post_detail">
+                    <div id="topics">
+                        <div class="post">
+                            <h1 class="postTitle">
+                                <a id="cb_post_title_url" class="postTitle2" th:href="'blog/article/'+${article.aid}" th:text="${article.title}"></a>
+                            </h1>
+                            <div class="clear"></div>
+                            <div class="postBody">
+                                <div id="cnblogs-body" class="blogpost_body cnblogs-markdown">
+                                    <th:block th:utext="${commons.article(article.content)}"></th:block>
+                                </div>
+                                <div class="clear"></div>
+                                <div id="blog_post_info_block">
+                                    <div id="BlogPostCategory">
+                                        分类:
+                                        <a href="#" target="_blank" th:text="${article.categories}"></a>
+                                    </div>
+                                    <div id="EntryTag">
+                                        标签:
+                                        <a href="" target="_blank" th:text="${article.tags}"></a>
+                                    </div>
+                                    <div id="blog_post_info">
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div id="post_next_prev"></div>
+                                </div>
+                            </div>
+                            <div class="postDesc">
+                                posted @
+                                <span id="post-date" th:text="${commons.fmtdate(article.created, 'yyyy-MM-dd HH:mm:ss')}"></span>&nbsp;&nbsp;
+                                <span id="post-view_count" th:text="'阅读('+${article.hits==null?0:article.hits}+')'"></span>&nbsp;&nbsp;
+                                <span id="post-comment-count" th:text="'评论('+${article.commentsNum==null?0:article.commentsNum}+')'"></span>
+                            </div>
+                        </div>
+                        <!--<script src="//common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>-->
+                        <script>markdown_highlight();</script>
+                    </div>
                 </div>
             </div><!--end: forFlow -->
+            <!--<div th:replace="site/comments">-->
         </div><!--end: mainContent 主体内容容器-->
 
         <div th:replace="site/left-sidebar"></div>
         <div class="clear"></div>
     </div>
 
+    <div th:replace="common/tale_comment::tale_comment"></div>
+
     <!-- footer -->
     <div th:replace="site/footer::footer(${commons.site_title()},${commons.site_record()},${commons.site_url()})"></div>
 </div>
 </body>
-<div th:replace="common/tale_comment::tale_comment"></div>
 </html>

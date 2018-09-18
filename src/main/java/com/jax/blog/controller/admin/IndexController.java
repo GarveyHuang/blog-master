@@ -15,20 +15,24 @@ import com.jax.blog.service.log.LogService;
 import com.jax.blog.service.site.SiteService;
 import com.jax.blog.service.user.UserService;
 import com.jax.blog.utils.APIResponse;
-import com.jax.blog.utils.Commons;
 import com.jax.blog.utils.GsonUtils;
+import com.jax.blog.utils.TaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
 /**
@@ -42,6 +46,9 @@ import java.util.List;
 public class IndexController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+
+    @Value("${user.salt}")
+    private String salt;
 
     @Autowired
     private SiteService siteService;
@@ -128,15 +135,20 @@ public class IndexController extends BaseController {
      * @return
      * @throws Exception
      */
-    @PostMapping(value = URLMapper.ADMIN_PASSWORD_MODIFY)
+    @PostMapping(value = URLMapper.ADMIN_PASSWORD)
     @ResponseBody
-    public APIResponse updatePassword(@RequestParam String oldPassword, @RequestParam String password, HttpServletRequest request, HttpSession session) {
+    public APIResponse updatePassword(@RequestParam String oldPassword,
+                                      @RequestParam String password,
+                                      HttpServletRequest request, HttpSession session)
+            throws InvalidKeySpecException, NoSuchAlgorithmException {
         User loginUser = this.user(request);
         if (StringUtils.isBlank(oldPassword) || StringUtils.isBlank(password)) {
             return APIResponse.fail("请确认信息输入完整");
         }
 
-        if (!loginUser.getPassword().equals(oldPassword)) {
+        String temp1 = loginUser.getUsername() + oldPassword;
+        String oldEncryptedPwd = TaleUtils.PBKDF2encode(temp1, this.salt);
+        if (!loginUser.getPassword().equals(oldEncryptedPwd)) {
             return APIResponse.fail("旧密码输入错误");
         }
 
@@ -146,14 +158,14 @@ public class IndexController extends BaseController {
         try {
             User temp = new User();
             temp.setUid(loginUser.getUid());
-            //String pwd = password; //这里先把密码加密，暂未实现
-            temp.setPassword(password);
+            String pwd = TaleUtils.PBKDF2encode(loginUser.getUsername() + password, this.salt); // 加密
+            temp.setPassword(pwd);
             userService.updateUserInfo(temp);
             logService.addLog(LogActions.UP_PWD.getAction(), GsonUtils.toJsonString(temp), null, null, request.getRemoteAddr(), this.getUid(request), "info");
 
             //更新session中的数据
             User original = (User) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
-            original.setPassword(password);
+            original.setPassword(pwd);
             session.setAttribute(WebConst.LOGIN_SESSION_KEY, original);
             return APIResponse.success();
         } catch (Exception e) {
