@@ -19,14 +19,14 @@
                             <div class="panel-body">
                                 <th:block th:each="c : ${categories}">
                                     <div class="btn-group m-b-10">
-                                        <th:block th:if="${c.name == '默认分类'}">
+                                        <th:block th:if="${c.name == 'Java'}">
                                             <button type="button"
                                                     th:class="'btn btn-'+${adminCommons.rand_color()}+' waves-effect waves-light'">
                                                 <th:block th:text="${c.name}"/>
                                                 <th:block th:text="' ('+${c.count}+')'"/>
                                             </button>
                                         </th:block>
-                                        <th:block th:unless="${c.name == '默认分类'}">
+                                        <th:block th:unless="${c.name == 'Java'}">
                                             <button type="button"
                                                     th:class="'btn btn-'+${adminCommons.rand_color()}+' dropdown-toggle waves-effect waves-light'"
                                                     data-toggle="dropdown" aria-expanded="false">
@@ -35,7 +35,7 @@
                                                 <span
                                                         class="caret"></span></button>
                                             <ul class="dropdown-menu" role="menu">
-                                                <li><a href="javascript:void(0)" th:attr="mid=${c.mid},cname=${c.name}"
+                                                <li><a href="javascript:void(0)" th:attr="mid=${c.mid},cname=${c.name}, slug=${c.slug}, cparent=${c.parent}"
                                                        class="edit-category">修改</a>
                                                 </li>
                                                 <li><a href="javascript:void(0)" th:attr="mid=${c.mid}"
@@ -80,6 +80,17 @@
                                     <input type="hidden" id="mid"/>
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="cname" placeholder="请输入分类名称"/>
+                                        <input type="text" class="form-control" id="slug" placeholder="请输入分类简介"/>
+                                        <select id="parent-sel" class="select2 form-control" data-placeholder="请选择父级分类">
+                                            <th:block>
+                                                <option value=""></option>
+                                            </th:block>
+                                            <th:block th:unless="${null == categories}">
+                                                <th:block th:each="c : ${categories}">
+                                                    <option th:value="${c.mid}" th:text="${c.name}"></option>
+                                                </th:block>
+                                            </th:block>
+                                        </select>
                                     </div>
                                     <button id="save-category-btn" type="button"
                                             class="btn btn-success waves-effect waves-light m-l-10">保存分类
@@ -101,11 +112,13 @@
 
     $('#save-category-btn').click(function () {
         var cname = $('#cform #cname').val();
+        var slug = $('#cform #slug').val();
+        var parent = $('#cform #parent-sel').val();
         var mid = $('#cform #mid').val();
         if (cname && cname != '') {
             tale.post({
                 url: '/admin/category/save',
-                data: {mid: mid, cname: cname},
+                data: {mid: mid, cname: cname, slug: slug, parent: parent},
                 success: function (result) {
                     $('#cform #mid').val('');
                     $('#cform #cname').val('');
@@ -122,8 +135,12 @@
     $('.edit-category').click(function () {
         var mid = $(this).attr('mid');
         var cname = $(this).attr('cname');
+        var slug = $(this).attr('slug');
+        var cparent = $(this).attr('cparent');
         $('#cform #mid').val(mid);
         $('#cform #cname').val(cname);
+        $('#cform #slug').val(slug);
+        $('#cform #parent-sel').find("option[value='" + cparent + "']").attr("selected", true);
     });
 
     $('.del-category').click(function () {

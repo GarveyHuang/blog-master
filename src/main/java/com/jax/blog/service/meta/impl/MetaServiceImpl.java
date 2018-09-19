@@ -54,30 +54,37 @@ public class MetaServiceImpl implements MetaService {
 
     @Override
     @CacheEvict(value = {"metaCaches", "metaCache"}, allEntries = true, beforeInvocation = true)
-    public void saveMeta(String type, String name, Integer mid) {
-        if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(name)) {
-            MetaCond metaCond = new MetaCond();
-            metaCond.setName(name);
-            metaCond.setType(type);
-            List<Meta> metas = metaDAO.getMetasByCond(metaCond);
-            if (null == metas || metas.size() == 0){
+    public void saveMeta(String type, String name, String slug, Integer parent, Integer mid) {
+        if (mid != null) {
+            if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(name)) {
                 Meta metaDomain = new Meta();
                 metaDomain.setName(name);
-                if (null != mid){
-                    Meta meta = metaDAO.getMetaById(mid);
-                    if (null != meta)
-                        metaDomain.setMid(mid);
-
-                    metaDAO.updateMeta(metaDomain);
-                    //更新原有的文章分类
-                    articleService.updateCategory(meta.getName(), name);
-                } else {
+                metaDomain.setSlug(slug);
+                metaDomain.setParent(parent);
+                Meta meta = metaDAO.getMetaById(mid);
+                if (null != meta) {
+                    metaDomain.setMid(mid);
+                }
+                metaDAO.updateMeta(metaDomain);
+                //更新原有的文章分类
+                articleService.updateCategory(meta.getName(), name);
+            }
+        } else {
+            if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(name)) {
+                MetaCond metaCond = new MetaCond();
+                metaCond.setName(name);
+                metaCond.setType(type);
+                List<Meta> metas = metaDAO.getMetasByCond(metaCond);
+                if (null == metas || metas.size() == 0) {
+                    Meta metaDomain = new Meta();
+                    metaDomain.setName(name);
+                    metaDomain.setSlug(slug);
+                    metaDomain.setParent(parent);
                     metaDomain.setType(type);
                     metaDAO.addMeta(metaDomain);
+                } else {
+                    throw BusinessException.withErrorCode(ErrorConstant.Meta.META_IS_EXIST);
                 }
-            } else {
-                throw BusinessException.withErrorCode(ErrorConstant.Meta.META_IS_EXIST);
-
             }
         }
     }

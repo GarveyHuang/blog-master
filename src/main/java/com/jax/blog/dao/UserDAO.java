@@ -21,6 +21,13 @@ public interface UserDAO {
     User getUserInfoById(@Param("uid") Integer uid);
 
     /**
+     * 根据主键获取盐值
+     * @param uid
+     * @return
+     */
+    String getUserSaltById(@Param("uid") Integer uid);
+
+    /**
      * 根据用户名和密码获取用户信息
      * @param username
      * @param password

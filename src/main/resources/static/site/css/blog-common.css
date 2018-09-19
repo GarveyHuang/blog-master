@@ -1,0 +1,29 @@
+.cnblogs-post-body h1 {
+    color:#399AB2;
+    font-size:22px;
+    border-bottom:2px solid rgba(53,86,129,.3);
+    text-shadow:0 -1px 5px rgba(0,0,0,.4);
+}
+
+.cnblogs-post-body h2 {
+    color: #60497C;
+    font-size: 20px;
+    border-bottom: 2px solid rgba(53,86,129,.3);
+    text-shadow: 0 -1px 5px rgba(0,0,0,.4);
+}
+
+.cnblogs-post-body h3 {
+    font-size: 18px;
+    color: #346093;
+    text-shadow: 0 -1px 5px rgba(0,0,0,.4);
+}
+
+.cnblogs-post-body h4 {
+    font-size: 16px;
+    color: #78943A;
+    text-shadow: 0 -1px 5px rgba(0,0,0,.4);
+}
+
+.cnblogs-post-body li {
+    list-style: disc;
+}

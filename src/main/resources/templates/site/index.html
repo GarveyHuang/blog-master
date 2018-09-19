@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="site/head::head(${commons.site_title()},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
+<body>
+<div id="home">
+    <!-- header -->
+    <div th:replace="site/header::header"></div>
+    <!-- header -->
+
+    <!-- main -->
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div class="day" th:each="post : ${articles.list}">
+                    <div class="dayTitle">
+                        <a id="homepage1_HomePageDays_ctl00_ImageLink" href="#">置顶随笔</a>
+                    </div>
+                    <div class="postTitle">
+                        <a id="homepage1_HomePageDays_ctl00_DayList_TitleUrl_0" class="postTitle2"
+                           th:href="'/blog/article/'+${post.aid}" th:text="${post.title}"></a>
+                    </div>
+                    <div class="postCon">
+                        <div class="c_b_p_desc">
+                            <th:block th:utext="${post.slug}"></th:block>
+                            <a th:href="'/blog/article/'+${post.aid}" class="c_b_p_desc_readmore">阅读全文</a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="postDesc" th:text="${'posted @ '+commons.fmtdate(post.created, 'yyyy-MM-dd HH:mm:ss')+' 阅读数('+(post.hits==null?0:post.hits)+') 评论数('+(post.commentsNum==null?0:post.commentsNum)+')'}"></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="topicListFooter">
+                    <div id="nav_next_page">
+                        <a href="http://www.cnblogs.com/jingmoxukong/default.html?page=2">下一页</a>
+                    </div>
+                </div>
+            </div><!--end: forFlow -->
+            <div class="clear"></div>
+        </div><!--end: mainContent 主体内容容器-->
+        <!--<div th:replace="site/left-sidebar"></div>-->
+    </div>
+
+    <!-- footer -->
+    <div th:replace="site/footer::footer(${commons.site_title()},${commons.site_record()},${commons.site_url()})"></div>
+</div>
+</body>
+</html>

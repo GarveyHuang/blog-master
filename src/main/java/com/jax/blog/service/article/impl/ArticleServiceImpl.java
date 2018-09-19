@@ -80,7 +80,7 @@ public class ArticleServiceImpl implements ArticleService {
             throw BusinessException.withErrorCode(ErrorConstant.Common.PARAM_IS_EMPTY);
         articleDAO.deleteArticleById(aid);
         //同时也要删除该文章下的所有评论
-        List<Comment> comments = commentDAO.getCommentsByCId(aid);
+        List<Comment> comments = commentDAO.getCommentsByAId(aid);
         if (null != comments && comments.size() > 0){
             comments.forEach(comment ->{
                 commentDAO.deleteComment(comment.getCmid());

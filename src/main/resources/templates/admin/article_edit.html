@@ -72,12 +72,14 @@
                                 <select id="multiple-type" class="select2 form-control"
                                         data-placeholder="请选择文章类型..">
                                     <th:block th:if="${null == articles}">
-                                        <option value="post" selected="selected">默认博文</option>
-                                        <option value="photo" >作品</option>
+                                        <option value="post" selected="selected">默认学习记录</option>
+                                        <option value="feeling">生活感悟</option>
+                                        <option value="photo" >摄影作品</option>
                                     </th:block>
                                     <th:block th:unless="${null == articles}">
-                                        <option value="post" th:selected="${null != articles and articles.type=='post'} ? true : false">默认博文</option>
-                                        <option value="photo" th:selected="${null != articles and articles.type=='photo'} ? true : false" >作品</option>
+                                        <option value="post" th:selected="${null != articles and articles.type=='post'} ? true : false">默认学习记录</option>
+                                        <option value="feeling" th:selected="${null != articles and articles.type=='feeling'} ? true : false">生活感悟</option>
+                                        <option value="photo" th:selected="${null != articles and articles.type=='photo'} ? true : false" >摄影作品</option>
                                     </th:block>
                                 </select>
                             </div>
@@ -89,11 +91,10 @@
                                        th:value="${articles!=null and articles.tags !=null}?${articles.tags}: ''"/>
                             </div>
                             <div class="form-group col-md-6" >
-                                <select id="multiple-sel"   class="select2 form-control" multiple="multiple"
-                                        data-placeholder="请选择分类...">
-                                    <th:block th:if="${null == categories}">
-                                        <option value="默认分类" selected="selected">默认分类</option>
-                                    </th:block>
+                                <select id="multiple-sel" class="select2 form-control" multiple="multiple" data-placeholder="请选择分类...">
+                                    <!--<th:block th:if="${null == categories}">
+                                        <option value="Java" selected="selected">Java</option>
+                                    </th:block>-->
                                     <th:block th:unless="${null == categories}">
                                         <th:block th:each="c : ${categories}">
                                             <option th:value="${c.name}" th:text="${c.name}"
@@ -110,11 +111,6 @@
                                 <!-- 注意：name属性的值-->
                                 <textarea id="text" name="text" style="display:none;" ></textarea>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<textarea style="height: 450px" autocomplete="off" id="text" name="text"-->
-                            <!--class="markdown-textarea"-->
-                            <!--th:utext="${articles!=null and articles.content !=null}?${articles.content}: ''"></textarea>-->
-                            <!--</div>-->
 
                             <div class="form-group col-md-3 col-sm-4" id="comment-div">
                                 <label class="col-sm-4">开启评论</label>
@@ -123,22 +119,6 @@
                                          onclick="isAllow_comment(this);"></div>
                                 </div>
                             </div>
-
-                            <!--<div class="form-group col-md-3 col-sm-4">-->
-                            <!--<label class="col-sm-4">允许Ping</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<div th:class="${articles!=null and articles.isAllowPing !=null}?'toggle toggle-success isAllow-'+${articles.isAllowPing}:'toggle toggle-success isAllow-true'"-->
-                            <!--onclick="isAllow_ping(this);"></div>-->
-                            <!--</div>-->
-                            <!--</div>-->
-
-                            <!--<div class="form-group col-md-3 col-sm-4">-->
-                            <!--<label class="col-sm-4">允许订阅</label>-->
-                            <!--<div class="col-sm-8">-->
-                            <!--<div th:class="${articles!=null and  articles.isAllowFeed !=null}?'toggle toggle-success isAllow-'+${articles.isAllowFeed}: 'toggle toggle-success isAllow-true'"-->
-                            <!--onclick="isAllow_feed(this);"></div>-->
-                            <!--</div>-->
-                            <!--</div>-->
 
                             <div class="clearfix"></div>
 
@@ -184,13 +164,6 @@
 
 <!-- editor.md -->
 <script th:src="@{/admin/editormd/src/editormd.js}"></script>
-
-
-<!--<script th:src="@{/admin/plugins/md/js/jquery.scrollto.js}"></script>-->
-<!--<script th:src="@{/admin/plugins/md/js/pagedown.js}"></script>-->
-<!--<script th:src="@{/admin/plugins/md/js/pagedown-extra.js}"></script>-->
-<!--<script th:src="@{/admin/plugins/md/js/diff.js}"></script>-->
-<!--<script th:src="@{/admin/plugins/md/js/md.js}"></script>-->
 
 <script th:src="@{//cdn.bootcss.com/multi-select/0.9.12/js/jquery.multi-select.min.js}"></script>
 <script th:src="@{//cdn.bootcss.com/select2/3.4.8/select2.min.js}"></script>

@@ -38,17 +38,21 @@ public class CategoryController extends BaseController {
     public String categoryList(HttpServletRequest request) {
         List<MetaDto> categories = metaService.getMetaList(Types.CATEGORY.getType(), null, WebConst.MAX_POSTS);
         List<MetaDto> tags = metaService.getMetaList(Types.TAG.getType(), null, WebConst.MAX_POSTS);
+        String nickname = this.getNickName(request);
         request.setAttribute("categories", categories);
         request.setAttribute("tags", tags);
+        request.setAttribute("nickname", nickname);
         return URLMapper.ADMIN_CATEGORY;
     }
 
     @ResponseBody
     @PostMapping(value = URLMapper.ADMIN_CATEGORY_SAVE)
     public APIResponse saveCategory(@RequestParam(name = "cname", required = true) String cname,
+                                    @RequestParam(name = "slug", required = false) String slug,
+                                    @RequestParam(name = "parent", required = false) Integer parent,
                                     @RequestParam(name = "mid", required = true) Integer mid) {
         try {
-            metaService.saveMeta(Types.CATEGORY.getType(), cname, mid);
+            metaService.saveMeta(Types.CATEGORY.getType(), cname, slug, parent, mid);
         } catch (Exception e) {
             e.printStackTrace();
             String msg = "保存分类失败";

@@ -13,7 +13,6 @@ public class MetaCond {
     /** 类型 */
     private String type;
 
-
     public String getName() {
         return name;
     }

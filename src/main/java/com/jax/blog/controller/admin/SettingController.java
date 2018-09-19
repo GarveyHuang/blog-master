@@ -42,7 +42,9 @@ public class SettingController extends BaseController {
         optionsList.forEach((option) -> {
             map.put(option.getName(), option.getValue());
         });
+        String nickname = this.getNickName(request);
         request.setAttribute("options", map);
+        request.setAttribute("nickname", nickname);
         return URLMapper.ADMIN_SETTING;
     }
 

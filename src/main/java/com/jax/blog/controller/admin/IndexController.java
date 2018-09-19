@@ -15,20 +15,24 @@ import com.jax.blog.service.log.LogService;
 import com.jax.blog.service.site.SiteService;
 import com.jax.blog.service.user.UserService;
 import com.jax.blog.utils.APIResponse;
-import com.jax.blog.utils.Commons;
 import com.jax.blog.utils.GsonUtils;
+import com.jax.blog.utils.TaleUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
 /**
@@ -43,6 +47,9 @@ public class IndexController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
 
+    @Value("${user.salt}")
+    private String salt;
+
     @Autowired
     private SiteService siteService;
 
@@ -56,7 +63,7 @@ public class IndexController extends BaseController {
      * 后台主页
      * @return
      */
-    @GetMapping(value = {"", URLMapper.ADMIN_INDEX})
+    @GetMapping(value = {"/admin/", URLMapper.ADMIN_INDEX})
     public String index(HttpServletRequest request) throws IOException {
         LOGGER.info("Enter admin index method");
         List<Comment> comments = siteService.getComments(5);
@@ -70,8 +77,7 @@ public class IndexController extends BaseController {
         request.setAttribute("statistics", statistics);
         request.setAttribute("logs", list);
 
-        User user = (User) request.getSession().getAttribute(WebConst.LOGIN_SESSION_KEY);
-        String nickname = user.getNickName();
+        String nickname = this.getNickName(request);
         request.setAttribute("nickname", nickname);
 
         LOGGER.info("Exit admin index method");
@@ -83,26 +89,43 @@ public class IndexController extends BaseController {
      * @return
      */
     @GetMapping(value = URLMapper.ADMIN_PROFILE)
-    public String profile() {
+    public String profile(HttpServletRequest request) {
+        String nickname = this.getNickName(request);
+        request.setAttribute("nickname", nickname);
         return URLMapper.ADMIN_PROFILE;
     }
 
-    @RequestMapping(value = URLMapper.ADMIN_USER_UPDATE, method = RequestMethod.POST)
+    /**
+     * 保存个人信息
+     * @param nickName
+     * @param email
+     * @param request
+     * @param session
+     * @return
+     */
     @ResponseBody
-    public APIResponse updateUserInfo(@RequestParam("imageFile") MultipartFile imageFile, User user, HttpServletRequest request) throws Exception {
-        if(! imageFile.isEmpty()) {
-            String filePath = request.getServletContext().getRealPath("/"); // 获取服务器根路径
-            String imageName = Commons.getCurrentDateStr() + "." + imageFile.getOriginalFilename().split("\\.")[1]; // 获取头像名
-            imageFile.transferTo(new File(filePath + "images\\upload\\userImages\\" + imageName)); // 复制到新地址
-            user.setImageName(imageName);
-        }
+    @PostMapping(value = URLMapper.ADMIN_PROFILE)
+    public APIResponse saveProfile(@RequestParam String nickName,
+                                   @RequestParam String email,
+                                   HttpServletRequest request,
+                                   HttpSession session) {
+        User user = this.user(request);
+        if (StringUtils.isNotBlank(nickName) && StringUtils.isNotBlank(email)) {
+            User temp = new User();
+            temp.setUid(user.getUid());
+            temp.setNickName(nickName);
+            temp.setEmail(email);
+            userService.updateUserInfo(temp);
+            logService.addLog(LogActions.UP_INFO.getAction(), null, null,
+                    GsonUtils.toJsonString(temp), request.getRemoteAddr(), this.getUid(request), "info");
 
-        int resultTotal = userService.updateUserInfo(user);
-        if(resultTotal > 0) {
-            request.getSession().getServletContext().setAttribute(WebConst.LOGIN_SESSION_KEY, userService.getUserInfoById(user.getUid()));
-            return APIResponse.success();
+            // 更新session中的数据
+            User original = (User) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
+            original.setNickName(nickName);
+            original.setEmail(email);
+            session.setAttribute(WebConst.LOGIN_SESSION_KEY, original);
         }
-        return APIResponse.fail("更新用户信息失败");
+        return APIResponse.success();
     }
 
     /**
@@ -112,32 +135,37 @@ public class IndexController extends BaseController {
      * @return
      * @throws Exception
      */
-    @PostMapping(value = URLMapper.ADMIN_PASSWORD_MODIFY)
+    @PostMapping(value = URLMapper.ADMIN_PASSWORD)
     @ResponseBody
-    public APIResponse updatePassword(@RequestParam String oldPassword, @RequestParam String password, HttpServletRequest request, HttpSession session) {
+    public APIResponse updatePassword(@RequestParam String oldPassword,
+                                      @RequestParam String password,
+                                      HttpServletRequest request, HttpSession session)
+            throws InvalidKeySpecException, NoSuchAlgorithmException {
         User loginUser = this.user(request);
         if (StringUtils.isBlank(oldPassword) || StringUtils.isBlank(password)) {
             return APIResponse.fail("请确认信息输入完整");
         }
 
-        if (!loginUser.getPassword().equals(oldPassword)) {
+        String temp1 = loginUser.getUsername() + oldPassword;
+        String oldEncryptedPwd = TaleUtils.PBKDF2encode(temp1, this.salt);
+        if (!loginUser.getPassword().equals(oldEncryptedPwd)) {
             return APIResponse.fail("旧密码输入错误");
         }
 
         if (password.length() < 6 || password.length() > 14) {
             return APIResponse.fail("请输入6-14位密码");
         }
-        try{
+        try {
             User temp = new User();
             temp.setUid(loginUser.getUid());
-            //String pwd = password; //这里先把密码加密，暂未实现
-            temp.setPassword(password);
+            String pwd = TaleUtils.PBKDF2encode(loginUser.getUsername() + password, this.salt); // 加密
+            temp.setPassword(pwd);
             userService.updateUserInfo(temp);
             logService.addLog(LogActions.UP_PWD.getAction(), GsonUtils.toJsonString(temp), null, null, request.getRemoteAddr(), this.getUid(request), "info");
 
             //更新session中的数据
             User original = (User) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
-            original.setPassword(password);
+            original.setPassword(pwd);
             session.setAttribute(WebConst.LOGIN_SESSION_KEY, original);
             return APIResponse.success();
         } catch (Exception e) {

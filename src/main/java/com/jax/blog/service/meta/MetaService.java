@@ -26,9 +26,11 @@ public interface MetaService {
      * 添加
      * @param type
      * @param name
+     * @param slug
+     * @param parent
      * @param mid
      */
-    void saveMeta(String type, String name, Integer mid);
+    void saveMeta(String type, String name, String slug, Integer parent, Integer mid);
 
 
 

@@ -153,7 +153,7 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> getCommentsByAId(Integer aid) {
         if (null == aid)
             throw BusinessException.withErrorCode(ErrorConstant.Common.PARAM_IS_EMPTY);
-        return commentDAO.getCommentsByCId(aid);
+        return commentDAO.getCommentsByAId(aid);
     }
 
     @Override

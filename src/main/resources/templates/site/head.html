@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title,google_site_verification,baidu_site_verification)">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><th:block th:text="${title!=null?title:'旧情如烟'}"></th:block> - 博客园</title>
+
+    <!-- style -->
+    <<link th:href="@{/site/css/blog-common.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/site/css/bundle-CodingLife-mobile.css}" id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet">
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/site/js/analytics.js"></script>
+
+    <script type="text/javascript">var currentBlogApp = '/site/images/', cb_enable_mathjax=true;var isLogined=false;</script>
+
+    <!-- 自定制样式文件以及脚本 -->
+    <script src="/site/js/cnblog.min.js"></script>
+    <link rel="stylesheet" href="/site/css/cnblog.min.css" />
+
+    <link rel="stylesheet" href="/admin/editormd/css/editormd.css">
+
+    <!-- 标签云相关库 -->
+    <script src="/site/js/jquery.engine3D.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/site/js/jquery.particlePhysics.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/site/js/jquery.starfieldTagCloud.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+</body>
+</html>

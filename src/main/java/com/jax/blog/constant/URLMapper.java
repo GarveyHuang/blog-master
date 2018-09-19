@@ -20,10 +20,8 @@ public class URLMapper {
 
     /** 查询用户信息 */
     public static final String ADMIN_USER_QUERY = "/admin/user/query.do";
-    /** 更新用户信息 */
-    public static final String ADMIN_USER_UPDATE = "/admin/user/update.do";
     /** 修改密码 */
-    public static final String ADMIN_PASSWORD_MODIFY = "/admin/password/modify.do";
+    public static final String ADMIN_PASSWORD = "/admin/password";
 
     /** 文章管理页 */
     public static final String ADMIN_ARTICLE = "/admin/article";
@@ -64,10 +62,16 @@ public class URLMapper {
     public static final String ADMIN_ATTACH_UPLOAD = "/admin/attach/upload";
 
     /** 博客主页 */
-    public static final String INDEX = "/index";
+    public static final String BLOG = "/blog/";
+    public static final String BLOG_INDEX = "/blog/index";
+    /** 首页-分页 */
+    public static final String BLOG_PAGE = "/blog/page/{p}";
 
-    /** 查询文章 **/
-    public static final String ARTICLE = "/article";
+    /** 文章内容页 **/
+    public static final String BLOG_ARTICLE = "/blog/article/{aid}";
+
+    /** 归档页 */
+    public static final String BLOG_ARCHIVES = "/blog/archives";
     /** 文章详情 */
     public static final String ARTICLE_DETAIL = "/article/detail";
 
