@@ -139,6 +139,10 @@ div#navCategory blockquote {
     float: right;
 }
 
+.topicListFooter {
+    text-align: right;
+}
+
 /************************************************************************** article list **************************************************************************/
 .forFlow {
     margin: auto;
@@ -313,16 +317,6 @@ h3.catListTitle {
     border-bottom: 1px dotted #cccccc;
 }
 
-.body_right img {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
-    transition: all 0.5s ease-out;
-    margin-right: 20px;
-    background-color: #f5f5f4;
-    box-shadow: 1px 1px 2px #586f76;
-}
-
 .feedbackManage {
     float: right;
 }
@@ -331,7 +325,7 @@ h3.catListTitle {
     border: 1px none #888888;
     border-radius: 15px;
     padding: 10px;
-    width: 75%;
+    width: 85%;
     box-shadow: 1px 1px 2px #888888;
     background: -webkit-linear-gradient(#dbd9cc, #f2f0e4);
     background: -o-linear-gradient(#dbd9cc, #f2f0e4);
@@ -350,6 +344,14 @@ h3.catListTitle {
     font-size: 18px;
     font-weight: 600;
     color: #de6f64;
+}
+
+.comment_vote {
+    text-align: right;
+}
+
+#comment_nav {
+    text-align: right;
 }
 
 /** * 标签 */

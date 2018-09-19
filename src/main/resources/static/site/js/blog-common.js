@@ -235,7 +235,7 @@ function InsertCodeToEditor(n) {
 }
 
 function RefreshPage() {
-    return location.reload(), !1
+    return location.reload();
 }
 
 function AddParamToUrl(n, t, i) {

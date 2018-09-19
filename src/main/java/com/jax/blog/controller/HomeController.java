@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.jax.blog.constant.Types;
 import com.jax.blog.constant.URLMapper;
 import com.jax.blog.constant.WebConst;
+import com.jax.blog.dto.MetaDto;
 import com.jax.blog.dto.StatisticsDto;
 import com.jax.blog.dto.cond.ArticleCond;
 import com.jax.blog.dto.cond.CommentCond;
@@ -17,7 +18,10 @@ import com.jax.blog.service.site.SiteService;
 import com.jax.blog.utils.PasswordEncryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
@@ -81,6 +85,10 @@ public class HomeController extends BaseController {
         PageInfo<Comment> latestComments = commentService.getCommentsByCond(new CommentCond(), 1, 5);
 
         // 标签
+        List<MetaDto> tags = siteService.getMetas(Types.TAG.getType(), "count", limit);
+
+        // 分类
+        List<MetaDto> categories = siteService.getMetas(Types.CATEGORY.getType(), "count", limit);
 
         // 后台统计数据
         StatisticsDto statisticsDto = siteService.getStatistics();
@@ -92,6 +100,8 @@ public class HomeController extends BaseController {
         request.setAttribute("latestComments", latestComments);
         request.setAttribute("articlesCount", articlesCount);
         request.setAttribute("commentsCount", commentsCount);
+        request.setAttribute("tags", tags);
+        request.setAttribute("categories", categories);
         return "site/index";
     }
 

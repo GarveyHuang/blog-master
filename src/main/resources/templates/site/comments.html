@@ -1,65 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="comments">
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" th:fragment="comments">
 <body>
-
-<div th:if="${article.isAllowComment}" class="comment-allow">
-    <div id="comments-content" th:if="${article}!=null">
-        <div th:id="${article.aid ?: 0}" class="comments-pan">
-            <h3>
-                <th:block th:text="${article.commentsNum ?: 0}"></th:block>
-                Comments
-            </h3>
-
-            <ul th:if="${comments}" class="comments-reply">
-                <th:block th:each="comment :${comments}">
-                    <li th:id="'li-comment-'+${comment.cmid}">
-                        <figure th:id="'comment-'+${comment.cmid}">
-                            <img th:src="@{${commons.gravatar(comment.email)}(s='80',r='G',d='')}" alt="" class="img-responsive"/>
-                        </figure>
-
-                        <section>
-                            <h4><a th:href="${comment.homePage}" target="blank" th:text="${comment.author}"></a></h4>
-                            <div class="date-pan">
-                                <th:block th:text="${commons.fmtdate(comment.created)}"></th:block>
-                            </div>
-                            <th:block th:utext="${commons.article(comment.content)}"></th:block>
-                        </section>
-                    </li>
-                </th:block>
-            </ul>
-
-            <div class="commentys-form">
-                <h4>Leave a comment</h4>
-                <div class="row">
-                    <form  id="comment-form" class="comment-form" role="form" onsubmit="return TaleComment.subComment();">
-                        <input type="hidden" name="cmid" id="cmid"/>
-                        <input type="hidden" name="aid" id="aid" th:value="${article.aid}"/>
-                        <input type="hidden" name="_csrf_token" th:value="${_csrf_token}"/>
-                        <div class="col-xs-12 col-sm-4 col-md-4">
-                            <input type="text" name="author" maxlength="12" id="author" placeholder="姓名 (*)"/>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-4 col-md-4">
-                            <input type="email" name="mail" id="mail" placeholder="邮箱 (*)"/>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-4 col-md-4">
-                            <input type="url" name="url" id="url" placeholder="网址 (http://)"/>
-                        </div>
-
-                        <div class="clearfix"></div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <textarea name="text" id="textarea" placeholder="以上信息可以为空,评论不能为空哦!"
-                                      required="required" minlength="5" maxlength="2000"></textarea>
-                        </div>
-                        <div class="text-center">
-                            <input type="submit" value="Post Comment" id="misubmit"/>
-                        </div>
-                    </form>
-                </div>
+<div id="comments_pager_top" th:if="${article.isAllowComment}">
+    <br/>
+    <div class="feedback_area_title">评论列表</div>
+    <div class="feedbackNoItems"></div>
+    <div class="feedbackItem">
+        <div class="feedbackListSubtitle">
+            <div class="feedbackManage">
+                <span class="comment_actions"></span>
             </div>
+            <a href="#3839373" class="layer">#1楼</a>
+            <a name="3839373" id="comment_anchor_1"></a>
+            <span class="comment_date">2017-11-13 17:12</span>
+            <a id="a_comment_author_1" href="#" target="_blank">韩子迟</a>
+        </div>
+        <div class="feedbackCon">
+            <div id="comment_body_1" class="blog_comment_body">
+                好卡 ..
+                <span class='bot' ></span>
+                <span class='top'></span>
+            </div>
+            <!--<div class="comment_vote">
+                <a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3839373,'Digg',this)">支持(0)</a>
+                <a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3839373,'Bury',this)">反对(0)</a>
+            </div>-->
         </div>
     </div>
+    <div id="comments_pager_bottom"></div>
 </div>
 </body>
 </html>

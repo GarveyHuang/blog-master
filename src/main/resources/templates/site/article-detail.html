@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<div th:replace="site/head::head(${commons.site_title()},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
+<div th:replace="site/head::head(${article.title},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
 <body>
 <div id="home">
     <!-- header -->
@@ -19,8 +19,9 @@
                             </h1>
                             <div class="clear"></div>
                             <div class="postBody">
-                                <div id="cnblogs-body" class="blogpost_body cnblogs-markdown">
-                                    <th:block th:utext="${commons.article(article.content)}"></th:block>
+                                <div id="cnblogs_post_body" class="cnblogs-post-body">
+                                    <textarea id="my-text" name="my-text" style="display:none;" class="markdown-textarea"
+                                              th:utext="${article!=null and article.content !=null}?${article.content}: ''"></textarea>
                                 </div>
                                 <div class="clear"></div>
                                 <div id="blog_post_info_block">
@@ -33,6 +34,16 @@
                                         <a href="" target="_blank" th:text="${article.tags}"></a>
                                     </div>
                                     <div id="blog_post_info">
+                                        <div id="div_digg">
+                                            <div class="diggit" onclick="votePost(7826982,'Digg')">
+                                                <span class="diggnum" id="digg_count">100</span>
+                                            </div>
+                                            <div class="buryit" onclick="votePost(7826982,'Bury')">
+                                                <span class="burynum" id="bury_count">5</span>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="diggword" id="digg_tips"></div>
+                                        </div>
                                     </div>
                                     <div class="clear"></div>
                                     <div id="post_next_prev"></div>
@@ -45,22 +56,53 @@
                                 <span id="post-comment-count" th:text="'评论('+${article.commentsNum==null?0:article.commentsNum}+')'"></span>
                             </div>
                         </div>
-                        <!--<script src="//common.cnblogs.com/highlight/9.12.0/highlight.min.js"></script>-->
-                        <script>markdown_highlight();</script>
                     </div>
                 </div>
             </div><!--end: forFlow -->
-            <!--<div th:replace="site/comments">-->
+
+            <!--<div id="blog-comments-placeholder" th:replace="site/comments"></div>-->
+
+            <!--<div id="comment_form" class="commentform">
+                <div id="comment_nav">
+                    <span id="span_refresh_tips"></span>
+                    <a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a>
+                    <a href="#" onclick="return RefreshPage();">刷新页面</a>
+                    <a href="#top">返回顶部</a>
+                </div>
+            </div>-->
+
         </div><!--end: mainContent 主体内容容器-->
 
         <div th:replace="site/left-sidebar"></div>
+
         <div class="clear"></div>
     </div>
 
-    <div th:replace="common/tale_comment::tale_comment"></div>
+    <!--<div th:replace="common/tale_comment::tale_comment"></div>-->
+
+    <div class="clear"></div>
 
     <!-- footer -->
     <div th:replace="site/footer::footer(${commons.site_title()},${commons.site_record()},${commons.site_url()})"></div>
 </div>
+<script src="/admin/editormd/lib/marked.min.js"></script>
+<script src="/admin/editormd/lib/prettify.min.js"></script>
+<script src="/admin/editormd/lib/raphael.min.js"></script>
+<script src="/admin/editormd/lib/underscore.min.js"></script>
+<script src="/admin/editormd/lib/sequence-diagram.min.js"></script>
+<script src="/admin/editormd/lib/flowchart.min.js"></script>
+<script src="/admin/editormd/lib/jquery.flowchart.min.js"></script>
+<script src="/admin/editormd/editormd.js"></script>
+
+<script>
+    editormd.markdownToHTML("cnblogs_post_body", {
+        htmlDecode      : "style,script,iframe",
+        emoji           : true,
+        taskList        : true,
+        tex             : true,  // 默认不解析
+        flowChart       : true,  // 默认不解析
+        sequenceDiagram : true  // 默认不解析
+    });
+</script>
 </body>
 </html>

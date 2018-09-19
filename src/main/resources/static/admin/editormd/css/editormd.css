@@ -3258,16 +3258,6 @@
   font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-.markdown-body a {
-  color: #4183c4;
-  text-decoration: none;
-}
-
-.markdown-body a:hover,
-.markdown-body a:active {
-  text-decoration: underline;
-}
-
 .markdown-body hr {
   height: 0;
   margin: 15px 0;
@@ -3839,9 +3829,10 @@
   color: #666;
   border-left: 4px solid #ddd;
   padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin-left: 0;
   font-size: 14px;
-  font-style: italic;
 }
 .editormd-preview-container p code, .editormd-html-preview p code {
   margin-left: 5px;

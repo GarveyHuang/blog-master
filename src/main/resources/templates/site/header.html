@@ -21,9 +21,9 @@
 
     <div id="header">
         <div id="blogTitle">
-            <a id="lnkBlogLogo" href="#"><img id="blogLogo" src="/site/images/logo.gif" alt="返回主页" data-bd-imgshare-binded="1"></a>
+            <a id="lnkBlogLogo" th:href="${commons.site_url()}"><img id="blogLogo" src="/site/images/logo.gif" alt="返回主页" data-bd-imgshare-binded="1"></a>
             <!--done-->
-            <h1><a id="Header1_HeaderTitle" class="headermaintitle" href="#">旧情如烟</a></h1>
+            <h1><a id="Header1_HeaderTitle" class="headermaintitle" th:href="${commons.site_url()}">旧情如烟</a></h1>
             <h2>Talk is cheap, show me the code.</h2>
         </div><!--end: blogTitle 博客的标题和副标题 -->
 
