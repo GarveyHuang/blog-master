@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="site/head::head(${commons.site_title()},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
+<head>
+    <div th:replace="site/head::head(${commons.site_title()},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
+</head>
 <body>
 <div id="home">
     <!-- header -->
@@ -35,7 +37,6 @@
                     </div>
                 </div>
             </div><!--end: forFlow -->
-            <div class="clear"></div>
         </div><!--end: mainContent 主体内容容器-->
         <!--<div th:replace="site/left-sidebar"></div>-->
     </div>
