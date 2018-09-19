@@ -153,13 +153,4 @@ public class HomeController extends BaseController {
             cache.hset("article", "hits", hits);
         }
     }
-
-    @ResponseBody
-    @GetMapping(value = "/blog/test")
-    public Map<String, Object> test(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        Map<String, Object> model = new HashMap<>();
-        String encryptedPwd = PasswordEncryption.getEncryptedPassword(password, "Mvw61W9elSYzAlek");
-        model.put("encryptedPwd", encryptedPwd);
-        return model;
-    }
 }
