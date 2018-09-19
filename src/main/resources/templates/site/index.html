@@ -38,11 +38,15 @@
                 </div>
             </div><!--end: forFlow -->
         </div><!--end: mainContent 主体内容容器-->
-        <!--<div th:replace="site/left-sidebar"></div>-->
+
+        <div th:replace="site/left-sidebar"></div>
+        <div class="clear"></div>
     </div>
+    <div class="clear"></div>
 
     <!-- footer -->
     <div th:replace="site/footer::footer(${commons.site_title()},${commons.site_record()},${commons.site_url()})"></div>
+    <div class="clear"></div>
 </div>
 </body>
 </html>
