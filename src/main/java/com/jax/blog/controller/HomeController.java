@@ -4,10 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.jax.blog.constant.Types;
 import com.jax.blog.constant.URLMapper;
 import com.jax.blog.constant.WebConst;
-import com.jax.blog.dto.MetaDto;
-import com.jax.blog.dto.StatisticsDto;
 import com.jax.blog.dto.cond.ArticleCond;
-import com.jax.blog.dto.cond.CommentCond;
 import com.jax.blog.model.Article;
 import com.jax.blog.model.Comment;
 import com.jax.blog.service.article.ArticleService;
@@ -15,20 +12,17 @@ import com.jax.blog.service.comment.CommentService;
 import com.jax.blog.service.meta.MetaService;
 import com.jax.blog.service.option.OptionService;
 import com.jax.blog.service.site.SiteService;
-import com.jax.blog.utils.PasswordEncryption;
+import com.jax.blog.utils.APIResponse;
+import com.jax.blog.utils.IPKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName HomeController
@@ -80,28 +74,12 @@ public class HomeController extends BaseController {
         articleCond.setType(Types.ARTICLE.getType());
         // 文章
         PageInfo<Article> articles = articleService.getArticlesByCond(articleCond, p, limit);
-
-        // 最新评论
-        PageInfo<Comment> latestComments = commentService.getCommentsByCond(new CommentCond(), 1, 5);
-
-        // 标签
-        List<MetaDto> tags = siteService.getMetas(Types.TAG.getType(), "count", limit);
-
-        // 分类
-        List<MetaDto> categories = siteService.getMetas(Types.CATEGORY.getType(), "count", limit);
-
-        // 后台统计数据
-        StatisticsDto statisticsDto = siteService.getStatistics();
-        Long articlesCount = statisticsDto.getArticlesCount();
-        Long commentsCount = statisticsDto.getCommentsCount();
         request.setAttribute("articles", articles);
         request.setAttribute("types", "articles");
         request.setAttribute("active", "blog");
-        request.setAttribute("latestComments", latestComments);
-        request.setAttribute("articlesCount", articlesCount);
-        request.setAttribute("commentsCount", commentsCount);
-        request.setAttribute("tags", tags);
-        request.setAttribute("categories", categories);
+
+        blogBaseData(request);
+
         return "site/index";
     }
 
@@ -120,15 +98,10 @@ public class HomeController extends BaseController {
         // 更新文章的阅读量
         this.updateArticleHit(article.getAid(), article.getHits());
         List<Comment> comments = commentService.getCommentsByAId(aid);
-        PageInfo<Comment> latestComments = commentService.getCommentsByCond(new CommentCond(), 1, 5);
-        StatisticsDto statisticsDto = siteService.getStatistics();
-        Long articlesCount = statisticsDto.getArticlesCount();
-        Long commentsCount = statisticsDto.getCommentsCount();
         request.setAttribute("comments", comments);
         request.setAttribute("active", "blog");
-        request.setAttribute("latestComments", latestComments);
-        request.setAttribute("articlesCount", articlesCount);
-        request.setAttribute("commentsCount", commentsCount);
+
+        blogBaseData(request);
         return "site/article-detail";
     }
 
@@ -152,5 +125,21 @@ public class HomeController extends BaseController {
         } else {
             cache.hset("article", "hits", hits);
         }
+    }
+
+    @PostMapping(value = URLMapper.BLOG_COMMENT_ADD)
+    public APIResponse addComment(HttpServletRequest request,
+                                  @RequestParam(name = "articleId") Integer articleId,
+                                  @RequestParam(name = "content") String content) {
+        String agent = request.getHeader("user-agent");
+        String ip = IPKit.getIpAddrByRequest(request);
+        Comment comment = new Comment();
+        comment.setArticleid(articleId);
+        comment.setContent(content);
+        comment.setAgent(agent);
+        comment.setAuthorIp(ip);
+        comment.setType(Types.COMMENT.getType());
+        commentService.addComment(comment);
+        return APIResponse.success();
     }
 }

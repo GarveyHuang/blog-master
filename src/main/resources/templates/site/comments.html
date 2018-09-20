@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" th:fragment="comments">
 <body>
-<div id="comments_pager_top" th:if="${article.isAllowComment}">
+<div id="comments_pager_top" th:if="${(article.isAllowComment)}">
     <br/>
-    <div class="feedback_area_title">评论列表</div>
+    <div class="feedback_area_title" th:if="${!#lists.isEmpty(comments)}">评论列表</div>
     <div class="feedbackNoItems"></div>
-    <div class="feedbackItem">
+    <div class="feedbackItem" th:each="comment, iterStat : ${comments}">
         <div class="feedbackListSubtitle">
             <div class="feedbackManage">
                 <span class="comment_actions"></span>
             </div>
-            <a href="#3839373" class="layer">#1楼</a>
-            <a name="3839373" id="comment_anchor_1"></a>
-            <span class="comment_date">2017-11-13 17:12</span>
-            <a id="a_comment_author_1" href="#" target="_blank">韩子迟</a>
+            <a href="#" class="layer" th:text="'#'+${iterStat.index + 1}+'楼'"></a>
+            <a name="3839373" th:id="'comment_anchor_'+${iterStat.index + 1}"></a>
+            <span class="comment_date" th:text="${commons.fmtdate(comment.created, 'yyyy-MM-dd HH:mm:ss')}"></span>
+            <a id="a_comment_author_1" href="#" target="_blank" th:text="${comment.author}"></a>
         </div>
         <div class="feedbackCon">
             <div id="comment_body_1" class="blog_comment_body">
-                好卡 ..
+                <th:block th:text="${comment.content}"></th:block>
                 <span class='bot' ></span>
                 <span class='top'></span>
             </div>

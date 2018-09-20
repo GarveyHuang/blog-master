@@ -69,6 +69,8 @@ public class URLMapper {
 
     /** 文章内容页 **/
     public static final String BLOG_ARTICLE = "/blog/article/{aid}";
+    /** 新增评论 **/
+    public static final String BLOG_COMMENT_ADD = "/blog/comment/add";
 
     /** 归档页 */
     public static final String BLOG_ARCHIVES = "/blog/archives";

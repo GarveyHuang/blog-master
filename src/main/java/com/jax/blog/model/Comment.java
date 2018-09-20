@@ -45,6 +45,9 @@ public class Comment {
     /** 评论状态 */
     private String status;
 
+    /** 评论类型 */
+    private String type;
+
     /** 父级评论 */
     private Integer parent;
 
@@ -136,13 +139,20 @@ public class Comment {
         this.content = content;
     }
 
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Integer getParent() {

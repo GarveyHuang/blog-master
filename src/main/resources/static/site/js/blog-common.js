@@ -188,11 +188,6 @@ function clt_enter(n) {
     return n.ctrlKey && n.keyCode == 13 ? (PostComment(), !1) : !0
 }
 
-function ShowCommentMsg(n) {
-    $("#tip_comment").html(n);
-    $("#tip_comment2").html(n)
-}
-
 function CancelCommentEdit() {
     confirm("确认取消修改吗？") && ResetCommentBox()
 }
@@ -682,50 +677,12 @@ function blogCommentManager() {
     this.ctlEnterPost = function (n) {
         return n.ctrlKey && n.keyCode == 13 ? (commentManager.postComment(), !1) : !0
     };
-    this.PostNewComment = function () {
-        var t = $.trim($("#tbCommentBody").val()), n, i;
-        if (!t) {
-            alert("请输入评论内容！");
-            return
-        }
-        if (t.length > 4e3) {
-            alert("评论内容过长，超过4000个字数限制！当前长度：" + t.length);
-            return
-        }
-        if (cb_entryId <= 0) {
-            alert("postId不正确");
-            return
-        }
-        ShowCommentMsg("评论提交中...");
-        $("#btn_comment_submit").attr("disabled", "disabled");
-        n = {};
-        n.blogApp = currentBlogApp;
-        n.postId = cb_entryId;
-        n.body = t;
-        i = $("#span_parentcomment_id").text();
-        n.parentCommentId = /(\d)/.test(i) ? i : 0;
-        $.ajax({
-            url: "/mvc/PostComment/Add.aspx",
-            data: JSON.stringify(n),
-            type: "post",
-            dataType: "json",
-            contentType: "application/json; charset=utf8",
-            timeout: 3e4,
-            success: function (n) {
-                if (n) n.IsSuccess ? (ShowCommentMsg("感谢您的回复:) 服务器端执行耗时" + n.Duration + "毫秒"), $("#tbCommentBody").val(""), $("#divCommentShow").html($("#divCommentShow").html() + n.Message), cb_mathjax_render("#divCommentShow")) : ShowCommentMsg(n.Message), $("#btn_comment_submit").removeAttr("disabled"); else ShowCommentMsg("抱歉！评论提交失败！请与管理员联系(contact@cnblogs.com)。"), $("#btn_comment_submit").removeAttr("disabled")
-            },
-            error: function (n, t) {
-                n.status == 500 ? ShowCommentMsg("抱歉！发生了错误！麻烦反馈至contact@cnblogs.com") : n.status > 0 ? ShowCommentMsg("抱歉！评论提交失败！错误信息：" + n.responseText) : ShowCommentMsg("抱歉！评论提交失败！出错原因：" + t);
-                $("#btn_comment_submit").removeAttr("disabled")
-            }
-        })
-    };
     this.UpdateComment = function () {
         var n = {};
         n.commentId = parseInt($("#comment_edit_id").html());
         n.body = $("#tbCommentBody").val();
         $.ajax({
-            url: "/mvc/PostComment/Update.aspx",
+            url: "/blog/comment/update",
             data: JSON.stringify(n),
             type: "post",
             dataType: "json",

@@ -68,6 +68,38 @@
                     <a href="#" onclick="return RefreshPage();">刷新页面</a>
                     <a href="#top">返回顶部</a>
                 </div>
+                <div id="comment_form_container">
+                    <script type="text/javascript" src="//mention.cnblogs.com/bundles/mention.js?id=20160615"></script>
+                    <div id="commentform_title">发表评论</div>
+                    <span id="tip_comment" style="color:Red"></span>
+                    <p>
+                        昵称：<input id="tbCommentAuthor" class="author" size="50" value="" type="text">
+                    </p>
+                    <div class="commentbox_main">
+                        <div class="commentbox_title">
+                            <div class="commentbox_title_left">评论内容：</div>
+                            <div class="commentbox_title_right">
+                                <img id="ubb_quote" class="comment_icon" src="/site/images/quote.gif" alt="引用" title="添加引用" onclick="insertUBB('tbCommentBody','quote')">
+                                <img id="ubb_bold" class="comment_icon" src="/site/images/b.png" alt="粗体" title="添加粗体" onclick="insertUBB('tbCommentBody','b')">
+                                <img id="ubb_url" class="comment_icon" src="/site/images/lk.png" alt="链接" title="添加链接" onclick="insertUbbUrl('tbCommentBody')">
+                                <img id="ubb_indent" class="comment_icon" src="/site/images/indent.png" alt="缩进" title="添加首行缩进" onclick="insertIndent('tbCommentBody')">
+                                <img id="ubb_code" class="comment_icon" src="/site/images/InsertCode.gif" alt="代码" title="添加代码" onclick="insertUbbCode()">
+                                <img id="ubb_img" class="comment_icon" src="/site/images/img.gif" alt="图片" title="上传图片" onclick="OpenImageUploadWindow();">
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div>
+                            <textarea id="tbCommentBody" class="comment_textarea tbCommentBody_bg"></textarea>
+                        </div>
+                    </div>
+                    <p id="commentbox_opt">
+                        <input id="btn_comment_submit" class="comment_btn" value="提交评论" type="button" th:onclick="'PostNewComment('+${article.aid}+')'">
+                    </p>
+                    <div id="tip_comment2" style="color:Red"></div>
+                    <p>
+                        [Ctrl+Enter快捷键提交]
+                    </p>
+                </div>
             </div>
 
         </div><!--end: mainContent 主体内容容器-->

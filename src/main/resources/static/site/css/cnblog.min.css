@@ -211,6 +211,73 @@ div#navCategory blockquote {
     padding-top: 5px;
 }
 
+/************************************************************************** comment style **************************************************************************/
+#commentform_title {
+    background-image: url(/site/images/icon_addcomment.gif);
+    background-repeat: no-repeat;
+    padding: 0 0 0 25px;
+    margin-bottom: 10px;
+}
+
+div.commentform input.author, div.commentform input.email, div.commentform input.url {
+    background-image: url(/site/images/icon_form.gif);
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    padding: 4px 4px 4px 30px;
+    width: 300px;
+    font-size: 13px;
+}
+
+div.commentform p {
+    margin-top: 10px;
+    line-height: 20px;
+}
+
+div.commentform input.author {
+    background-position: 3px -3px;
+}
+
+.commentbox_main {
+}
+
+.commentbox_title {
+    overflow: hidden;
+    width: 450px;
+}
+
+.commentbox_title_left {
+    float: left;
+}
+
+.comment_icon {
+    vertical-align: middle;
+}
+
+.commentbox_title_right {
+    float: right;
+    height: 22px;
+}
+
+div.commentform textarea.comment_textarea {
+    line-height: 1.6;
+}
+
+div.commentform textarea {
+    width: 650px;
+    height: 300px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    font-family: 'PingFang SC','Helvetica Neue','Helvetica','Arial',sans-serif;
+}
+
+.comment_btn {
+    height: 26px;
+    width: 68px;
+    margin: 0;
+    padding: 0;
+    line-height: 22px;
+}
+
 /************************************************************************** sidebar style **************************************************************************/
 #sideBar {
     width: 20%;
@@ -252,6 +319,11 @@ h3.catListTitle {
     border-radius: 8px 8px 8px 8px;
 }
 
+.div_my_zzk {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 /************************************************************************** article content style **************************************************************************/
 .postBody {
     padding: 10px 20px 10px;
@@ -270,6 +342,19 @@ h3.catListTitle {
     border: 1px solid #d9dbe1;
     border-radius: 8px;
     box-shadow: 3px 3px 3px #888888;
+}
+
+.cnblogs-markdown code {
+    background-color: #F6F8FA !important;
+    box-shadow: 1px 1px 1px #888;
+}
+
+.cnblogs-markdown code, .cnblogs-post-body code {
+    font-family: "Courier New",sans-serif !important;
+    line-height: 20px;
+    padding: 0 5px !important;
+    border-radius: 3px !important;
+    vertical-align: middle;
 }
 
 #cnblogs_post_body h1 h2 h3 h4 {

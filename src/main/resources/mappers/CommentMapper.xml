@@ -9,7 +9,7 @@
 
     <sql id="BASE_COLUMN">
         cm.cmid, cm.articleId, cm.created, cm.author, cm.authorId, cm.ownerId, cm.email,
-        cm.homePage, cm.ip, cm.agent, cm.status, cm.parent, cm.content
+        cm.homePage, cm.ip, cm.agent, cm.status, cm.parent, cm.content, cm.type
     </sql>
 
     <!-- 新增评论 -->
@@ -21,10 +21,10 @@
             homePage, ip, agent, type, status, parent, content,
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{aid,jdbcType=INTEGER}, #{created, jdbcType=INTEGER},
-            #{author, jdbcType=VARCHAR}, #{authorId, jdbcType=INTEGER}, #{ownerId, jdbcType=INTEGER},
-            #{email, jdbcType=VARCHAR}, #{homePage, jdbcType=VARCHAR}, #{ip, jdbcType=VARCHAR}, #{agent, jdbcType=VARCHAR},
-            #{status, jdbcType=VARCHAR}, #{parent, jdbcType=INTEGER}, #{content, jdbcType=LONGVARCHAR},
+            #{aid,jdbcType=INTEGER}, UNIX_TIMESTAMP(NOW()), #{author, jdbcType=VARCHAR}, #{authorId, jdbcType=INTEGER},
+            #{ownerId, jdbcType=INTEGER}, #{email, jdbcType=VARCHAR}, #{homePage, jdbcType=VARCHAR},
+            #{ip, jdbcType=VARCHAR}, #{agent, jdbcType=VARCHAR}, #{type, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR},
+            #{parent, jdbcType=INTEGER}, #{content, jdbcType=LONGVARCHAR},
         </trim>
     </insert>
 
