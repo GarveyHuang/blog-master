@@ -62,7 +62,7 @@ public class URLMapper {
     public static final String ADMIN_ATTACH_UPLOAD = "/admin/attach/upload";
 
     /** 博客主页 */
-    public static final String BLOG = "/blog/";
+    public static final String BLOG = "/blog";
     public static final String BLOG_INDEX = "/blog/index";
     /** 首页-分页 */
     public static final String BLOG_PAGE = "/blog/page/{p}";

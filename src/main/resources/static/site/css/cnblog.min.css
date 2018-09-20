@@ -324,6 +324,16 @@ h3.catListTitle {
     margin-bottom: 5px;
 }
 
+.recent_comment_body {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.recent_comment_author {
+    text-align: right;
+    margin-right: 4px;
+}
+
 /************************************************************************** article content style **************************************************************************/
 .postBody {
     padding: 10px 20px 10px;

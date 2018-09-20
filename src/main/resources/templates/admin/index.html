@@ -82,13 +82,13 @@
                                     <ul class="list-group"
                                         th:unless="${comments}==null and ${#lists.size(comments)}==0">
                                         <li class="list-group-item" th:each="comment : ${comments}">
-                                            <div th:if="${comment.homePage!=null and ${comment.homePage}!=''">
+                                            <div th:if="${comment.homePage}!=null and ${comment.homePage}!=''">
                                                 <a th:href="@{${comment.homePage}}" target="_blank"
                                                    th:text="${comment.author}"></a>
                                             </div>
                                             <th:block th:unless="${comment.homePage}!=null and ${comment.homePage}!=''" th:text="${comment.author}"/>
-                                            于<th:block th:text="${commons.fmtdate(comment.created,'MM月dd日HH:mm')}"/>：<a
-                                                th:href="${commons.site_url('/admin/article/')}+${comment.articleId}+'#comments-content'"
+                                            &nbsp;于&nbsp;<th:block th:text="${commons.fmtdate(comment.created,'MM月dd日 HH:mm')}"/>：<a
+                                                th:href="${commons.site_url('/blog/article/')}+${comment.articleId}+'#comments-content'"
                                                 target="_blank" th:utext="${commons.article(comment.content)}"></a>
                                         </li>
                                     </ul>

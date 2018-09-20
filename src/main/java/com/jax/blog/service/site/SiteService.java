@@ -7,6 +7,7 @@ import com.jax.blog.dto.ArchiveDto;
 import com.jax.blog.dto.MetaDto;
 import com.jax.blog.dto.StatisticsDto;
 import com.jax.blog.dto.cond.ArticleCond;
+import com.jax.blog.dto.cond.CommentCond;
 import com.jax.blog.model.Article;
 import com.jax.blog.model.Comment;
 
@@ -26,7 +27,7 @@ public interface SiteService {
      * @param limit
      * @return
      */
-    List<Comment> getComments(int limit);
+    List<Comment> getComments(int limit, CommentCond commentCond);
 
     /**
      * 获取最新的文章

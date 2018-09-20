@@ -93,7 +93,8 @@
                         </div>
                     </div>
                     <p id="commentbox_opt">
-                        <input id="btn_comment_submit" class="comment_btn" value="提交评论" type="button" th:onclick="'PostNewComment('+${article.aid}+')'">
+                        <input id="btn_comment_submit" class="comment_btn" value="提交评论" type="button"
+                               th:onclick="'PostNewComment('+${article.aid}+',\''+${article.title}+'\')'"/>
                     </p>
                     <div id="tip_comment2" style="color:Red"></div>
                     <p>

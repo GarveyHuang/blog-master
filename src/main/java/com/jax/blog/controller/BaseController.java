@@ -3,6 +3,7 @@ package com.jax.blog.controller;
 import com.jax.blog.constant.Types;
 import com.jax.blog.dto.MetaDto;
 import com.jax.blog.dto.StatisticsDto;
+import com.jax.blog.dto.cond.CommentCond;
 import com.jax.blog.model.Comment;
 import com.jax.blog.model.User;
 import com.jax.blog.service.site.SiteService;
@@ -36,9 +37,9 @@ public abstract class BaseController {
      * @param request
      * @return
      */
-    public BaseController blogBaseData(HttpServletRequest request) {
+    public BaseController blogBaseData(HttpServletRequest request, CommentCond commentCond) {
         // 最新评论
-        List<Comment> latestComments = siteService.getComments(5);
+        List<Comment> latestComments = siteService.getComments(5, commentCond);
 
         // 标签
         List<MetaDto> tags = siteService.getMetas(Types.TAG.getType(), "count", 100);

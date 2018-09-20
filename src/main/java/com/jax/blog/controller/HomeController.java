@@ -5,6 +5,7 @@ import com.jax.blog.constant.Types;
 import com.jax.blog.constant.URLMapper;
 import com.jax.blog.constant.WebConst;
 import com.jax.blog.dto.cond.ArticleCond;
+import com.jax.blog.dto.cond.CommentCond;
 import com.jax.blog.model.Article;
 import com.jax.blog.model.Comment;
 import com.jax.blog.service.article.ArticleService;
@@ -16,10 +17,7 @@ import com.jax.blog.utils.APIResponse;
 import com.jax.blog.utils.IPKit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -78,7 +76,9 @@ public class HomeController extends BaseController {
         request.setAttribute("types", "articles");
         request.setAttribute("active", "blog");
 
-        blogBaseData(request);
+        CommentCond commentCond = new CommentCond();
+        commentCond.setStatus("approved");
+        blogBaseData(request, commentCond);
 
         return "site/index";
     }
@@ -101,7 +101,9 @@ public class HomeController extends BaseController {
         request.setAttribute("comments", comments);
         request.setAttribute("active", "blog");
 
-        blogBaseData(request);
+        CommentCond commentCond = new CommentCond();
+        commentCond.setStatus("approved");
+        blogBaseData(request, commentCond);
         return "site/article-detail";
     }
 
@@ -127,19 +129,30 @@ public class HomeController extends BaseController {
         }
     }
 
+    @ResponseBody
     @PostMapping(value = URLMapper.BLOG_COMMENT_ADD)
     public APIResponse addComment(HttpServletRequest request,
                                   @RequestParam(name = "articleId") Integer articleId,
-                                  @RequestParam(name = "content") String content) {
+                                  @RequestParam(name = "author") String author,
+                                  @RequestParam(name = "content") String content,
+                                  @RequestParam(name = "articleTitle") String articleTitle) {
         String agent = request.getHeader("user-agent");
         String ip = IPKit.getIpAddrByRequest(request);
         Comment comment = new Comment();
-        comment.setArticleid(articleId);
+        comment.setArticleId(articleId);
+        comment.setArticleTitle(articleTitle);
         comment.setContent(content);
+        comment.setAuthor(author);
         comment.setAgent(agent);
         comment.setAuthorIp(ip);
         comment.setType(Types.COMMENT.getType());
-        commentService.addComment(comment);
+        try {
+            commentService.addComment(comment);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.fail(e.getMessage());
+        }
+
         return APIResponse.success();
     }
 }

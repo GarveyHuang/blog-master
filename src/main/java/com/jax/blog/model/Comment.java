@@ -13,7 +13,10 @@ public class Comment {
     private Integer cmid;
 
     /** article表主键,关联字段 */
-    private Integer articleid;
+    private Integer articleId;
+
+    /** 文章标题 */
+    private String articleTitle;
 
     /** 评论生成时的GMT unix时间戳 */
     private Integer created;
@@ -59,12 +62,20 @@ public class Comment {
         this.cmid = cmid;
     }
 
-    public Integer getArticleid() {
-        return articleid;
+    public Integer getArticleId() {
+        return articleId;
     }
 
-    public void setArticleid(Integer articleid) {
-        this.articleid = articleid;
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
     }
 
     public Integer getCreated() {
