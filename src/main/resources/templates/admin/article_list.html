@@ -31,11 +31,14 @@
                                         <a th:href="@{'/admin/article/'+${post.aid}}" th:text="${post.title}"></a>
                                     </td>
                                     <td>
-                                        <th:block th:if="${post.type == 'post'}">
-                                            <span class="label label-success">博文</span>
+                                        <th:block th:if="${post.type == 'article'}">
+                                            <span class="label label-success">学习记录</span>
+                                        </th:block>
+                                        <th:block th:if="${post.type == 'feeling'}">
+                                            <span class="label label-purple">生活感悟</span>
                                         </th:block>
                                         <th:block th:if="${post.type == 'photo'}">
-                                            <span class="label label-default">作品</span>
+                                            <span class="label label-pink">作品</span>
                                         </th:block>
                                     </td>
                                     <td><th:block th:text="${commons.fmtdate(post.created, 'yyyy-MM-dd HH:mm:ss')}"/></td>
