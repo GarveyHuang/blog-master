@@ -70,6 +70,7 @@ public class HomeController extends BaseController {
         p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
         ArticleCond articleCond = new ArticleCond();
         articleCond.setType(Types.ARTICLE.getType());
+        articleCond.setStatus(Types.PUBLISH.getType());
         // 文章
         PageInfo<Article> articles = articleService.getArticlesByCond(articleCond, p, limit);
         request.setAttribute("articles", articles);
