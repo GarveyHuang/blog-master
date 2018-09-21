@@ -6,6 +6,7 @@ import com.jax.blog.constant.URLMapper;
 import com.jax.blog.constant.WebConst;
 import com.jax.blog.controller.BaseController;
 import com.jax.blog.dto.StatisticsDto;
+import com.jax.blog.dto.cond.CommentCond;
 import com.jax.blog.exception.BusinessException;
 import com.jax.blog.model.Article;
 import com.jax.blog.model.Comment;
@@ -66,7 +67,7 @@ public class IndexController extends BaseController {
     @GetMapping(value = {"/admin/", URLMapper.ADMIN_INDEX})
     public String index(HttpServletRequest request) throws IOException {
         LOGGER.info("Enter admin index method");
-        List<Comment> comments = siteService.getComments(5);
+        List<Comment> comments = siteService.getComments(5, new CommentCond());
         List<Article> articles = siteService.getNewArticles(5);
         StatisticsDto statistics = siteService.getStatistics();
         // 获取最新的20条日志

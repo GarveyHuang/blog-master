@@ -65,21 +65,21 @@ public class CommentServiceImpl implements CommentService {
         if (StringUtils.isBlank(comment.getAuthor())) {
             comment.setAuthor("热心网友");
         }
-        if (StringUtils.isNotBlank(comment.getEmail()) && !TaleUtils.isEmail(comment.getEmail())) {
+        /*if (StringUtils.isNotBlank(comment.getEmail()) && !TaleUtils.isEmail(comment.getEmail())) {
             msg =  "请输入正确的邮箱格式";
-        }
+        }*/
         if (StringUtils.isBlank(comment.getContent())) {
             msg = "评论内容不能为空";
         }
-        if (comment.getContent().length() < 5 || comment.getContent().length() > 2000) {
+        if (comment.getContent().length() < 3 || comment.getContent().length() > 2000) {
             msg = "评论字数在5-2000个字符";
         }
-        if (null == comment.getArticleid()) {
+        if (null == comment.getArticleId()) {
             msg = "评论文章不能为空";
         }
         if (msg != null)
             throw BusinessException.withErrorCode(msg);
-        Article article = articleService.getArticleById(comment.getArticleid());
+        Article article = articleService.getArticleById(comment.getArticleId());
         if (null == article)
             throw BusinessException.withErrorCode("该文章不存在");
         comment.setOwnerId(article.getAuthorId());
@@ -122,7 +122,7 @@ public class CommentServiceImpl implements CommentService {
         count++;
 
         //更新当前文章的评论数
-        Article contentDomain = articleService.getArticleById(comment.getArticleid());
+        Article contentDomain = articleService.getArticleById(comment.getArticleId());
         if (null != contentDomain
                 && null != contentDomain.getCommentsNum()
                 && contentDomain.getCommentsNum() != 0){

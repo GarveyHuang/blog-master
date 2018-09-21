@@ -77,13 +77,17 @@
                             <h3 class="catListTitle">最新评论</h3>
                             <div id="RecentCommentsBlock">
                                 <ul>
-                                    <li th:each="comment: ${latestComments.list}">
-                                        <span class="recent_comment_title">
-                                            <a href="#"></a>
-                                        </span>
-                                        <span class="recent_comment_body" th:text="${comment.content}"></span>
-                                        <span class="recent_comment_author" th:text="'--'+${comment.author}"></span>
-                                    </li>
+                                    <div th:if="${latestComments != null}" th:each="comment, iterStat : ${latestComments}">
+                                        <li class="recent_comment_title">
+                                            <a th:href="'/blog/article/'+${comment.articleId}"
+                                               th:text="${iterStat.index + 1}+'. Re:'+${comment.articleTitle}"></a>
+                                        </li>
+                                        <li class="recent_comment_body" th:text="${comment.content}"></li>
+                                        <li class="recent_comment_author" th:text="'--'+${comment.author}"></li>
+                                    </div>
+                                    <div th:if="${latestComments == null}">
+                                        <li>暂无评论</li>
+                                    </div>
                                 </ul>
                             </div>
                         </div>

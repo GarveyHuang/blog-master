@@ -55,13 +55,13 @@ public class SiteServiceImpl implements SiteService {
 
     @Override
     @Cacheable(value = "siteCache", key = "'comments_' + #p0")
-    public List<Comment> getComments(int limit) {
+    public List<Comment> getComments(int limit, CommentCond commentCond) {
         LOGGER.debug("Enter recentComments method:limit={}", limit);
         if (limit < 0 || limit>10) {
             limit = 10;
         }
         PageHelper.startPage(1, limit);
-        List<Comment> rs = commentDAO.getCommentsByCond(new CommentCond());
+        List<Comment> rs = commentDAO.getCommentsByCond(commentCond);
         LOGGER.debug("Exit recentComments method");
         return rs;
     }

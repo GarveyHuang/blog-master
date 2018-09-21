@@ -11,7 +11,9 @@ package com.jax.blog.constant;
 public enum Types {
     TAG("tag"),
     CATEGORY("category"),
-    ARTICLE("post"),
+    ARTICLE("article"),
+    MESSAGE("message"),
+    COMMENT("comment"),
     PUBLISH("publish"),
     PAGE("page"),
     DRAFT("draft"),
