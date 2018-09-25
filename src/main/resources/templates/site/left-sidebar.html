@@ -77,16 +77,16 @@
                             <h3 class="catListTitle">最新评论</h3>
                             <div id="RecentCommentsBlock">
                                 <ul>
-                                    <div th:if="${latestComments != null}" th:each="comment, iterStat : ${latestComments}">
+                                    <div th:if="${latestComments == null}">
+                                        <li>暂无评论</li>
+                                    </div>
+                                    <div th:unless="${latestComments == null}" th:each="comment, iterStat : ${latestComments}">
                                         <li class="recent_comment_title">
                                             <a th:href="'/blog/article/'+${comment.articleId}"
                                                th:text="${iterStat.index + 1}+'. Re:'+${comment.articleTitle}"></a>
                                         </li>
                                         <li class="recent_comment_body" th:text="${comment.content}"></li>
                                         <li class="recent_comment_author" th:text="'--'+${comment.author}"></li>
-                                    </div>
-                                    <div th:if="${latestComments == null}">
-                                        <li>暂无评论</li>
                                     </div>
                                 </ul>
                             </div>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
 
-                <div id="sidebar_topcommentedposts" class="sidebar-block">
+                <!--<div id="sidebar_topcommentedposts" class="sidebar-block">
                     <div id="topfeedback_posts_wrap">
                         <div class="catListFeedback">
                             <h3 class="catListTitle">评论排行榜</h3>
@@ -122,9 +122,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
-                <div id="sidebar_topdiggedposts" class="sidebar-block">
+                <!--<div id="sidebar_topdiggedposts" class="sidebar-block">
                     <div id="topdigg_posts_wrap">
                         <div class="catListView">
                             <h3 class="catListTitle">推荐排行榜</h3>
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div><!--end: sideBarMain -->
