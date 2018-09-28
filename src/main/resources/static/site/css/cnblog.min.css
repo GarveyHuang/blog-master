@@ -5,7 +5,8 @@
 }
 
 body {
-    background: #FFFCEC;
+    background-color: #eee;
+    /*background: #FFFCEC;*/
     color: #586f76;
     font-family: Verdana, Arial, Helvetica, sans-serif, "微软雅黑";
     font-size: 13px;
@@ -18,7 +19,8 @@ a {
 }
 
 a:hover {
-    color: #fe4165;
+    /*color: #fe4165;*/
+    color: #FF6B57;
 }
 
 img {
@@ -94,7 +96,8 @@ blockquote {
 
 /** * navigator */
 #navigator {
-    background: #e8e8e8;
+    /*background: #e8e8e8;*/
+    background-color: rgba(255,255,255,.95);
     height: 40px;
     line-height: 40px;
     color: #999999;
@@ -139,7 +142,7 @@ div#navCategory blockquote {
 /************************************************************************** main content style **************************************************************************/
 #mainContent {
     margin-left: auto;
-    width: 78%;
+    width: 70%;
     float: right;
 }
 
@@ -154,8 +157,9 @@ div#navCategory blockquote {
 
 .day {
     border: 1px solid #cccccc;
-    border-radius: 16px;
+    border-radius: 10px;
     margin: 20px 0px;
+    background: #fff;
 }
 
 /* article list - post date */
@@ -169,7 +173,6 @@ div#navCategory blockquote {
     border-bottom: 1px solid #cccccc;
     font-size: 22px;
     font-weight: bold;
-    text-shadow: 0 -1px 8px rgba(0, 0, 0, 0.4);
 }
 
 .postCon {
@@ -280,7 +283,7 @@ div.commentform textarea {
 
 /************************************************************************** sidebar style **************************************************************************/
 #sideBar {
-    width: 20%;
+    width: 28%;
     float: left;
     border: none;
     overflow: hidden;
@@ -311,6 +314,7 @@ h3.catListTitle {
 }
 
 #footer {
+    font-size: 12px;
     height: 60px;
     line-height: 60px;
     color: #586f76;
@@ -322,6 +326,27 @@ h3.catListTitle {
 .div_my_zzk {
     margin-top: 5px;
     margin-bottom: 5px;
+    height: 35px;
+}
+
+.input_my_zzk {
+    width: 200px;
+    height: 22px;
+    outline: none;
+    font-size: 14px;
+    padding: 3px;
+    color: gray;
+    border: 1px solid #ff6b57;
+}
+.btn_my_zzk {
+    width: 70px;
+    height: 28px;
+    font-size: 14px;
+    color: white;
+    background: #ff6b57;
+    border: 1px;
+    outline: none;
+    cursor: pointer;
 }
 
 .recent_comment_body {
@@ -332,6 +357,105 @@ h3.catListTitle {
 .recent_comment_author {
     text-align: right;
     margin-right: 4px;
+}
+
+.grid-weibo-show {
+    background-color: rgba(255,255,255,.7);
+}
+
+.profile_block {
+    background-color: #fff;
+    padding: 50px 20px 5px 20px;
+    margin: 50px 0 10px 0;
+}
+
+.avatar {
+    float: none;
+    box-shadow: none;
+    width: 90px;
+    height: 90px;
+    padding: 5px;
+    background-color: rgba(255,255,255,.3);
+    border-radius: 100%;
+    margin: -90px auto 0 auto;
+    position: relative;
+    z-index: 2;
+}
+.profile_block .avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+
+.profile_block h4 {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px;
+    text-align: center;
+}
+
+.grid-weibo-show .seta {
+    text-align: center;
+    font-size: 12px;
+}
+
+.grid-weibo-show .u-btn-submit {
+    display: block;
+    margin: 10px auto;
+    width: 70%;
+    border-radius: 2px;
+    border: 1px solid #FF6B57;
+    background: #FF6B57;
+    color: #ffffff;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.grid-weibo-show .u-btn-submit:hover {
+    color: #fff;
+}
+
+.grid-weibo-show .f-tdn {
+    padding: 10px 14px;
+    text-align: center;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.grid-weibo-show footer {
+    border-top: 1px solid #e5e5e5;
+}
+
+.grid-weibo-show footer li strong, .grid-weibo-show footer li span {
+    display: block;
+    margin: 0 auto;
+    margin-top: 0px;
+}
+
+.grid-weibo-show li strong {
+    font-family: Georgia;
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: -2px !important;
+}
+
+.grid-weibo-show footer ul {
+    font-size: 0;
+}
+
+.grid-weibo-show footer li {
+    display: inline-block;
+    width: 33.333%;
+    text-align: center;
+    font-size: 14px;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px 0;
 }
 
 /************************************************************************** article content style **************************************************************************/

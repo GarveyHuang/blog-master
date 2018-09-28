@@ -9,6 +9,7 @@ import com.jax.blog.dao.AttachDAO;
 import com.jax.blog.dao.CommentDAO;
 import com.jax.blog.dao.MetaDAO;
 import com.jax.blog.dto.ArchiveDto;
+import com.jax.blog.dto.ArticleRankingDto;
 import com.jax.blog.dto.MetaDto;
 import com.jax.blog.dto.StatisticsDto;
 import com.jax.blog.dto.cond.ArticleCond;
@@ -54,7 +55,7 @@ public class SiteServiceImpl implements SiteService {
     private AttachDAO attachDAO;
 
     @Override
-    @Cacheable(value = "siteCache", key = "'comments_' + #p0")
+    //@Cacheable(value = "siteCache", key = "'comments_' + #p0")
     public List<Comment> getComments(int limit, CommentCond commentCond) {
         LOGGER.debug("Enter recentComments method:limit={}", limit);
         if (limit < 0 || limit>10) {
@@ -67,7 +68,7 @@ public class SiteServiceImpl implements SiteService {
     }
 
     @Override
-    @Cacheable(value = "siteCache", key = "'newArticles_' + #p0")
+    //@Cacheable(value = "siteCache", key = "'newArticles_' + #p0")
     public List<Article> getNewArticles(int limit) {
         LOGGER.debug("Enter recentArticles method:limit={}", limit);
         if (limit < 0 || limit > 10)
@@ -79,7 +80,7 @@ public class SiteServiceImpl implements SiteService {
     }
 
     @Override
-    @Cacheable(value = "siteCache", key = "'comment_' + #p0")
+    //@Cacheable(value = "siteCache", key = "'comment_' + #p0")
     public Comment getComment(Integer cmid) {
         LOGGER.debug("Enter recentComment method");
         if (null == cmid) {
@@ -91,11 +92,13 @@ public class SiteServiceImpl implements SiteService {
     }
 
     @Override
-    @Cacheable(value = "siteCache", key = "'statistics_' + #p0")
+    //@Cacheable(value = "siteCache", key = "'statistics_' + #p0")
     public StatisticsDto getStatistics() {
         LOGGER.debug("Enter recentStatistics method");
         // 文章总数
-        Long articlesCount = articleDAO.getArticleCount();
+        Long articlesCount = articleDAO.getArticleCount("article");
+
+        Long shareCount = articleDAO.getArticleCount("feeling");
 
         Long commentsCount = commentDAO.getCommentsCount();
 
@@ -105,6 +108,7 @@ public class SiteServiceImpl implements SiteService {
 
         StatisticsDto statisticsDto = new StatisticsDto();
         statisticsDto.setArticlesCount(articlesCount);
+        statisticsDto.setShareCount(shareCount);
         statisticsDto.setCommentsCount(commentsCount);
         statisticsDto.setLinksCount(linksCount);
         statisticsDto.setAttachsCount(attachsCount);
@@ -132,8 +136,6 @@ public class SiteServiceImpl implements SiteService {
         return archives;
     }
 
-
-
     private void parseArchives(List<ArchiveDto> archives, ArticleCond articleCond) {
         if (null != archives){
             archives.forEach(archive -> {
@@ -152,7 +154,7 @@ public class SiteServiceImpl implements SiteService {
     }
 
     @Override
-    @Cacheable(value = "siteCache", key = "'metas_' + #p0")
+    //@Cacheable(value = "siteCache", key = "'metas_' + #p0")
     public List<MetaDto> getMetas(String type, String orderBy, int limit) {
         LOGGER.debug("Enter metas method:type={},order={},limit={}", type, orderBy, limit);
         List<MetaDto> retList=null;
@@ -171,5 +173,17 @@ public class SiteServiceImpl implements SiteService {
         }
         LOGGER.debug("Exit metas method");
         return retList;
+    }
+
+    @Override
+    public List<ArticleRankingDto> getArticleRanklingByHits() {
+        List<ArticleRankingDto> articleRankings = articleDAO.getArticleRanklingByHits();
+        return articleRankings;
+    }
+
+    @Override
+    public List<ArticleRankingDto> getArticleRanklingByComments() {
+        List<ArticleRankingDto> articleRankings = articleDAO.getArticleRanklingByComments();
+        return articleRankings;
     }
 }

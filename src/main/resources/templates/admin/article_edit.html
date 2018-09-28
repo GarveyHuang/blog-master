@@ -72,29 +72,29 @@
                                 <select id="multiple-type" class="select2 form-control"
                                         data-placeholder="请选择文章类型..">
                                     <th:block th:if="${null == articles}">
-                                        <option value="post" selected="selected">默认学习记录</option>
+                                        <option value="article" selected="selected">默认学习记录</option>
                                         <option value="feeling">生活感悟</option>
                                         <option value="photo" >摄影作品</option>
                                     </th:block>
                                     <th:block th:unless="${null == articles}">
-                                        <option value="post" th:selected="${null != articles and articles.type=='post'} ? true : false">默认学习记录</option>
+                                        <option value="article" th:selected="${null != articles and articles.type=='article'} ? true : false">默认学习记录</option>
                                         <option value="feeling" th:selected="${null != articles and articles.type=='feeling'} ? true : false">生活感悟</option>
                                         <option value="photo" th:selected="${null != articles and articles.type=='photo'} ? true : false" >摄影作品</option>
                                     </th:block>
                                 </select>
                             </div>
 
-
                             <div class="form-group col-md-6" style="padding: 0 10px 0 0;">
                                 <!-- 如果是作品类，那么暂时不允许使用标签 -->
                                 <input name="tags" id="tags"  type="text" class="form-control" placeholder="请填写文章标签"
                                        th:value="${articles!=null and articles.tags !=null}?${articles.tags}: ''"/>
                             </div>
+
                             <div class="form-group col-md-6" >
                                 <select id="multiple-sel" class="select2 form-control" multiple="multiple" data-placeholder="请选择分类...">
-                                    <!--<th:block th:if="${null == categories}">
+                                    <th:block th:if="${null == categories}">
                                         <option value="Java" selected="selected">Java</option>
-                                    </th:block>-->
+                                    </th:block>
                                     <th:block th:unless="${null == categories}">
                                         <th:block th:each="c : ${categories}">
                                             <option th:value="${c.name}" th:text="${c.name}"
@@ -104,7 +104,15 @@
                                 </select>
                             </div>
 
+                            <div class="form-group" style="padding: 0 10px 0 0;">
+                                <input type="text" class="form-control" placeholder="请输入文章描述（必须）" name="slug"
+                                       required="required"
+                                       aria-required="true"
+                                       th:value="${articles!=null and articles.slug!=null }?${articles.slug}: ''"/>
+                            </div>
+
                             <div class="clearfix"></div>
+
                             <div id="my-editormd" >
                                 <textarea id="my-text" name="my-text" style="display:none;" class="markdown-textarea"
                                           th:utext="${articles!=null and articles.content !=null}?${articles.content}: ''"></textarea>

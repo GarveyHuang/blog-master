@@ -113,7 +113,7 @@ $('#multiple-type').change(function () {
     var postType = $('#multiple-type').val();
     var tags = $('#tags');
     var categories = $('#multiple-sel');
-    if(postType == 'post'){
+    if(postType == 'article'){
         $('#tags_tagsinput').show(500);
         $('#s2id_multiple-sel').show(500);
         $('#comment-div').attr("style","display:block;");
@@ -129,7 +129,7 @@ $(function () {
     var postType = $('#multiple-type').val();
     var tags = $('#tags');
     var categories = $('#multiple-sel');
-    if(postType == 'post'){
+    if(postType == 'article'){
         $('#tags_tagsinput').show();
         $('#s2id_multiple-sel').show();
         $('#comment-div').attr("style","display:block;");

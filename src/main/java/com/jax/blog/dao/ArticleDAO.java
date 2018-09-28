@@ -4,6 +4,7 @@ package com.jax.blog.dao;
  */
 
 import com.jax.blog.dto.ArchiveDto;
+import com.jax.blog.dto.ArticleRankingDto;
 import com.jax.blog.dto.cond.ArticleCond;
 import com.jax.blog.model.Article;
 import org.apache.ibatis.annotations.Mapper;
@@ -71,10 +72,11 @@ public interface ArticleDAO {
     List<Article> getArticlesByCond(ArticleCond articleCond);
 
     /**
-     * 获取文章总数量
+     * 根据类型获取文章总数量
+     * @param type
      * @return
      */
-    Long getArticleCount();
+    Long getArticleCount(@Param("type") String type);
 
     /**
      * 获取归档数据
@@ -95,4 +97,16 @@ public interface ArticleDAO {
      * @return
      */
     List<Article> searchArticle(@Param("param") String param);
+
+    /**
+     * 查询推荐文章，根据阅读数排序
+     * @return
+     */
+    List<ArticleRankingDto> getArticleRanklingByHits();
+
+    /**
+     * 查询推荐文章，根据评论数排序
+     * @return
+     */
+    List<ArticleRankingDto> getArticleRanklingByComments();
 }

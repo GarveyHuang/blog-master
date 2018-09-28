@@ -4,6 +4,7 @@ package com.jax.blog.service.site;
  */
 
 import com.jax.blog.dto.ArchiveDto;
+import com.jax.blog.dto.ArticleRankingDto;
 import com.jax.blog.dto.MetaDto;
 import com.jax.blog.dto.StatisticsDto;
 import com.jax.blog.dto.cond.ArticleCond;
@@ -63,8 +64,6 @@ public interface SiteService {
      */
     List<ArchiveDto> getArchives(ArticleCond articleCond);
 
-
-
     /**
      * 获取分类/标签列表
      * @param type
@@ -73,4 +72,16 @@ public interface SiteService {
      * @return
      */
     List<MetaDto> getMetas(String type, String orderBy, int limit);
+
+    /**
+     * 查询推荐文章，根据阅读数排序
+     * @return
+     */
+    List<ArticleRankingDto> getArticleRanklingByHits();
+
+    /**
+     * 查询推荐文章，根据评论数排序
+     * @return
+     */
+    List<ArticleRankingDto> getArticleRanklingByComments();
 }
