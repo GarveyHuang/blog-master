@@ -77,7 +77,7 @@
                                         <option value="photo" >摄影作品</option>
                                     </th:block>
                                     <th:block th:unless="${null == articles}">
-                                        <option value="post" th:selected="${null != articles and articles.type=='article'} ? true : false">默认学习记录</option>
+                                        <option value="article" th:selected="${null != articles and articles.type=='article'} ? true : false">默认学习记录</option>
                                         <option value="feeling" th:selected="${null != articles and articles.type=='feeling'} ? true : false">生活感悟</option>
                                         <option value="photo" th:selected="${null != articles and articles.type=='photo'} ? true : false" >摄影作品</option>
                                     </th:block>

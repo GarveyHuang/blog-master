@@ -1,6 +1,7 @@
 package com.jax.blog.controller;
 
 import com.jax.blog.constant.Types;
+import com.jax.blog.dto.ArticleRankingDto;
 import com.jax.blog.dto.MetaDto;
 import com.jax.blog.dto.StatisticsDto;
 import com.jax.blog.dto.cond.CommentCond;
@@ -50,13 +51,22 @@ public abstract class BaseController {
         // 后台统计数据
         StatisticsDto statisticsDto = siteService.getStatistics();
         Long articlesCount = statisticsDto.getArticlesCount();
+        Long shareCount = statisticsDto.getShareCount();
         Long commentsCount = statisticsDto.getCommentsCount();
+
+        // 按阅读数获取排序文章
+        List<ArticleRankingDto> hitsRanking = siteService.getArticleRanklingByHits();
+        // 按评论数获取排序文章
+        List<ArticleRankingDto> commentsRanking = siteService.getArticleRanklingByComments();
 
         request.setAttribute("latestComments", latestComments);
         request.setAttribute("articlesCount", articlesCount);
+        request.setAttribute("shareCount", shareCount);
         request.setAttribute("commentsCount", commentsCount);
         request.setAttribute("tags", tags);
         request.setAttribute("categories", categories);
+        request.setAttribute("hitsRanking", hitsRanking);
+        request.setAttribute("commentsRanking", commentsRanking);
         return this;
     }
 

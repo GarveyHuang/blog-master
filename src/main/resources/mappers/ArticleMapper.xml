@@ -151,7 +151,12 @@
 
     <select id="getArticleCount" resultType="java.lang.Long">
         SELECT count(*)
-        FROM <include refid="BASE_TABLE"/>
+        FROM <include refid="BASE_TABLE"/> AS a
+        <where>
+            <if test="type != null">
+                AND a.type = #{type, jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 
     <resultMap id="archiveDtoMap" type="com.jax.blog.dto.ArchiveDto">
@@ -198,6 +203,24 @@
             OR
             a.content LIKE CONCAT('%',#{param, jdbcType=VARCHAR},'%')
         </where>
+    </select>
+
+    <!-- 查询推荐文章，根据阅读数排序 -->
+    <select id="getArticleRanklingByHits" resultType="com.jax.blog.dto.ArticleRankingDto">
+        SELECT 
+        a.aid, a.title, IFNULL(a.hits, 0) AS orderValue
+        FROM <include refid="BASE_TABLE"></include> AS a
+        ORDER BY a.hits DESC, a.created DESC
+        LIMIT 5
+    </select>
+
+    <!-- 查询推荐文章，根据评论数排序 -->
+    <select id="getArticleRanklingByComments" resultType="com.jax.blog.dto.ArticleRankingDto">
+        SELECT
+        a.aid, a.title, IFNULL(a.commentsNum, 0) AS orderValue
+        FROM <include refid="BASE_TABLE"></include> AS a
+        ORDER BY a.commentsNum DESC, a.created DESC
+        LIMIT 5
     </select>
 
 </mapper>

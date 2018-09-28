@@ -9,8 +9,10 @@ package com.jax.blog.dto;
  **/
 
 public class StatisticsDto {
-    /** 文章数 */
+    /** 学习记录文章数 */
     private Long articlesCount;
+    /** 生活随笔文章数 */
+    private Long shareCount;
     /** 评论数 */
     private Long commentsCount;
     /** 友链数 */
@@ -24,6 +26,14 @@ public class StatisticsDto {
 
     public void setArticlesCount(Long articlesCount) {
         this.articlesCount = articlesCount;
+    }
+
+    public Long getShareCount() {
+        return shareCount;
+    }
+
+    public void setShareCount(Long shareCount) {
+        this.shareCount = shareCount;
     }
 
     public Long getCommentsCount() {

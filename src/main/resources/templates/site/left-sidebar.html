@@ -4,15 +4,40 @@
 <div id="sideBar">
     <div id="sideBarMain">
         <div class="newsItem">
-            <a href="http://www.jianshu.com/u/e336bc023b9d" style="font-size:16px; font-weight:600; color:#D33632;">我的简书</a>
-            <div id="profile_block">
-                昵称：<a th:href="${commons.site_url()}">旧情如烟</a>
+            <!--<a href="#" style="font-size:16px; font-weight:600; color:#D33632;">我的简书</a>-->
+            <div class="grid-weibo-show">
+                <div id="profile_block" class="profile_block">
+                    <div class="avatar">
+                        <img class="avatar_img" th:src="${commons.site_avatar()}"/>
+                        <span class="rank"></span>
+                    </div>
+                    <h4>旧情如烟</h4>
+                    <p class="seta" th:text="${commons.site_sign()}"></p>
+                    <a class="u-btn-submit f-tdn" href="#" target="_blank">
+                        <i class="fa fa-tencent-weibo"></i>关注网易云音乐
+                    </a>
+                </div>
+                <footer>
+                    <ul>
+                        <li>
+                            <strong id="event_count">56</strong>
+                            <span>动态</span>
+                        </li>
+                        <li>
+                            <strong id="follow_count">35</strong>
+                            <span>关注</span></li>
+                        <li>
+                            <strong id="fan_count">21</strong>
+                            <span>粉丝</span>
+                        </li>
+                    </ul>
+                </footer>
             </div>
             <h3 class="catListTitle">公告</h3>
             <div id="blog-news">
                 <!-- 小老鼠游戏控件 -->
                 <div classname="sidebarMouse">
-                    <object type="application/x-shockwave-flash" style="outline:none;" data="/site/images/hamster.swf" width="240" height="160">
+                    <object type="application/x-shockwave-flash" style="outline:none;" data="/site/images/hamster.swf" width="340" height="160">
                         <param name="movie" value="http://cdn.abowman.com/widgets/hamster/hamster.swf?up_bodyColor=f0e9cc&amp;up_feetColor=D4C898&amp;up_eyeColor=000567&amp;up_wheelSpokeColor=DEDEDE&amp;up_wheelColor=FFFFFF&amp;up_waterColor=E0EFFF&amp;up_earColor=b0c4de&amp;up_wheelOuterColor=FF4D4D&amp;up_snoutColor=F7F4E9&amp;up_bgColor=F0E4E4&amp;up_foodColor=cba920&amp;up_wheelCenterColor=E4EB2E&amp;up_tailColor=E6DEBE&amp;">
                         <param name="AllowScriptAccess" value="always">
                         <param name="wmode" value="opaque">
@@ -20,7 +45,7 @@
                 </div>
 
                 <!-- 公告栏时钟控件 -->
-                <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#FDF6E3" width="240" height="110" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+                <embed wmode="transparent" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.swf" quality="high" bgcolor="#FDF6E3" width="340" height="110" name="honehoneclock" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
                 <div>
                     <div style="ffont-weight:600;background-color:#FFF2C9;margin-top:10px;font-size:14px;padding:8px;">
                         <em>公告</em>
@@ -28,7 +53,7 @@
                             <a href="#">详谈如何定制自己的博客园皮肤</a><br>
                             私信或留言恕不一一答复。</p>
                     </div>
-                    <a href="#" style="font-size:16px; font-weight:600; color:#D33632;">我的文章归档</a><br>
+                    <!--<a href="#" style="font-size:16px; font-weight:600; color:#D33632;">我的文章归档</a><br>-->
                 </div>
             </div>
         </div>
@@ -50,10 +75,10 @@
                         <h3 class="catListTitle">我的标签</h3>
                         <ul>
                             <li th:each="tag : ${tags}">
-                                <a th:href="'localhost:56000/blog/tag/'+${tag.mid}" th:text="${tag.name}+'('+${tag.count}+')'"></a>
+                                <a th:href="'/blog/tag/'+${tag.mid}" th:text="${tag.name}+'('+${tag.count}+')'"></a>
                             </li>
                             <li>
-                                <a href="http://www.cnblogs.com/jingmoxukong/tag/">更多</a>
+                                <a href="#">更多</a>
                             </li>
                         </ul>
                     </div>
@@ -77,16 +102,16 @@
                             <h3 class="catListTitle">最新评论</h3>
                             <div id="RecentCommentsBlock">
                                 <ul>
-                                    <div th:if="${latestComments == null}">
+                                    <div th:if="${latestComments.size()==0}">
                                         <li>暂无评论</li>
                                     </div>
-                                    <div th:unless="${latestComments == null}" th:each="comment, iterStat : ${latestComments}">
+                                    <div th:unless="${latestComments.size()==0}" th:each="comment, iterStat : ${latestComments}">
                                         <li class="recent_comment_title">
                                             <a th:href="'/blog/article/'+${comment.articleId}"
                                                th:text="${iterStat.index + 1}+'. Re:'+${comment.articleTitle}"></a>
                                         </li>
                                         <li class="recent_comment_body" th:text="${comment.content}"></li>
-                                        <li class="recent_comment_author" th:text="'--'+${comment.author}"></li>
+                                        <li class="recent_comment_author" th:text="'--by:'+${comment.author}"></li>
                                     </div>
                                 </ul>
                             </div>
@@ -98,10 +123,11 @@
                     <div id="topview_posts_wrap">
                         <div class="catListView">
                             <h3 class="catListTitle">阅读排行榜</h3>
-                            <div id="TopViewPostsBlock">
+                            <div id="TopViewPostsBlock" th:each="article, iterStat : ${hitsRanking}">
                                 <ul>
                                     <li>
-                                        <a href="">1.xxxxxxxxxxx(阅读数)</a>
+                                        <a th:href="'blog/article/'+${article.aid}"
+                                           th:text="${iterStat.index + 1}+'. '+${article.title}+'('+${article.orderValue}+')'"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -109,20 +135,21 @@
                     </div>
                 </div>
 
-                <!--<div id="sidebar_topcommentedposts" class="sidebar-block">
+                <div id="sidebar_topcommentedposts" class="sidebar-block">
                     <div id="topfeedback_posts_wrap">
                         <div class="catListFeedback">
                             <h3 class="catListTitle">评论排行榜</h3>
-                            <div id="TopFeedbackPostsBlock">
+                            <div id="TopFeedbackPostsBlock" th:each="article, iterStat : ${commentsRanking}">
                                 <ul>
                                     <li>
-                                        <a href="#">1.xxxxxx(评论数)</a>
+                                        <a th:href="'blog/article/'+${article.aid}"
+                                           th:text="${iterStat.index + 1}+'. '+${article.title}+'('+${article.orderValue}+')'"></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                </div>-->
+                </div>
 
                 <!--<div id="sidebar_topdiggedposts" class="sidebar-block">
                     <div id="topdigg_posts_wrap">

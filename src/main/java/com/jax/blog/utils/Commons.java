@@ -42,7 +42,6 @@ public class Commons {
         return site_option("site_url") + sub;
     }
 
-
     /**
      * 文件上传，为文件重新命名
      **/
@@ -54,6 +53,22 @@ public class Commons {
         String suffix = name.substring(pos);
         String rename = sdfDate+suffix;
         return rename;
+    }
+
+    /**
+     * 获取博主头像路径
+     * @return
+     */
+    public static String site_avatar() {
+        return site_option("site_avatar");
+    }
+
+    /**
+     * 博主签名
+     * @return
+     */
+    public static String site_sign() {
+        return site_option("site_sign");
     }
 
     /**
