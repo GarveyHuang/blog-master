@@ -366,7 +366,7 @@ h3.catListTitle {
 .profile_block {
     background-color: #fff;
     padding: 50px 20px 5px 20px;
-    margin: 50px 0 10px 0;
+    margin: 50px 0 0 0;
 }
 
 .avatar {
@@ -375,7 +375,7 @@ h3.catListTitle {
     width: 90px;
     height: 90px;
     padding: 5px;
-    background-color: rgba(255,255,255,.3);
+    /*background-color: rgba(255,255,255,.3);*/
     border-radius: 100%;
     margin: -90px auto 0 auto;
     position: relative;
@@ -428,6 +428,7 @@ h3.catListTitle {
 
 .grid-weibo-show footer {
     border-top: 1px solid #e5e5e5;
+    background-color: #fff;
 }
 
 .grid-weibo-show footer li strong, .grid-weibo-show footer li span {
@@ -456,6 +457,10 @@ h3.catListTitle {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 10px 0;
+}
+
+#blog-news {
+    margin: 15px auto 0 auto;
 }
 
 /************************************************************************** article content style **************************************************************************/
