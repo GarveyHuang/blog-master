@@ -64,8 +64,6 @@ public class URLMapper {
     /** 博客主页 */
     public static final String BLOG = "/blog";
     public static final String BLOG_INDEX = "/blog/index";
-    /** 首页-分页 */
-    public static final String BLOG_PAGE = "/blog/page/{p}";
 
     /** 文章内容页 **/
     public static final String BLOG_ARTICLE = "/blog/article/{aid}";
