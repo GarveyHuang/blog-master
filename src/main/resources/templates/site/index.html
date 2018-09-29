@@ -31,11 +31,7 @@
                     <div class="postDesc" th:text="${'posted @ '+commons.fmtdate(post.created, 'yyyy-MM-dd HH:mm:ss')+' 阅读数('+(post.hits==null?0:post.hits)+') 评论数('+(post.commentsNum==null?0:post.commentsNum)+')'}"></div>
                     <div class="clear"></div>
                 </div>
-                <div class="topicListFooter">
-                    <div id="nav_next_page">
-                        <a th:href="${commons.site_url()}+'/index.html?page=2'">下一页</a>
-                    </div>
-                </div>
+                <div class="topicListFooter" th:replace="common/macros :: pageAdminNav(${articles})"></div>
             </div><!--end: forFlow -->
         </div><!--end: mainContent 主体内容容器-->
 

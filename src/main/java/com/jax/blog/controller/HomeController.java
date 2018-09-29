@@ -48,31 +48,21 @@ public class HomeController extends BaseController {
 
     /**
      * 博客首页
+     * @param request
+     * @param page
+     * @param limit
      * @return
      */
     @GetMapping(value = {"", URLMapper.BLOG, URLMapper.BLOG_INDEX } )
     public String blogIndex(HttpServletRequest request,
-                        @RequestParam(name = "limit", required = false, defaultValue = "11") int limit) {
-        return this.blogIndex(request, 1, limit);
-    }
-
-    /**
-     * 主页-分页
-     * @param request
-     * @param p
-     * @param limit
-     * @return
-     */
-    @GetMapping(value = URLMapper.BLOG_PAGE)
-    public String blogIndex(HttpServletRequest request,
-                            @PathVariable("p") int p,
+                            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
                             @RequestParam(name = "limit", required = false, defaultValue = "11") int limit) {
-        p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
+        page = page < 0 || page > WebConst.MAX_PAGE ? 1 : page;
         ArticleCond articleCond = new ArticleCond();
         articleCond.setType(Types.ARTICLE.getType());
         articleCond.setStatus(Types.PUBLISH.getType());
         // 文章
-        PageInfo<Article> articles = articleService.getArticlesByCond(articleCond, p, limit);
+        PageInfo<Article> articles = articleService.getArticlesByCond(articleCond, page, limit);
         request.setAttribute("articles", articles);
         request.setAttribute("types", "articles");
         request.setAttribute("active", "blog");
