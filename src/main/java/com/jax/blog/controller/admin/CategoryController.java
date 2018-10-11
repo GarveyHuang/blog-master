@@ -42,7 +42,7 @@ public class CategoryController extends BaseController {
         request.setAttribute("categories", categories);
         request.setAttribute("tags", tags);
         request.setAttribute("nickname", nickname);
-        return URLMapper.ADMIN_CATEGORY;
+        return "admin/category";
     }
 
     @ResponseBody

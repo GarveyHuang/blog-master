@@ -54,7 +54,7 @@
     </update>
 
     <!-- 根据文章编号获取对应的标签或分类 -->
-    <select id="getRelationShipByCid" resultType="com.jax.blog.model.RelationShip">
+    <select id="getRelationShipByAid" resultType="com.jax.blog.model.RelationShip">
         SELECT
         <include refid="BASE_COLUMN"/>
         FROM <include refid="BASE_TABLE"/> AS rs

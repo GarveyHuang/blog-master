@@ -50,7 +50,7 @@ public class LoginAuthController extends BaseController {
      */
     @RequestMapping(value = URLMapper.ADMIN_LOGIN, method = RequestMethod.GET)
     public String login() {
-        return URLMapper.ADMIN_LOGIN;
+        return "admin/login";
     }
 
     /**
@@ -108,7 +108,7 @@ public class LoginAuthController extends BaseController {
         cookie.setMaxAge(0); // 立即销毁cookie
         cookie.setPath("/");
         try {
-            response.sendRedirect(URLMapper.ADMIN_LOGIN);
+            response.sendRedirect("login");
         } catch (IOException e) {
             e.printStackTrace();
             LOGGER.error("注销失败", e);

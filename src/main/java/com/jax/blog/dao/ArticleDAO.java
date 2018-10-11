@@ -37,10 +37,10 @@ public interface ArticleDAO {
 
     /**
      * 根据编号删除文章
-     * @param cid
+     * @param aid
      * @return
      */
-    int deleteArticleById(@Param("cid") Integer cid);
+    int deleteArticleById(@Param("aid") Integer aid);
 
     /**
      * 更新文章

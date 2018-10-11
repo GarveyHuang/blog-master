@@ -82,7 +82,7 @@ public class IndexController extends BaseController {
         request.setAttribute("nickname", nickname);
 
         LOGGER.info("Exit admin index method");
-        return URLMapper.ADMIN_INDEX;
+        return "admin/index";
     }
 
     /**
@@ -93,7 +93,7 @@ public class IndexController extends BaseController {
     public String profile(HttpServletRequest request) {
         String nickname = this.getNickName(request);
         request.setAttribute("nickname", nickname);
-        return URLMapper.ADMIN_PROFILE;
+        return "admin/profile";
     }
 
     /**

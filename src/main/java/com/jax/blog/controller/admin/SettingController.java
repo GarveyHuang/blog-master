@@ -45,7 +45,7 @@ public class SettingController extends BaseController {
         String nickname = this.getNickName(request);
         request.setAttribute("options", map);
         request.setAttribute("nickname", nickname);
-        return URLMapper.ADMIN_SETTING;
+        return "admin/setting";
     }
 
     @ResponseBody

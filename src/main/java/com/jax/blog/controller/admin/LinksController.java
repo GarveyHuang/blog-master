@@ -43,7 +43,7 @@ public class LinksController extends BaseController {
         String nickname = this.getNickName(request);
         request.setAttribute("links", metas);
         request.setAttribute("nickname", nickname);
-        return URLMapper.ADMIN_LINKS;
+        return "admin/links";
     }
 
     @ResponseBody
